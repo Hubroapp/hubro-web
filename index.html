@@ -1,0 +1,2602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://gethubro.app">
+<meta property="og:title" content="Hubro — Find Jobs, Housing & Community in Your New Country">
+<meta property="og:description" content="Hubro connects international workers, students and families with verified jobs, housing and a trusted community.">
+<meta property="og:url" content="https://gethubro.app">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Hubro — Find Jobs, Housing & Community">
+<meta name="twitter:description" content="Find verified jobs, housing and community in your new country.">
+<title>Hubro — Find Jobs, Housing & Community in Your New Country</title>
+<meta name="description" content="Hubro connects international workers, students and families with verified jobs, housing and a trusted community. Visit gethubro.app — Available on iOS and Android.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple: #534AB7;
+    --purple-mid: #7F77DD;
+    --purple-light: #AFA9EC;
+    --purple-pale: #EEEDFE;
+    --purple-dark: #3C3489;
+    --purple-deeper: #26215C;
+    --white: #FFFFFF;
+    --grey-bg: #F8F7FE;
+    --grey-light: #F1EFE8;
+    --text: #1A1A2E;
+    --text-mid: #4A4870;
+    --text-muted: #8886AA;
+    --border: #E0DEFD;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--white);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-family: 'Syne', sans-serif;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 5%;
+    height: 68px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-decoration: none;
+    letter-spacing: -0.5px;
+  }
+  .nav-logo .hub { color: var(--purple); }
+  .nav-logo .ro { color: var(--purple-mid); }
+
+  .nav-links {
+    display: flex; gap: 2rem; list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none; color: var(--text-mid);
+    font-size: 0.9rem; font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--purple); }
+
+  .nav-cta {
+    background: var(--purple); color: white;
+    border: none; padding: 0.6rem 1.4rem;
+    border-radius: 8px; font-size: 0.9rem;
+    font-weight: 600; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: background 0.2s, transform 0.1s;
+    text-decoration: none;
+  }
+  .nav-cta:hover { background: var(--purple-dark); transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    padding: 120px 5% 80px;
+    display: flex; align-items: center;
+    position: relative;
+    overflow: hidden;
+    background: var(--white);
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 70% 50%, rgba(83,74,183,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 90% 20%, rgba(127,119,221,0.06) 0%, transparent 60%);
+  }
+
+  .hero-grid {
+    position: absolute; inset: 0; z-index: 0; opacity: 0.03;
+    background-image: linear-gradient(var(--purple) 1px, transparent 1px),
+                      linear-gradient(90deg, var(--purple) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-content {
+    position: relative; z-index: 1;
+    max-width: 640px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--purple-pale); color: var(--purple);
+    padding: 6px 14px; border-radius: 100px;
+    font-size: 0.8rem; font-weight: 600;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(83,74,183,0.2);
+  }
+  .hero-badge::before {
+    content: ''; width: 6px; height: 6px;
+    border-radius: 50%; background: var(--purple);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .hero h1 {
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    font-weight: 800; line-height: 1.1;
+    letter-spacing: -1.5px;
+    margin-bottom: 1.2rem;
+    color: var(--text);
+  }
+
+  .hero h1 .accent { color: var(--purple); }
+
+  .hero p {
+    font-size: 1.1rem; line-height: 1.7;
+    color: var(--text-mid);
+    margin-bottom: 2.2rem;
+    max-width: 520px;
+    font-weight: 400;
+  }
+
+  .hero-btns {
+    display: flex; flex-wrap: wrap; gap: 12px;
+    margin-bottom: 2rem;
+  }
+
+  .btn-primary {
+    background: var(--purple); color: white;
+    padding: 0.85rem 1.8rem; border-radius: 10px;
+    font-size: 0.95rem; font-weight: 600;
+    text-decoration: none; border: none; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: var(--purple-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(83,74,183,0.3); }
+
+  .btn-outline {
+    background: transparent; color: var(--purple);
+    padding: 0.85rem 1.8rem; border-radius: 10px;
+    font-size: 0.95rem; font-weight: 600;
+    text-decoration: none; border: 1.5px solid var(--purple);
+    cursor: pointer; font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-outline:hover { background: var(--purple-pale); transform: translateY(-2px); }
+
+  .app-badges {
+    display: flex; gap: 12px; flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+  }
+
+  .app-badge {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--text); color: white;
+    padding: 10px 18px; border-radius: 10px;
+    text-decoration: none; transition: all 0.2s;
+  }
+  .app-badge:hover { background: var(--purple-dark); transform: translateY(-2px); }
+  .app-badge .badge-icon { font-size: 1.4rem; }
+  .app-badge .badge-text { line-height: 1.2; }
+  .app-badge .badge-text small { font-size: 0.65rem; opacity: 0.7; display: block; }
+  .app-badge .badge-text strong { font-size: 0.85rem; font-family: 'Syne', sans-serif; }
+
+  .trust-bar {
+    display: flex; gap: 2rem; flex-wrap: wrap;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+  .trust-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 0.85rem; color: var(--text-mid); font-weight: 500;
+  }
+  .trust-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--purple); }
+
+  /* Hero visual */
+  .hero-visual {
+    position: absolute; right: 4%; top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  .phone-mockup {
+    width: 280px;
+    background: var(--text);
+    border-radius: 36px;
+    padding: 16px;
+    box-shadow: 0 40px 80px rgba(26,26,46,0.3), 0 0 0 8px rgba(83,74,183,0.1);
+  }
+
+  .phone-screen {
+    background: var(--grey-bg);
+    border-radius: 24px;
+    overflow: hidden;
+    min-height: 520px;
+  }
+
+  .phone-header {
+    background: var(--purple);
+    padding: 20px 16px 16px;
+    color: white;
+  }
+  .phone-header-top {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 12px;
+  }
+  .phone-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem; }
+  .phone-logo .ro { color: var(--purple-light); }
+  .phone-search {
+    background: rgba(255,255,255,0.15);
+    border-radius: 8px; padding: 8px 12px;
+    font-size: 0.75rem; color: rgba(255,255,255,0.7);
+    display: flex; align-items: center; gap: 6px;
+  }
+
+  .phone-tabs {
+    display: flex; gap: 0;
+    background: white;
+    border-bottom: 1px solid var(--border);
+  }
+  .phone-tab {
+    flex: 1; padding: 10px 4px; text-align: center;
+    font-size: 0.7rem; font-weight: 600; color: var(--text-muted);
+    cursor: pointer;
+  }
+  .phone-tab.active { color: var(--purple); border-bottom: 2px solid var(--purple); }
+
+  .phone-cards { padding: 12px; display: flex; flex-direction: column; gap: 10px; }
+
+  .phone-card {
+    background: white; border-radius: 12px;
+    padding: 12px; border: 1px solid var(--border);
+  }
+  .phone-card-top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 6px;
+  }
+  .phone-card-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.75rem; color: var(--text); }
+  .phone-card-badge {
+    font-size: 0.6rem; font-weight: 700; padding: 2px 6px;
+    border-radius: 4px;
+  }
+  .badge-green { background: #EAF3DE; color: #3B6D11; }
+  .badge-purple { background: var(--purple-pale); color: var(--purple); }
+  .badge-amber { background: #FAEEDA; color: #854F0B; }
+  .phone-card-sub { font-size: 0.65rem; color: var(--text-muted); margin-bottom: 8px; }
+  .phone-card-score {
+    display: flex; align-items: center; gap: 6px;
+  }
+  .score-bar { flex: 1; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .score-fill { height: 100%; border-radius: 2px; background: var(--purple); }
+  .score-text { font-size: 0.65rem; font-weight: 700; color: var(--purple); }
+
+  /* ── SECTIONS ── */
+  section { padding: 90px 5%; }
+
+  .section-label {
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--purple);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 800; line-height: 1.15;
+    letter-spacing: -1px;
+    margin-bottom: 1rem;
+    color: var(--text);
+  }
+
+  .section-sub {
+    font-size: 1.05rem; color: var(--text-mid);
+    line-height: 1.7; max-width: 560px;
+    font-weight: 400;
+  }
+
+  /* ── PROBLEMS ── */
+  .problems { background: var(--grey-bg); }
+
+  .problems-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px; margin-top: 3rem;
+  }
+
+  .problem-card {
+    background: white; border-radius: 16px;
+    padding: 1.5rem; border: 1px solid var(--border);
+    transition: all 0.3s;
+  }
+  .problem-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(83,74,183,0.12); border-color: var(--purple-light); }
+
+  .problem-icon {
+    font-size: 1.8rem; margin-bottom: 0.8rem;
+  }
+  .problem-card h3 {
+    font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem;
+    color: var(--text);
+  }
+  .problem-card p { font-size: 0.85rem; color: var(--text-mid); line-height: 1.6; }
+
+  /* ── SOLUTION ── */
+  .solution-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px; margin-top: 3rem;
+  }
+
+  .solution-card {
+    border-radius: 20px; padding: 2rem;
+    position: relative; overflow: hidden;
+  }
+  .solution-card:nth-child(1) { background: var(--purple); color: white; }
+  .solution-card:nth-child(2) { background: var(--purple-pale); }
+  .solution-card:nth-child(3) { background: var(--grey-light); }
+
+  .solution-card .s-num {
+    font-family: 'Syne', sans-serif; font-size: 4rem;
+    font-weight: 800; opacity: 0.15; line-height: 1;
+    margin-bottom: -1rem;
+  }
+  .solution-card:nth-child(1) .s-num { color: white; }
+  .solution-card:nth-child(2) .s-num { color: var(--purple); }
+
+  .solution-card h3 {
+    font-size: 1.2rem; font-weight: 700; margin-bottom: 0.7rem;
+  }
+  .solution-card:nth-child(1) h3 { color: white; }
+  .solution-card p { font-size: 0.9rem; line-height: 1.7; }
+  .solution-card:nth-child(1) p { color: rgba(255,255,255,0.8); }
+  .solution-card:nth-child(2) p { color: var(--text-mid); }
+
+  /* ── HOW IT WORKS ── */
+  .how { background: var(--grey-bg); }
+
+  .steps {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 0; margin-top: 3rem;
+    position: relative;
+  }
+
+  .steps::before {
+    content: '';
+    position: absolute; top: 32px; left: 16.5%; right: 16.5%;
+    height: 1px; background: var(--border);
+    z-index: 0;
+  }
+
+  .step {
+    text-align: center; padding: 0 1.5rem;
+    position: relative; z-index: 1;
+  }
+
+  .step-num {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: var(--purple); color: white;
+    font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.2rem;
+    box-shadow: 0 0 0 8px var(--grey-bg), 0 0 0 9px var(--border);
+  }
+
+  .step h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.6rem; }
+  .step p { font-size: 0.875rem; color: var(--text-mid); line-height: 1.7; }
+
+  /* ── EMPLOYERS ── */
+  .employers {
+    background: var(--purple-deeper);
+    color: white;
+  }
+
+  .employers .section-title { color: white; }
+  .employers .section-sub { color: rgba(255,255,255,0.7); }
+  .employers .section-label { color: var(--purple-light); }
+
+  .employer-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 20px; margin: 3rem 0 2.5rem;
+  }
+
+  .employer-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px; padding: 1.5rem;
+    transition: all 0.3s;
+  }
+  .employer-card:hover { background: rgba(255,255,255,0.12); transform: translateY(-3px); }
+
+  .employer-card .e-icon { font-size: 1.6rem; margin-bottom: 0.8rem; }
+  .employer-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; color: white; }
+  .employer-card p { font-size: 0.85rem; color: rgba(255,255,255,0.65); line-height: 1.6; }
+
+  .btn-white {
+    background: white; color: var(--purple);
+    padding: 0.85rem 1.8rem; border-radius: 10px;
+    font-size: 0.95rem; font-weight: 700;
+    text-decoration: none; border: none; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s; display: inline-block;
+  }
+  .btn-white:hover { background: var(--purple-pale); transform: translateY(-2px); }
+
+  /* ── LANDLORDS ── */
+  .landlords-inner {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: center;
+  }
+
+  .landlord-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 16px; margin-top: 2rem;
+  }
+
+  .landlord-card {
+    background: white; border-radius: 14px;
+    padding: 1.2rem; border: 1px solid var(--border);
+    transition: all 0.3s;
+  }
+  .landlord-card:hover { border-color: var(--purple-light); box-shadow: 0 8px 24px rgba(83,74,183,0.1); }
+  .landlord-card .l-icon { font-size: 1.4rem; margin-bottom: 0.6rem; }
+  .landlord-card h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .landlord-card p { font-size: 0.8rem; color: var(--text-mid); line-height: 1.6; }
+
+  .landlord-visual {
+    background: var(--grey-bg); border-radius: 24px;
+    padding: 2rem; border: 1px solid var(--border);
+  }
+
+  .property-card {
+    background: white; border-radius: 16px;
+    overflow: hidden; border: 1px solid var(--border);
+    margin-bottom: 14px;
+  }
+  .property-img {
+    height: 120px;
+    background: linear-gradient(135deg, var(--purple-pale), var(--purple-light));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.5rem;
+  }
+  .property-info { padding: 1rem; }
+  .property-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; margin-bottom: 4px; }
+  .property-meta { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 8px; }
+  .property-footer {
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .property-price { font-family: 'Syne', sans-serif; font-weight: 800; color: var(--purple); font-size: 1rem; }
+  .verified-badge {
+    background: #EAF3DE; color: #3B6D11;
+    font-size: 0.65rem; font-weight: 700;
+    padding: 3px 8px; border-radius: 6px;
+  }
+
+  /* ── AI SECTION ── */
+  .ai-section { background: var(--grey-bg); }
+
+  .ai-inner {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; margin-top: 3rem; align-items: start;
+  }
+
+  .ai-col h3 {
+    font-size: 1rem; font-weight: 700; margin-bottom: 1rem;
+    color: var(--text);
+  }
+
+  .ai-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .ai-list li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 0.875rem; color: var(--text-mid); line-height: 1.6;
+  }
+  .ai-check {
+    width: 20px; height: 20px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.65rem; font-weight: 700; flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .check-yes { background: #EAF3DE; color: #3B6D11; }
+  .check-no { background: #FCEBEB; color: #A32D2D; }
+
+  .ai-disclaimer {
+    margin-top: 2.5rem; padding: 1rem 1.2rem;
+    background: var(--purple-pale);
+    border-left: 3px solid var(--purple);
+    border-radius: 0 10px 10px 0;
+    font-size: 0.825rem; color: var(--text-mid); line-height: 1.6;
+  }
+
+  /* ── CV MATCHING ── */
+  .matching { background: white; }
+
+  .matching-demo {
+    margin-top: 3rem;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 3rem; align-items: center;
+  }
+
+  .match-card {
+    background: white; border-radius: 20px;
+    border: 1px solid var(--border); overflow: hidden;
+    box-shadow: 0 8px 32px rgba(83,74,183,0.08);
+  }
+
+  .match-card-header {
+    background: var(--purple); color: white;
+    padding: 1.2rem 1.5rem;
+  }
+  .match-card-header h3 { font-size: 1rem; font-weight: 700; margin-bottom: 2px; }
+  .match-card-header p { font-size: 0.75rem; opacity: 0.75; }
+
+  .match-card-body { padding: 1.5rem; }
+
+  .match-score-big {
+    text-align: center; margin-bottom: 1.5rem;
+  }
+  .score-circle {
+    width: 100px; height: 100px; border-radius: 50%;
+    border: 6px solid var(--purple-pale);
+    border-top-color: var(--purple);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 0.8rem;
+    position: relative;
+  }
+  .score-circle-value {
+    font-family: 'Syne', sans-serif; font-size: 1.6rem; font-weight: 800; color: var(--purple);
+  }
+  .score-label { font-size: 0.8rem; color: var(--text-mid); font-weight: 500; }
+
+  .match-breakdown { display: flex; flex-direction: column; gap: 10px; }
+  .breakdown-row { display: flex; align-items: center; gap: 10px; }
+  .breakdown-label { font-size: 0.75rem; color: var(--text-mid); width: 100px; flex-shrink: 0; }
+  .breakdown-bar { flex: 1; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+  .breakdown-fill { height: 100%; border-radius: 3px; background: var(--purple); }
+  .breakdown-pct { font-size: 0.75rem; font-weight: 700; color: var(--purple); width: 36px; text-align: right; }
+
+  .match-btn-row { margin-top: 1.5rem; display: flex; gap: 10px; }
+  .match-apply { flex: 1; background: var(--purple); color: white; border: none; padding: 0.8rem; border-radius: 10px; font-weight: 700; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; cursor: pointer; transition: all 0.2s; }
+  .match-apply:hover { background: var(--purple-dark); }
+  .match-save { background: var(--purple-pale); color: var(--purple); border: none; padding: 0.8rem 1rem; border-radius: 10px; font-weight: 700; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; cursor: pointer; }
+
+  .threshold-explainer { }
+  .threshold-explainer h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem; }
+  .threshold-explainer p { font-size: 0.9rem; color: var(--text-mid); line-height: 1.7; margin-bottom: 1.5rem; }
+
+  .threshold-levels { display: flex; flex-direction: column; gap: 10px; }
+  .threshold-level {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 14px; border-radius: 10px;
+    font-size: 0.85rem;
+  }
+  .tl-pct { font-weight: 800; font-family: 'Syne', sans-serif; width: 60px; font-size: 0.9rem; }
+  .tl-grey { background: #F1EFE8; color: #888780; }
+  .tl-amber { background: #FAEEDA; color: #854F0B; }
+  .tl-green { background: #EAF3DE; color: #3B6D11; }
+  .tl-purple { background: var(--purple-pale); color: var(--purple); }
+
+  /* ── COMMUNITY ── */
+  .community { background: var(--grey-bg); }
+
+  .community-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 16px; margin: 2.5rem 0;
+  }
+
+  .community-card {
+    background: white; border-radius: 14px;
+    padding: 1.2rem; border: 1px solid var(--border);
+    display: flex; align-items: center; gap: 12px;
+    transition: all 0.3s;
+  }
+  .community-card:hover { border-color: var(--purple-light); transform: translateX(4px); }
+  .community-card .c-icon { font-size: 1.5rem; width: 44px; height: 44px; background: var(--purple-pale); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .community-card h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 2px; }
+  .community-card p { font-size: 0.78rem; color: var(--text-muted); }
+
+  /* ── SOCIAL PROOF ── */
+  .proof { background: white; }
+
+  .metrics {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px; margin: 3rem 0;
+  }
+
+  .metric-card {
+    text-align: center; padding: 2rem;
+    background: var(--purple-pale);
+    border-radius: 20px;
+  }
+  .metric-card .m-num {
+    font-family: 'Syne', sans-serif; font-size: 2.8rem; font-weight: 800;
+    color: var(--purple); line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+  .metric-card .m-label { font-size: 0.875rem; color: var(--text-mid); font-weight: 500; }
+
+  .testimonials {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 20px; margin-top: 2rem;
+  }
+
+  .testimonial {
+    background: var(--grey-bg); border-radius: 16px;
+    padding: 1.5rem; border: 1px solid var(--border);
+  }
+  .testimonial blockquote {
+    font-size: 0.9rem; line-height: 1.7; color: var(--text-mid);
+    margin-bottom: 1rem; font-style: italic;
+  }
+  .testimonial cite { font-size: 0.8rem; font-weight: 600; color: var(--text); display: block; }
+  .testimonial cite small { color: var(--text-muted); font-weight: 400; display: block; margin-top: 2px; }
+  .stars { color: #EF9F27; font-size: 0.75rem; margin-bottom: 0.7rem; }
+  .t-note { font-size: 0.72rem; color: var(--text-muted); margin-top: 1rem; text-align: center; }
+
+  /* ── PRICING ── */
+  .pricing { background: var(--grey-bg); }
+
+  .pricing-tabs {
+    display: flex; gap: 8px; margin: 2rem 0;
+    background: white; padding: 6px; border-radius: 12px;
+    width: fit-content; border: 1px solid var(--border);
+  }
+  .pricing-tab {
+    padding: 8px 20px; border-radius: 8px;
+    font-size: 0.875rem; font-weight: 600; cursor: pointer;
+    border: none; background: transparent;
+    color: var(--text-mid); font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+  }
+  .pricing-tab.active { background: var(--purple); color: white; }
+
+  .pricing-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 20px; margin-top: 1.5rem;
+  }
+
+  .pricing-card {
+    background: white; border-radius: 20px;
+    padding: 1.8rem; border: 1px solid var(--border);
+    position: relative; transition: all 0.3s;
+  }
+  .pricing-card:hover { transform: translateY(-4px); box-shadow: 0 20px 48px rgba(83,74,183,0.12); }
+  .pricing-card.featured { border-color: var(--purple); border-width: 2px; }
+  .pricing-card.featured::before {
+    content: 'Most popular';
+    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    background: var(--purple); color: white;
+    font-size: 0.72rem; font-weight: 700; padding: 4px 12px; border-radius: 20px;
+  }
+
+  .pricing-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 0.3rem; }
+  .pricing-price { margin: 0.8rem 0; }
+  .pricing-price .amount { font-family: 'Syne', sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--purple); }
+  .pricing-price .period { font-size: 0.85rem; color: var(--text-muted); }
+  .pricing-desc { font-size: 0.82rem; color: var(--text-mid); margin-bottom: 1.2rem; line-height: 1.5; }
+
+  .pricing-features { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 1.5rem; }
+  .pricing-features li {
+    font-size: 0.82rem; color: var(--text-mid);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .pricing-features li::before {
+    content: '✓'; color: var(--purple); font-weight: 700; flex-shrink: 0;
+  }
+
+  /* ── FINAL CTA ── */
+  .final-cta {
+    background: linear-gradient(135deg, var(--purple) 0%, var(--purple-mid) 100%);
+    color: white; text-align: center;
+  }
+  .final-cta .section-title { color: white; }
+  .final-cta p { color: rgba(255,255,255,0.8); font-size: 1.05rem; max-width: 520px; margin: 0 auto 2.5rem; line-height: 1.7; }
+  .final-cta .hero-btns { justify-content: center; }
+  .final-cta .app-badges { justify-content: center; margin-top: 1rem; }
+  .final-cta .app-badge { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2); }
+  .final-cta .app-badge:hover { background: rgba(255,255,255,0.25); }
+  .btn-primary-white { background: white; color: var(--purple); }
+  .btn-primary-white:hover { background: var(--purple-pale); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+  .btn-outline-white { border-color: rgba(255,255,255,0.5); color: white; }
+  .btn-outline-white:hover { background: rgba(255,255,255,0.1); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--purple-deeper);
+    color: rgba(255,255,255,0.7);
+    padding: 60px 5% 30px;
+  }
+
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem; margin-bottom: 3rem;
+  }
+
+  .footer-brand .nav-logo { margin-bottom: 1rem; display: block; }
+  .footer-brand p { font-size: 0.85rem; line-height: 1.7; max-width: 240px; }
+  .footer-socials { display: flex; gap: 10px; margin-top: 1.2rem; }
+  .social-btn {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: rgba(255,255,255,0.1); color: white;
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none; font-size: 0.8rem; font-weight: 700;
+    transition: background 0.2s;
+  }
+  .social-btn:hover { background: var(--purple); }
+
+  .footer-col h4 {
+    font-size: 0.8rem; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; color: white; margin-bottom: 1rem;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .footer-col ul li a {
+    text-decoration: none; color: rgba(255,255,255,0.6);
+    font-size: 0.85rem; transition: color 0.2s;
+  }
+  .footer-col ul li a:hover { color: white; }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+    font-size: 0.78rem;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in {
+    opacity: 1; transform: translateY(0);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .js-ready .fade-in { opacity: 0; transform: translateY(20px); }
+  .js-ready .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .hero-visual { display: none; }
+    .solution-grid { grid-template-columns: 1fr 1fr; }
+    .employer-grid { grid-template-columns: 1fr 1fr; }
+    .landlords-inner { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .matching-demo { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 4%; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 4% 60px; }
+    section { padding: 60px 4%; }
+    .solution-grid, .steps, .employer-grid, .community-grid,
+    .testimonials, .pricing-grid, .metrics { grid-template-columns: 1fr; }
+    .steps::before { display: none; }
+    .ai-inner { grid-template-columns: 1fr; }
+    .landlord-grid { grid-template-columns: 1fr 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+    .hero-btns { flex-direction: column; }
+    .btn-primary, .btn-outline { text-align: center; justify-content: center; }
+  }
+
+/* ── LANGUAGE SELECTOR ── */
+.lang-selector {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.lang-btn {
+  display: flex; align-items: center; gap: 6px;
+  padding: 6px 12px; border-radius: 8px;
+  border: 1.5px solid var(--border);
+  background: white; cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem; font-weight: 600;
+  color: var(--text-mid);
+  transition: all 0.2s;
+}
+.lang-btn:hover { border-color: var(--purple-light); color: var(--purple); }
+.lang-dropdown {
+  position: absolute; top: calc(100% + 8px); right: 0;
+  background: white; border-radius: 14px;
+  border: 1px solid var(--border);
+  box-shadow: 0 12px 32px rgba(83,74,183,0.15);
+  padding: 6px; min-width: 180px;
+  display: none; z-index: 300;
+  animation: fadeDown 0.2s ease;
+}
+@keyframes fadeDown { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:translateY(0)} }
+.lang-dropdown.open { display: block; }
+.lang-option {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 12px; border-radius: 8px;
+  cursor: pointer; transition: all 0.15s;
+  font-size: 0.85rem; font-weight: 500;
+  color: var(--text-mid);
+}
+.lang-option:hover { background: var(--purple-pale); color: var(--purple); }
+.lang-option.active { background: var(--purple-pale); color: var(--purple); font-weight: 700; }
+.lang-flag { font-size: 1.1rem; }
+
+</style>
+
+
+
+<style>
+/* HUBRO WHITESPACE FIX v2 */
+html,body{overflow-x:hidden !important;}
+.job-detail,.jobs-list,.listings-sidebar,.filter-panel,.split-right,.split-left{height:auto !important;position:relative !important;top:auto !important;}
+.main-layout,.jobs-area,.listings-area,.dashboard-area{min-height:0 !important;}
+[style*="calc(100vh"]{height:auto !important;}
+.modal-overlay,.hubro-success-overlay{position:fixed !important;}
+.float-cta,#float-cta{position:fixed !important;}
+section + section{padding-top:0 !important;}
+@media(max-width:768px){
+  .job-detail,.jobs-list{position:relative !important;height:auto !important;max-height:none !important;overflow-y:visible !important;}
+  .main-layout{flex-direction:column !important;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo"><span class="hub">hub</span><span class="ro">ro</span></a>
+  <ul class="nav-links">
+    <li><a href="jobs.html" style="font-weight:700;color:var(--purple);">Find Jobs</a></li>
+    <li><a href="housing.html">Find Housing</a></li>
+    <li><a href="employers.html">For Employers</a></li>
+    <li><a href="landlords.html">For Landlords</a></li>
+    <li><a href="community.html">Community</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+  </ul>
+  
+    <div class="lang-selector">
+      <button class="lang-btn" onclick="toggleLangDropdown()" id="lang-btn">
+        <span id="lang-btn-text">🇬🇧 English</span>
+        <span style="font-size:0.6rem;opacity:0.6;">▼</span>
+      </button>
+      <div class="lang-dropdown" id="lang-dropdown">
+        <div class="lang-option active" data-lang="en" onclick="selectLang('en')"><span class="lang-flag">🇬🇧</span> English</div>
+        <div class="lang-option" data-lang="es" onclick="selectLang('es')"><span class="lang-flag">🇪🇸</span> Español</div>
+        <div class="lang-option" data-lang="pt" onclick="selectLang('pt')"><span class="lang-flag">🇧🇷</span> Português</div>
+        <div class="lang-option" data-lang="pl" onclick="selectLang('pl')"><span class="lang-flag">🇵🇱</span> Polski</div>
+        <div class="lang-option" data-lang="de" onclick="selectLang('de')"><span class="lang-flag">🇩🇪</span> Deutsch</div>
+        <div class="lang-option" data-lang="fr" onclick="selectLang('fr')"><span class="lang-flag">🇫🇷</span> Français</div>
+        <div class="lang-option" data-lang="it" onclick="selectLang('it')"><span class="lang-flag">🇮🇹</span> Italiano</div>
+        <div class="lang-option" data-lang="zh" onclick="selectLang('zh')"><span class="lang-flag">🇨🇳</span> 中文</div>
+        <div class="lang-option" data-lang="ja" onclick="selectLang('ja')"><span class="lang-flag">🇯🇵</span> 日本語</div>
+      </div>
+    </div>
+
+  <a href="auth.html" class="nav-cta">Sign up free →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  
+  <div class="hero-content">
+    <div class="hero-badge">Now available in Ireland — Early Access</div>
+    <h1>Find <span class="accent">jobs, housing</span> & community in your new country.</h1>
+    <p>Hubro connects international workers, students and families with verified employers, landlords and a trusted community — all in one app.</p>
+    <div class="hero-btns">
+      <a href="auth.html" class="btn-primary">Create your profile →</a>
+      <a href="employers.html" class="btn-outline">I'm an Employer</a>
+      <a href="landlords.html" class="btn-outline">I'm a Landlord</a>
+    </div>
+    <div class="app-badges">
+      <a href="#" class="app-badge">
+        <span class="badge-icon">🍎</span>
+        <span class="badge-text"><small>Download on the</small><strong>App Store</strong></span>
+      </a>
+      <a href="#" class="app-badge">
+        <span class="badge-icon">▶</span>
+        <span class="badge-text"><small>Get it on</small><strong>Google Play</strong></span>
+      </a>
+    </div>
+    <div class="trust-bar">
+      <div class="trust-item"><div class="trust-dot"></div> 100% verified listings</div>
+      <div class="trust-item"><div class="trust-dot"></div> 15 languages supported</div>
+      <div class="trust-item"><div class="trust-dot"></div> AI fraud protection</div>
+    </div>
+  </div>
+
+  <!-- Phone mockup -->
+  <div class="hero-visual">
+    <div class="phone-mockup">
+      <div class="phone-screen">
+        <div class="phone-header">
+          <div class="phone-header-top">
+            <span class="phone-logo">hub<span class="ro">ro</span></span>
+            <span style="font-size:0.65rem;opacity:0.7">👤 Maria</span>
+          </div>
+          <div class="phone-search">🔍 Search jobs, housing...</div>
+        </div>
+        <div class="phone-tabs">
+          <div class="phone-tab active">Jobs</div>
+          <div class="phone-tab">Housing</div>
+          <div class="phone-tab">Community</div>
+        </div>
+        <div class="phone-cards">
+          <div class="phone-card">
+            <div class="phone-card-top">
+              <div class="phone-card-title">Software Engineer</div>
+              <span class="phone-card-badge badge-purple">87% match</span>
+            </div>
+            <div class="phone-card-sub">Stripe · Dublin · €65k–€80k</div>
+            <div class="phone-card-score">
+              <div class="score-bar"><div class="score-fill" style="width:87%"></div></div>
+              <span class="score-text">87%</span>
+            </div>
+          </div>
+          <div class="phone-card">
+            <div class="phone-card-top">
+              <div class="phone-card-title">1-bed Apartment</div>
+              <span class="phone-card-badge badge-green">Verified</span>
+            </div>
+            <div class="phone-card-sub">Ranelagh, Dublin 6 · €1,650/mo</div>
+            <div class="phone-card-score">
+              <div class="score-bar"><div class="score-fill" style="width:72%"></div></div>
+              <span class="score-text">72%</span>
+            </div>
+          </div>
+          <div class="phone-card">
+            <div class="phone-card-top">
+              <div class="phone-card-title">UX Designer</div>
+              <span class="phone-card-badge badge-amber">64% match</span>
+            </div>
+            <div class="phone-card-sub">HubSpot · Remote · €50k–€65k</div>
+            <div class="phone-card-score">
+              <div class="score-bar"><div class="score-fill" style="width:64%"></div></div>
+              <span class="score-text">64%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- DEPARTMENTS -->
+<section style="background:var(--grey-bg);">
+  <div class="section-label" style="text-align:center;">What Hubro covers</div>
+  <h2 class="section-title" style="text-align:center;max-width:600px;margin:0 auto 1rem;">Six departments.<br>One platform. Everything you need.</h2>
+  <p class="section-sub" style="text-align:center;margin:0 auto 3rem;">From the moment you decide to move to the day you feel fully settled — Hubro has a department for every step of your journey.</p>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:960px;margin:0 auto;">
+    <div style="background:white;border-radius:18px;padding:1.5rem;border:1px solid var(--border);transition:all 0.3s;" onmouseover="this.style.transform='translateY(-4px)';this.style.borderColor='var(--purple-light)';this.style.boxShadow='0 12px 32px rgba(83,74,183,0.12)'" onmouseout="this.style.transform='';this.style.borderColor='var(--border)';this.style.boxShadow=''">
+      <div style="font-size:1.8rem;margin-bottom:0.8rem;">📄</div>
+      <div style="font-size:0.65rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--purple);margin-bottom:0.4rem;">Department 01</div>
+      <h3 style="font-family:Syne,sans-serif;font-size:1rem;font-weight:700;margin-bottom:0.5rem;">Relocation & Documentation</h3>
+      <p style="font-size:0.82rem;color:var(--text-mid);line-height:1.6;">PPS Number, bank account, immigration, healthcare — we tell you exactly what you need based on your situation.</p>
+    </div>
+    <div style="background:white;border-radius:18px;padding:1.5rem;border:1px solid var(--border);transition:all 0.3s;" onmouseover="this.style.transform='translateY(-4px)';this.style.borderColor='var(--purple-light)';this.style.boxShadow='0 12px 32px rgba(83,74,183,0.12)'" onmouseout="this.style.transform='';this.style.borderColor='var(--border)';this.style.boxShadow=''">
+      <div style="font-size:1.8rem;margin-bottom:0.8rem;">💼</div>
+      <div style="font-size:0.65rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--purple);margin-bottom:0.4rem;">Department 02</div>
+      <h3 style="font-family:Syne,sans-serif;font-size:1rem;font-weight:700;margin-bottom:0.5rem;">Employment</h3>
+      <p style="font-size:0.82rem;color:var(--text-mid);line-height:1.6;">Find verified jobs, build your CV, track applications and prepare for interviews with AI-powered matching.</p>
+    </div>
+    <div style="background:white;border-radius:18px;padding:1.5rem;border:1px solid var(--border);transition:all 0.3s;" onmouseover="this.style.transform='translateY(-4px)';this.style.borderColor='var(--purple-light)';this.style.boxShadow='0 12px 32px rgba(83,74,183,0.12)'" onmouseout="this.style.transform='';this.style.borderColor='var(--border)';this.style.boxShadow=''">
+      <div style="font-size:1.8rem;margin-bottom:0.8rem;">🏠</div>
+      <div style="font-size:0.65rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--purple);margin-bottom:0.4rem;">Department 03</div>
+      <h3 style="font-family:Syne,sans-serif;font-size:1rem;font-weight:700;margin-bottom:0.5rem;">Housing</h3>
+      <p style="font-size:0.82rem;color:var(--text-mid);line-height:1.6;">Verified listings, fraud-free search, landlord matching and tenant preparation — find your home safely.</p>
+    </div>
+    <div style="background:white;border-radius:18px;padding:1.5rem;border:1px solid var(--border);transition:all 0.3s;" onmouseover="this.style.transform='translateY(-4px)';this.style.borderColor='var(--purple-light)';this.style.boxShadow='0 12px 32px rgba(83,74,183,0.12)'" onmouseout="this.style.transform='';this.style.borderColor='var(--border)';this.style.boxShadow=''">
+      <div style="font-size:1.8rem;margin-bottom:0.8rem;">🤝</div>
+      <div style="font-size:0.65rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--purple);margin-bottom:0.4rem;">Department 04</div>
+      <h3 style="font-family:Syne,sans-serif;font-size:1rem;font-weight:700;margin-bottom:0.5rem;">Community</h3>
+      <p style="font-size:0.82rem;color:var(--text-mid);line-height:1.6;">Q&A sessions, English classes, workshops, networking events and a trusted support network.</p>
+    </div>
+    <div style="background:var(--purple);border-radius:18px;padding:1.5rem;border:1px solid var(--purple);transition:all 0.3s;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 32px rgba(83,74,183,0.3)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+      <div style="font-size:1.8rem;margin-bottom:0.8rem;">🏢</div>
+      <div style="font-size:0.65rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:0.4rem;">Department 05</div>
+      <h3 style="font-family:Syne,sans-serif;font-size:1rem;font-weight:700;margin-bottom:0.5rem;color:white;">For Employers</h3>
+      <p style="font-size:0.82rem;color:rgba(255,255,255,0.8);line-height:1.6;">Post verified jobs, screen candidates with custom questions and hire better international talent faster.</p>
+    </div>
+    <div style="background:white;border-radius:18px;padding:1.5rem;border:1px solid var(--border);transition:all 0.3s;" onmouseover="this.style.transform='translateY(-4px)';this.style.borderColor='var(--purple-light)';this.style.boxShadow='0 12px 32px rgba(83,74,183,0.12)'" onmouseout="this.style.transform='';this.style.borderColor='var(--border)';this.style.boxShadow=''">
+      <div style="font-size:1.8rem;margin-bottom:0.8rem;">🔑</div>
+      <div style="font-size:0.65rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--purple);margin-bottom:0.4rem;">Department 06</div>
+      <h3 style="font-family:Syne,sans-serif;font-size:1rem;font-weight:700;margin-bottom:0.5rem;">For Landlords</h3>
+      <p style="font-size:0.82rem;color:var(--text-mid);line-height:1.6;">List your property and find verified, reliable international tenants with AI matching and risk reports.</p>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:2.5rem;">
+    <a href="pricing.html" style="background:var(--purple);color:white;padding:0.85rem 2rem;border-radius:10px;text-decoration:none;font-weight:700;font-size:0.95rem;display:inline-block;transition:all 0.2s;" onmouseover="this.style.background='#3C3489'" onmouseout="this.style.background='var(--purple)'">View all plans & pricing →</a>
+  </div>
+</section>
+
+
+<!-- PROBLEMS -->
+<section class="problems fade-in">
+  <div class="section-label">The problem</div>
+  <h2 class="section-title">Starting over in a new country<br>is harder than it should be.</h2>
+  <div class="problems-grid">
+    <div class="problem-card">
+      <div class="problem-icon">📄</div>
+      <h3>Confusing paperwork</h3>
+      <p>Nobody tells you which documents you need or where to get them.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">🏠</div>
+      <h3>Housing scams</h3>
+      <p>Fake listings and unreliable landlords cost people money and time.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">💼</div>
+      <h3>Hard to find real jobs</h3>
+      <p>Job boards are full of outdated listings and unverified employers.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">🌐</div>
+      <h3>Language barriers</h3>
+      <p>Navigating a new system in a foreign language is overwhelming.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">😔</div>
+      <h3>Feeling isolated</h3>
+      <p>No community, no support, no one who understands what you are going through.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section>
+  <div class="section-label">The solution</div>
+  <h2 class="section-title">One app. Everything you need<br>to settle successfully.</h2>
+  <p class="section-sub">Hubro brings together verified jobs, verified housing and a trusted community so you never have to figure it out alone.</p>
+  <div class="solution-grid">
+    <div class="solution-card">
+      <div class="s-num">01</div>
+      <h3>Verified Jobs</h3>
+      <p>Browse opportunities from employers who have been verified by our team. Apply with confidence knowing every listing is real.</p>
+    </div>
+    <div class="solution-card">
+      <div class="s-num">02</div>
+      <h3>Verified Housing</h3>
+      <p>Find accommodation from landlords with verified profiles. No scams, no surprises — just safe, reliable homes.</p>
+    </div>
+    <div class="solution-card">
+      <div class="s-num">03</div>
+      <h3>Trusted Community</h3>
+      <p>Connect with people who have been through the same journey. Get answers, support and friendship in your new city.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how fade-in" id="how">
+  <div class="section-label">How it works</div>
+  <h2 class="section-title">Get started in three steps.</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>Create your profile</h3>
+      <p>Tell us who you are, where you are from, and what you are looking for. Upload your CV and it gets verified by our AI in seconds.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>Explore verified opportunities</h3>
+      <p>See your match score for every job and property listing. Employers and landlords can also find and contact you directly.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>Connect and settle</h3>
+      <p>Apply to roles and properties where you match 30% or above. Join the community and build your new life with confidence.</p>
+    </div>
+  </div>
+</section>
+
+<!-- EMPLOYERS -->
+<section class="employers fade-in" id="employers">
+  <div class="section-label">For employers</div>
+  <h2 class="section-title">Hire international talent<br>with confidence.</h2>
+  <p class="section-sub">Access a pool of pre-verified international candidates who are ready to work and committed to building a life here.</p>
+  <div class="employer-grid">
+    <div class="employer-card">
+      <div class="e-icon">✅</div>
+      <h3>Pre-screened candidates</h3>
+      <p>Every CV is verified by our AI before the candidate appears on the platform.</p>
+    </div>
+    <div class="employer-card">
+      <div class="e-icon">🎯</div>
+      <h3>AI-powered matching</h3>
+      <p>Our matching engine surfaces the most relevant candidates for your specific role and requirements.</p>
+    </div>
+    <div class="employer-card">
+      <div class="e-icon">⚡</div>
+      <h3>Faster hiring</h3>
+      <p>Reduce time-to-hire by connecting directly with motivated, verified international talent.</p>
+    </div>
+  </div>
+  <a href="#waitlist" class="btn-white">Join waitlist →</a>
+</section>
+
+<!-- LANDLORDS -->
+<section id="landlords">
+  <div class="landlords-inner">
+    <div>
+      <div class="section-label">For landlords</div>
+      <h2 class="section-title">Find reliable tenants<br>more efficiently.</h2>
+      <p class="section-sub">List your property and connect with verified international residents who are actively looking for long-term accommodation.</p>
+      <div class="landlord-grid">
+        <div class="landlord-card">
+          <div class="l-icon">🔍</div>
+          <h3>Verified tenants</h3>
+          <p>Every user on Hubro has a verified profile with identity confirmation.</p>
+        </div>
+        <div class="landlord-card">
+          <div class="l-icon">📋</div>
+          <h3>Reduced risk</h3>
+          <p>Access tenant profiles including employment status and community rating.</p>
+        </div>
+        <div class="landlord-card">
+          <div class="l-icon">📢</div>
+          <h3>Greater visibility</h3>
+          <p>Your listing reaches thousands of active international residents.</p>
+        </div>
+        <div class="landlord-card">
+          <div class="l-icon">🤖</div>
+          <h3>AI fraud detection</h3>
+          <p>Our AI reviews every tenant profile for consistency and authenticity.</p>
+        </div>
+      </div>
+      <br>
+      <a href="#waitlist" class="btn-primary">Join waitlist →</a>
+    </div>
+    <div class="landlord-visual">
+      <div class="property-card">
+        <div class="property-img">🏠</div>
+        <div class="property-info">
+          <div class="property-title">1-bed Apartment — Ranelagh</div>
+          <div class="property-meta">Dublin 6 · Available 1 Feb · Min 6 months</div>
+          <div class="property-footer">
+            <span class="property-price">€1,650/mo</span>
+            <span class="verified-badge">✓ Verified</span>
+          </div>
+        </div>
+      </div>
+      <div class="property-card">
+        <div class="property-img">🏢</div>
+        <div class="property-info">
+          <div class="property-title">Studio — Smithfield</div>
+          <div class="property-meta">Dublin 7 · Available Now · Min 3 months</div>
+          <div class="property-footer">
+            <span class="property-price">€1,200/mo</span>
+            <span class="verified-badge">✓ Verified</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI SECTION -->
+<section class="ai-section fade-in">
+  <div class="section-label">AI & Technology</div>
+  <h2 class="section-title">Technology that helps people,<br>not replaces them.</h2>
+  <p class="section-sub">Hubro uses AI to verify CVs, detect fraud, improve matching and personalise recommendations — always with human oversight.</p>
+  <div class="ai-inner">
+    <div class="ai-col">
+      <h3>✅ What our technology does</h3>
+      <ul class="ai-list">
+        <li><span class="ai-check check-yes">✓</span> Verifies and scores every CV uploaded to the platform</li>
+        <li><span class="ai-check check-yes">✓</span> Matches candidates to relevant jobs and housing listings</li>
+        <li><span class="ai-check check-yes">✓</span> Detects fraudulent listings and suspicious profiles automatically</li>
+        <li><span class="ai-check check-yes">✓</span> Personalises recommendations based on your full profile</li>
+        <li><span class="ai-check check-yes">✓</span> Supports moderation of community content</li>
+      </ul>
+    </div>
+    <div class="ai-col">
+      <h3>🚫 What our technology never does</h3>
+      <ul class="ai-list">
+        <li><span class="ai-check check-no">✗</span> Makes hiring or tenancy decisions alone</li>
+        <li><span class="ai-check check-no">✗</span> Discriminates based on origin, language or background</li>
+        <li><span class="ai-check check-no">✗</span> Replaces human review and oversight</li>
+        <li><span class="ai-check check-no">✗</span> Shares your data without your explicit consent</li>
+      </ul>
+    </div>
+  </div>
+  <div class="ai-disclaimer">
+    <strong>Important:</strong> AI supports decision-making on Hubro but all final decisions involving people are reviewed by our team. We are committed to fairness, transparency and human oversight at every step.
+  </div>
+</section>
+
+<!-- CV MATCHING -->
+<section class="matching fade-in">
+  <div class="section-label">CV matching</div>
+  <h2 class="section-title">Apply only where you truly match.</h2>
+  <p class="section-sub">Our AI compares your CV against every listing and shows you a real match score. You can apply to any listing where you score 30% or above.</p>
+  <div class="matching-demo">
+    <div class="match-card">
+      <div class="match-card-header">
+        <h3>Software Engineer — Stripe</h3>
+        <p>Dublin · Full-time · €65,000 – €80,000</p>
+      </div>
+      <div class="match-card-body">
+        <div class="match-score-big">
+          <div class="score-circle">
+            <span class="score-circle-value">87%</span>
+          </div>
+          <div class="score-label">Strong match — you are a great candidate</div>
+        </div>
+        <div class="match-breakdown">
+          <div class="breakdown-row">
+            <span class="breakdown-label">Skills</span>
+            <div class="breakdown-bar"><div class="breakdown-fill" style="width:92%"></div></div>
+            <span class="breakdown-pct">92%</span>
+          </div>
+          <div class="breakdown-row">
+            <span class="breakdown-label">Experience</span>
+            <div class="breakdown-bar"><div class="breakdown-fill" style="width:85%"></div></div>
+            <span class="breakdown-pct">85%</span>
+          </div>
+          <div class="breakdown-row">
+            <span class="breakdown-label">Education</span>
+            <div class="breakdown-bar"><div class="breakdown-fill" style="width:90%"></div></div>
+            <span class="breakdown-pct">90%</span>
+          </div>
+          <div class="breakdown-row">
+            <span class="breakdown-label">Languages</span>
+            <div class="breakdown-bar"><div class="breakdown-fill" style="width:80%"></div></div>
+            <span class="breakdown-pct">80%</span>
+          </div>
+          <div class="breakdown-row">
+            <span class="breakdown-label">Location</span>
+            <div class="breakdown-bar"><div class="breakdown-fill" style="width:100%"></div></div>
+            <span class="breakdown-pct">100%</span>
+          </div>
+        </div>
+        <div class="match-btn-row">
+          <button class="match-apply">Apply now</button>
+          <button class="match-save">Save</button>
+        </div>
+      </div>
+    </div>
+    <div class="threshold-explainer">
+      <h3>How the 30% threshold works</h3>
+      <p>Every listing shows your real compatibility score so you can focus your energy on applications that matter. Below 30%, the apply button is disabled — protecting both your time and the employer's.</p>
+      <div class="threshold-levels">
+        <div class="threshold-level tl-grey">
+          <span class="tl-pct">0–29%</span>
+          <span>Cannot apply — does not meet minimum requirements</span>
+        </div>
+        <div class="threshold-level tl-amber">
+          <span class="tl-pct">30–69%</span>
+          <span>Can apply — consider strengthening your CV first</span>
+        </div>
+        <div class="threshold-level tl-green">
+          <span class="tl-pct">70–89%</span>
+          <span>Strong match — you are a good candidate</span>
+        </div>
+        <div class="threshold-level tl-purple">
+          <span class="tl-pct">90–100%</span>
+          <span>Excellent match — you are among the top candidates</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMUNITY -->
+<section class="community fade-in" id="community">
+  <div class="section-label">Community</div>
+  <h2 class="section-title">A community built for people<br>building a new life.</h2>
+  <p class="section-sub">Join thousands of international residents sharing knowledge, support and opportunities.</p>
+  <div class="community-grid">
+    <div class="community-card">
+      <div class="c-icon">💬</div>
+      <div><h3>Q&A Sessions</h3><p>Get answers from people who have been through the same journey.</p></div>
+    </div>
+    <div class="community-card">
+      <div class="c-icon">🇬🇧</div>
+      <div><h3>English Classes</h3><p>Free and premium English classes for all levels.</p></div>
+    </div>
+    <div class="community-card">
+      <div class="c-icon">🎓</div>
+      <div><h3>Workshops</h3><p>Practical workshops on CV writing, interviews and more.</p></div>
+    </div>
+    <div class="community-card">
+      <div class="c-icon">🤝</div>
+      <div><h3>Networking Events</h3><p>Meet employers, landlords and fellow community members.</p></div>
+    </div>
+    <div class="community-card">
+      <div class="c-icon">💼</div>
+      <div><h3>Career Support</h3><p>One-to-one career guidance from experienced professionals.</p></div>
+    </div>
+    <div class="community-card">
+      <div class="c-icon">🏡</div>
+      <div><h3>Housing Advice</h3><p>Navigate the rental market with help from those who know it.</p></div>
+    </div>
+  </div>
+  <a href="auth.html" class="btn-primary">Create your profile →</a>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section class="proof fade-in">
+  <div class="section-label">Trusted by</div>
+  <h2 class="section-title">Trusted by international residents<br>across Europe.</h2>
+  <div class="metrics">
+    <div class="metric-card">
+      <div class="m-num">10,000+</div>
+      <div class="m-label">Early access registrations</div>
+    </div>
+    <div class="metric-card">
+      <div class="m-num">500+</div>
+      <div class="m-label">Verified employers & landlords</div>
+    </div>
+    <div class="metric-card">
+      <div class="m-num">15</div>
+      <div class="m-label">Languages supported</div>
+    </div>
+  </div>
+  <div class="testimonials">
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <blockquote>"I found my apartment and my first job in Ireland through Hubro. It changed everything. I finally felt like someone understood what I was going through."</blockquote>
+      <cite>Maria, 28<small>Moved from Brazil to Dublin</small></cite>
+    </div>
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <blockquote>"We hired three great candidates in two weeks. The match quality was far better than any other platform we have used. The CV verification saves us hours."</blockquote>
+      <cite>HR Manager<small>Dublin Technology Company</small></cite>
+    </div>
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <blockquote>"Finally a platform that actually understands what international tenants need. My properties are rented faster and to much more reliable tenants."</blockquote>
+      <cite>Verified Hubro Landlord<small>Cork, Ireland</small></cite>
+    </div>
+  </div>
+  <p class="t-note">Testimonials are illustrative during the early access phase.</p>
+</section>
+
+<!-- PRICING -->
+<section class="pricing fade-in" id="pricing">
+  <div class="section-label">Pricing</div>
+  <h2 class="section-title">Simple, transparent pricing.</h2>
+  <p class="section-sub">Start for free. Upgrade when you are ready.</p>
+  <div class="pricing-tabs">
+    <button class="pricing-tab active" onclick="switchTab(this, 'individuals')">For Individuals</button>
+    <button class="pricing-tab" onclick="switchTab(this, 'employers')">For Employers</button>
+    <button class="pricing-tab" onclick="switchTab(this, 'landlords')">For Landlords</button>
+  </div>
+
+  <div class="pricing-grid" id="tab-individuals">
+    <div class="pricing-card">
+      <div class="pricing-name">Free</div>
+      <div class="pricing-price"><span class="amount">€0</span><span class="period">/month</span></div>
+      <div class="pricing-desc">Get started and explore the platform at no cost.</div>
+      <ul class="pricing-features">
+        <li>Browse verified jobs & housing</li>
+        <li>Community access</li>
+        <li>Basic profile & CV upload</li>
+        <li>Match scores on listings</li>
+      </ul>
+      <a href="#waitlist" class="btn-outline" style="width:100%;text-align:center;display:block">Join waitlist — free</a>
+    </div>
+    <div class="pricing-card featured">
+      <div class="pricing-name">Guided</div>
+      <div class="pricing-price"><span class="amount">€4.99</span><span class="period">/month</span></div>
+      <div class="pricing-desc">For people who want extra support and better opportunities.</div>
+      <ul class="pricing-features">
+        <li>Everything in Free</li>
+        <li>Priority listing access</li>
+        <li>AI fraud alerts</li>
+        <li>Multilingual support (15 languages)</li>
+        <li>CV improvement suggestions</li>
+      </ul>
+      <a href="#waitlist" class="btn-primary" style="width:100%;text-align:center;display:block">Join waitlist</a>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-name">Premium</div>
+      <div class="pricing-price"><span class="amount">€14.99</span><span class="period">/month</span></div>
+      <div class="pricing-desc">Full access for those serious about their move.</div>
+      <ul class="pricing-features">
+        <li>Everything in Guided</li>
+        <li>Full AI matching & scoring</li>
+        <li>Priority support (&lt;12h response)</li>
+        <li>Document guidance</li>
+        <li>Exclusive community events</li>
+      </ul>
+      <a href="#waitlist" class="btn-outline" style="width:100%;text-align:center;display:block">Join waitlist</a>
+    </div>
+  </div>
+
+  <div class="pricing-grid" id="tab-employers" style="display:none">
+    <div class="pricing-card">
+      <div class="pricing-name">Talent Access</div>
+      <div class="pricing-price"><span class="amount">€99</span><span class="period">/month</span></div>
+      <div class="pricing-desc">Start hiring verified international talent today.</div>
+      <ul class="pricing-features">
+        <li>Post up to 5 job listings</li>
+        <li>Browse verified candidates</li>
+        <li>Direct messaging</li>
+        <li>Match score reports</li>
+      </ul>
+      <a href="#waitlist" class="btn-outline" style="width:100%;text-align:center;display:block">Join waitlist</a>
+    </div>
+    <div class="pricing-card featured">
+      <div class="pricing-name">Hiring Plus</div>
+      <div class="pricing-price"><span class="amount">€299</span><span class="period">/month</span></div>
+      <div class="pricing-desc">For companies with ongoing international hiring needs.</div>
+      <ul class="pricing-features">
+        <li>Unlimited job listings</li>
+        <li>Advanced candidate analytics</li>
+        <li>Priority listing visibility</li>
+        <li>Dedicated account support</li>
+        <li>Bulk candidate export</li>
+      </ul>
+      <a href="#waitlist" class="btn-primary" style="width:100%;text-align:center;display:block">Join waitlist</a>
+    </div>
+    <div class="pricing-card" style="opacity:0.4;pointer-events:none">
+      <div class="pricing-name">Enterprise</div>
+      <div class="pricing-price"><span class="amount">Custom</span></div>
+      <div class="pricing-desc">For large organisations with complex hiring requirements.</div>
+      <ul class="pricing-features">
+        <li>Everything in Hiring Plus</li>
+        <li>Custom integrations</li>
+        <li>Dedicated account manager</li>
+        <li>SLA guarantee</li>
+      </ul>
+      <a href="mailto:info@gethubro.app" class="btn-outline" style="width:100%;text-align:center;display:block">Contact us</a>
+    </div>
+  </div>
+
+  <div class="pricing-grid" id="tab-landlords" style="display:none">
+    <div class="pricing-card">
+      <div class="pricing-name">Basic Listing</div>
+      <div class="pricing-price"><span class="amount">€49</span><span class="period">/month</span></div>
+      <div class="pricing-desc">Start listing your properties to verified tenants.</div>
+      <ul class="pricing-features">
+        <li>Up to 3 property listings</li>
+        <li>Verified tenant profiles</li>
+        <li>Direct messaging with tenants</li>
+        <li>Basic tenant match scores</li>
+      </ul>
+      <a href="#waitlist" class="btn-outline" style="width:100%;text-align:center;display:block">Join waitlist</a>
+    </div>
+    <div class="pricing-card featured">
+      <div class="pricing-name">Verified Match</div>
+      <div class="pricing-price"><span class="amount">€149</span><span class="period">/month</span></div>
+      <div class="pricing-desc">For landlords who want to fill properties faster with less risk.</div>
+      <ul class="pricing-features">
+        <li>Unlimited property listings</li>
+        <li>Priority listing placement</li>
+        <li>Advanced tenant risk reports</li>
+        <li>Employment & income verification</li>
+        <li>Dedicated landlord support</li>
+      </ul>
+      <a href="#waitlist" class="btn-primary" style="width:100%;text-align:center;display:block">Join waitlist</a>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-name">Agency</div>
+      <div class="pricing-price"><span class="amount">Custom</span></div>
+      <div class="pricing-desc">For letting agencies managing multiple landlords and properties.</div>
+      <ul class="pricing-features">
+        <li>Multi-landlord management</li>
+        <li>White-label option</li>
+        <li>API access</li>
+        <li>Volume pricing</li>
+      </ul>
+      <a href="mailto:info@gethubro.app" class="btn-outline" style="width:100%;text-align:center;display:block">Contact us</a>
+    </div>
+  </div>
+
+  <p style="text-align:center;font-size:0.8rem;color:var(--text-muted);margin-top:1.5rem">All prices exclude VAT. Annual plans available at 20% discount.</p>
+</section>
+
+
+
+<!-- CANDIDATE PROFILE FORM -->
+<section id="create-profile" style="background: white;">
+  <div class="section-label">For candidates</div>
+  <h2 class="section-title">Create your profile<br>and get found by employers.</h2>
+  <p class="section-sub">Fill in your details below. Employers and landlords will be able to find you based on your profile. Our AI will score and verify your information automatically.</p>
+
+  <div style="max-width: 760px; margin: 3rem auto 0; background: var(--grey-bg); border-radius: 24px; padding: 2.5rem; border: 1px solid var(--border);">
+
+  <form name="candidate-profile" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="candidate-form">
+    <input type="hidden" name="form-name" value="candidate-profile">
+    <p style="display:none;"><input name="bot-field"></p>
+
+    <!-- Progress bar -->
+    <div style="display:flex; gap: 8px; margin-bottom: 2rem; align-items: center;">
+      
+      
+      <span style="font-size:0.75rem; color:var(--text-muted); white-space:nowrap; margin-left:8px;">Step 1 of 4</span>
+    </div>
+
+    <!-- Step 1 - Personal Info -->
+    <div id="step1" class="profile-step">
+      <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:1.5rem; color:var(--text);">👤 Personal Information</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+        <div class="form-group">
+          <label class="form-label">First Name *</label>
+          <input type="text" name="first-name" class="form-input" placeholder="Your first name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Last Name *</label>
+          <input type="text" name="last-name" class="form-input" placeholder="Your last name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email *</label>
+          <input type="email" name="email" class="form-input" placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone</label>
+          <input type="tel" name="phone" class="form-input" placeholder="+353 ...">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Country of Origin *</label>
+          <select name="country-of-origin" class="form-input">
+            <option value="">Select country...</option>
+            <option>Brazil</option><option>Spain</option><option>Portugal</option>
+            <option>India</option><option>Poland</option><option>Romania</option>
+            <option>Nigeria</option><option>Philippines</option><option>France</option>
+            <option>Germany</option><option>Italy</option><option>Mexico</option>
+            <option>Colombia</option><option>China</option><option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Current Location *</label>
+          <select name="current-location" class="form-input">
+            <option value="">Select city...</option>
+            <option>Dublin</option><option>Cork</option><option>Galway</option>
+            <option>Limerick</option><option>Waterford</option><option>Other Ireland</option>
+            <option>Not in Ireland yet</option>
+          </select>
+        </div>
+      </div>
+      <div style="display:flex; justify-content:flex-end; margin-top:1.5rem;">
+        <button onclick="nextStep(2)" class="btn-primary">Next — Work Experience →</button>
+      </div>
+    </div>
+
+    <!-- Step 2 - Work Experience -->
+    <div id="step2" class="profile-step" style="display:none;">
+      <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:1.5rem; color:var(--text);">💼 Work Experience & Skills</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+        <div class="form-group">
+          <label class="form-label">Job Title / Role *</label>
+          <input type="text" name="job-title" class="form-input" placeholder="e.g. Software Engineer">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Sector *</label>
+          <select name="sector" class="form-input">
+            <option value="">Select sector...</option>
+            <option>Technology / IT</option><option>Healthcare</option>
+            <option>Finance / Banking</option><option>Hospitality / Tourism</option>
+            <option>Construction / Trades</option><option>Education</option>
+            <option>Retail / Sales</option><option>Marketing / Communications</option>
+            <option>Engineering</option><option>Legal</option>
+            <option>Administration</option><option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Years of Experience *</label>
+          <select name="years-experience" class="form-input">
+            <option value="">Select...</option>
+            <option>Less than 1 year</option><option>1 - 2 years</option>
+            <option>3 - 5 years</option><option>5 - 10 years</option>
+            <option>10+ years</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Education Level *</label>
+          <select name="education-level" class="form-input">
+            <option value="">Select...</option>
+            <option>Secondary School</option><option>Vocational / Trade Certificate</option>
+            <option>Bachelor Degree</option><option>Master Degree</option>
+            <option>PhD / Doctorate</option><option>Other</option>
+          </select>
+        </div>
+        <div class="form-group" style="grid-column:1/-1;">
+          <label class="form-label">Key Skills (separate with commas) *</label>
+          <input type="text" name="skills" class="form-input" placeholder="e.g. Python, Project Management, Customer Service">
+        </div>
+        <div class="form-group" style="grid-column:1/-1;">
+          <label class="form-label">Languages Spoken *</label>
+          <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:6px;">
+            <label class="lang-check"><input type="checkbox" name="lang-english" value="English"> English</label>
+            <label class="lang-check"><input type="checkbox" name="lang-spanish" value="Spanish"> Spanish</label>
+            <label class="lang-check"><input type="checkbox" name="lang-portuguese" value="Portuguese"> Portuguese</label>
+            <label class="lang-check"><input type="checkbox" name="lang-french" value="French"> French</label>
+            <label class="lang-check"><input type="checkbox" name="lang-german" value="German"> German</label>
+            <label class="lang-check"><input type="checkbox" name="lang-italian" value="Italian"> Italian</label>
+            <label class="lang-check"><input type="checkbox" name="lang-polish" value="Polish"> Polish</label>
+            <label class="lang-check"><input type="checkbox" name="lang-romanian" value="Romanian"> Romanian</label>
+            <label class="lang-check"><input type="checkbox" name="lang-hindi" value="Hindi"> Hindi</label>
+            <label class="lang-check"><input type="checkbox" name="lang-arabic" value="Arabic"> Arabic</label>
+            <label class="lang-check"><input type="checkbox" name="lang-chinese" value="Chinese"> Chinese</label>
+            <label class="lang-check"><input type="checkbox" name="lang-other" value="Other"> Other</label>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex; justify-content:space-between; margin-top:1.5rem;">
+        <button onclick="nextStep(1)" class="btn-outline">← Back</button>
+        <button onclick="nextStep(3)" class="btn-primary">Next — What you need →</button>
+      </div>
+    </div>
+
+    <!-- Step 3 - What they need -->
+    <div id="step3" class="profile-step" style="display:none;">
+      <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:1.5rem; color:var(--text);">🎯 What are you looking for?</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+        <div class="form-group" style="grid-column:1/-1;">
+          <label class="form-label">I am looking for... *</label>
+          <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:6px;">
+            <label class="type-check"><input type="checkbox" name="looking-job" value="job"> 💼 A job</label>
+            <label class="type-check"><input type="checkbox" name="looking-housing" value="housing"> 🏠 Housing</label>
+            <label class="type-check"><input type="checkbox" name="looking-both" value="both"> 🤝 Both</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Preferred Contract Type</label>
+          <select name="contract-type" class="form-input">
+            <option value="">Select...</option>
+            <option>Full-time</option><option>Part-time</option>
+            <option>Contract</option><option>Any</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Expected Salary (€/year)</label>
+          <select name="expected-salary" class="form-input">
+            <option value="">Select range...</option>
+            <option>Under €25,000</option><option>€25,000 – €35,000</option>
+            <option>€35,000 – €50,000</option><option>€50,000 – €70,000</option>
+            <option>€70,000 – €100,000</option><option>€100,000+</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Housing Budget (€/month)</label>
+          <select name="housing-budget" class="form-input">
+            <option value="">Select range...</option>
+            <option>Under €800</option><option>€800 – €1,200</option>
+            <option>€1,200 – €1,600</option><option>€1,600 – €2,000</option>
+            <option>€2,000+</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Available From</label>
+          <input type="date" name="available-from" class="form-input">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Work Permit / Visa Status</label>
+          <select name="visa-status" class="form-input">
+            <option value="">Select...</option>
+            <option>EU / EEA citizen — no permit needed</option>
+            <option>Valid Irish work permit</option>
+            <option>Student visa with work rights</option>
+            <option>Applying for permit</option>
+            <option>Need visa sponsorship</option>
+          </select>
+        </div>
+        <div class="form-group" style="grid-column:1/-1;">
+          <label class="form-label">Brief introduction (optional)</label>
+          <textarea name="bio" class="form-input" rows="3" placeholder="Tell employers and landlords a little about yourself..."></textarea>
+        </div>
+      </div>
+      <div style="display:flex; justify-content:space-between; margin-top:1.5rem;">
+        <button onclick="nextStep(2)" class="btn-outline">← Back</button>
+        <button onclick="nextStep(4)" class="btn-primary">Next — Review & Submit →</button>
+      </div>
+    </div>
+
+    <!-- Step 4 - Review & Submit -->
+    <div id="step4" class="profile-step" style="display:none;">
+      <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:1rem; color:var(--text);">✅ Almost done!</h3>
+      <div style="background: var(--purple-pale); border-radius:16px; padding:1.5rem; margin-bottom:1.5rem; border: 1px solid var(--border);">
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:1rem;">
+          <div style="width:48px; height:48px; border-radius:50%; background:var(--purple); display:flex; align-items:center; justify-content:center; color:white; font-size:1.2rem;">🤖</div>
+          <div>
+            <div style="font-weight:700; font-size:0.9rem; color:var(--text);">Hubro AI Verification</div>
+            <div style="font-size:0.8rem; color:var(--text-mid);">Your profile will be verified automatically once submitted</div>
+          </div>
+        </div>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:6px;">
+          <li style="font-size:0.82rem; color:var(--text-mid); display:flex; gap:8px;"><span style="color:var(--purple);">✓</span> Profile completeness check</li>
+          <li style="font-size:0.82rem; color:var(--text-mid); display:flex; gap:8px;"><span style="color:var(--purple);">✓</span> Skills and experience consistency review</li>
+          <li style="font-size:0.82rem; color:var(--text-mid); display:flex; gap:8px;"><span style="color:var(--purple);">✓</span> Hubro Trust Score assigned (0–100)</li>
+          <li style="font-size:0.82rem; color:var(--text-mid); display:flex; gap:8px;"><span style="color:var(--purple);">✓</span> Profile visible to verified employers within 24h</li>
+        </ul>
+      </div>
+      <div style="margin-bottom:1.5rem;">
+        <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer;">
+          <input type="checkbox" id="consent-check" style="margin-top:3px; accent-color:var(--purple);">
+          <span style="font-size:0.82rem; color:var(--text-mid); line-height:1.6;">I agree to the <a href="#" style="color:var(--purple);">Terms of Service</a> and <a href="#" style="color:var(--purple);">Privacy Policy</a>. I consent to my profile being visible to verified employers and landlords on the Hubro platform.</span>
+        </label>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <button onclick="nextStep(3)" class="btn-outline">← Back</button>
+        <button onclick="submitProfile()" class="btn-primary" style="padding: 0.85rem 2rem;">Submit my profile →</button>
+      </div>
+      <div id="profile-success" style="display:none; margin-top:1.5rem; padding:1.2rem; background:#EAF3DE; border-radius:12px; text-align:center;">
+        <div style="font-size:1.5rem; margin-bottom:0.5rem;">🎉</div>
+        <div style="font-weight:700; color:#3B6D11; margin-bottom:0.3rem;">Profile submitted successfully!</div>
+        <div style="font-size:0.85rem; color:#3B6D11;">Our AI is verifying your profile. You will receive a confirmation email within 24 hours.</div>
+      </div>
+    </div>
+
+  </form>
+
+  </div>
+</section>
+
+<!-- EMPLOYER / LANDLORD SEARCH -->
+<section id="search-candidates" style="background: var(--grey-bg);">
+  <div class="section-label">For employers & landlords</div>
+  <h2 class="section-title">Find the right candidate<br>in seconds.</h2>
+  <p class="section-sub">Search our database of verified candidates using the filters below. Every profile has been reviewed by our AI before appearing here.</p>
+
+  <div style="max-width: 960px; margin: 3rem auto 0;">
+
+    <!-- Search filters -->
+    <div style="background: white; border-radius: 20px; padding: 2rem; border: 1px solid var(--border); margin-bottom: 2rem; box-shadow: 0 4px 16px rgba(83,74,183,0.06);">
+      <h3 style="font-size:0.95rem; font-weight:700; margin-bottom:1.2rem; color:var(--text);">🔍 Search filters</h3>
+      <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:14px;">
+        <div class="form-group">
+          <label class="form-label">I am looking for</label>
+          <select class="form-input" id="f-type" onchange="filterCandidates()">
+            <option value="">Candidates & Tenants</option>
+            <option value="job">Job candidates only</option>
+            <option value="housing">Tenants only</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Sector</label>
+          <select class="form-input" id="f-sector" onchange="filterCandidates()">
+            <option value="">All sectors</option>
+            <option>Technology / IT</option><option>Healthcare</option>
+            <option>Finance / Banking</option><option>Hospitality / Tourism</option>
+            <option>Construction / Trades</option><option>Education</option>
+            <option>Retail / Sales</option><option>Engineering</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Experience</label>
+          <select class="form-input" id="f-exp" onchange="filterCandidates()">
+            <option value="">Any experience</option>
+            <option>Less than 1 year</option><option>1 - 2 years</option>
+            <option>3 - 5 years</option><option>5 - 10 years</option>
+            <option>10+ years</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Language</label>
+          <select class="form-input" id="f-lang" onchange="filterCandidates()">
+            <option value="">Any language</option>
+            <option>English</option><option>Spanish</option><option>Portuguese</option>
+            <option>French</option><option>German</option><option>Polish</option>
+            <option>Romanian</option><option>Hindi</option><option>Arabic</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Location</label>
+          <select class="form-input" id="f-loc" onchange="filterCandidates()">
+            <option value="">All Ireland</option>
+            <option>Dublin</option><option>Cork</option><option>Galway</option>
+            <option>Limerick</option><option>Waterford</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Visa Status</label>
+          <select class="form-input" id="f-visa" onchange="filterCandidates()">
+            <option value="">Any status</option>
+            <option>EU / EEA — no permit needed</option>
+            <option>Valid work permit</option>
+            <option>Needs sponsorship</option>
+          </select>
+        </div>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:1.2rem;">
+        <span id="results-count" style="font-size:0.85rem; color:var(--text-mid);">Showing 6 verified candidates</span>
+        <button onclick="resetFilters()" style="background:none; border:none; color:var(--purple); font-size:0.85rem; font-weight:600; cursor:pointer; font-family: DM Sans, sans-serif;">Reset filters</button>
+      </div>
+    </div>
+
+    <!-- Candidate cards -->
+    <div id="candidates-grid" style="display:grid; grid-template-columns: repeat(3, 1fr); gap:16px;">
+
+      <div class="candidate-card" data-type="job" data-sector="Technology / IT" data-loc="Dublin" data-lang="English">
+        <div class="cand-header">
+          <div class="cand-avatar" style="background: #534AB7;">IB</div>
+          <div>
+            <div class="cand-name">Ivan B.</div>
+            <div class="cand-role">Software Engineer</div>
+          </div>
+          <span class="cand-score">94</span>
+        </div>
+        <div class="cand-tags">
+          <span class="cand-tag">Technology / IT</span>
+          <span class="cand-tag">5-10 years</span>
+          <span class="cand-tag">Dublin</span>
+        </div>
+        <div class="cand-langs">🌐 English · Spanish</div>
+        <div class="cand-visa">✅ EU Citizen</div>
+        <button class="cand-btn">View profile</button>
+      </div>
+
+      <div class="candidate-card" data-type="job" data-sector="Healthcare" data-loc="Cork" data-lang="English">
+        <div class="cand-header">
+          <div class="cand-avatar" style="background: #2E8B57;">MR</div>
+          <div>
+            <div class="cand-name">Maria R.</div>
+            <div class="cand-role">Registered Nurse</div>
+          </div>
+          <span class="cand-score">88</span>
+        </div>
+        <div class="cand-tags">
+          <span class="cand-tag">Healthcare</span>
+          <span class="cand-tag">3-5 years</span>
+          <span class="cand-tag">Cork</span>
+        </div>
+        <div class="cand-langs">🌐 English · Portuguese</div>
+        <div class="cand-visa">✅ Valid Work Permit</div>
+        <button class="cand-btn">View profile</button>
+      </div>
+
+      <div class="candidate-card" data-type="housing" data-sector="Finance / Banking" data-loc="Dublin" data-lang="English">
+        <div class="cand-header">
+          <div class="cand-avatar" style="background: #B8860B;">AK</div>
+          <div>
+            <div class="cand-name">Aleksa K.</div>
+            <div class="cand-role">Financial Analyst</div>
+          </div>
+          <span class="cand-score">91</span>
+        </div>
+        <div class="cand-tags">
+          <span class="cand-tag">Finance</span>
+          <span class="cand-tag">3-5 years</span>
+          <span class="cand-tag">Dublin</span>
+        </div>
+        <div class="cand-langs">🌐 English · Polish · German</div>
+        <div class="cand-visa">✅ EU Citizen</div>
+        <button class="cand-btn">View profile</button>
+      </div>
+
+      <div class="candidate-card" data-type="job" data-sector="Hospitality / Tourism" data-loc="Galway" data-lang="Spanish">
+        <div class="cand-header">
+          <div class="cand-avatar" style="background: #C0392B;">LC</div>
+          <div>
+            <div class="cand-name">Luis C.</div>
+            <div class="cand-role">Hotel Manager</div>
+          </div>
+          <span class="cand-score">85</span>
+        </div>
+        <div class="cand-tags">
+          <span class="cand-tag">Hospitality</span>
+          <span class="cand-tag">5-10 years</span>
+          <span class="cand-tag">Galway</span>
+        </div>
+        <div class="cand-langs">🌐 English · Spanish · French</div>
+        <div class="cand-visa">✅ Valid Work Permit</div>
+        <button class="cand-btn">View profile</button>
+      </div>
+
+      <div class="candidate-card" data-type="housing" data-sector="Education" data-loc="Dublin" data-lang="English">
+        <div class="cand-header">
+          <div class="cand-avatar" style="background: #7F77DD;">SP</div>
+          <div>
+            <div class="cand-name">Sofia P.</div>
+            <div class="cand-role">Primary Teacher</div>
+          </div>
+          <span class="cand-score">79</span>
+        </div>
+        <div class="cand-tags">
+          <span class="cand-tag">Education</span>
+          <span class="cand-tag">1-2 years</span>
+          <span class="cand-tag">Dublin</span>
+        </div>
+        <div class="cand-langs">🌐 English · Romanian</div>
+        <div class="cand-visa">✅ EU Citizen</div>
+        <button class="cand-btn">View profile</button>
+      </div>
+
+      <div class="candidate-card" data-type="job" data-sector="Construction / Trades" data-loc="Limerick" data-lang="English">
+        <div class="cand-header">
+          <div class="cand-avatar" style="background: #1A6B4A;">DO</div>
+          <div>
+            <div class="cand-name">David O.</div>
+            <div class="cand-role">Electrician</div>
+          </div>
+          <span class="cand-score">82</span>
+        </div>
+        <div class="cand-tags">
+          <span class="cand-tag">Construction</span>
+          <span class="cand-tag">5-10 years</span>
+          <span class="cand-tag">Limerick</span>
+        </div>
+        <div class="cand-langs">🌐 English · Hindi</div>
+        <div class="cand-visa">✅ Valid Work Permit</div>
+        <button class="cand-btn">View profile</button>
+      </div>
+
+    </div>
+
+    <div id="no-results" style="display:none; text-align:center; padding:3rem; color:var(--text-muted);">
+      <div style="font-size:2rem; margin-bottom:1rem;">🔍</div>
+      <div style="font-weight:600; margin-bottom:0.5rem;">No candidates match your filters</div>
+      <div style="font-size:0.85rem;">Try adjusting your search criteria</div>
+    </div>
+
+    <div style="text-align:center; margin-top:2rem;">
+      <a href="#waitlist" class="btn-primary">Join waitlist to access full database →</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-label { font-size: 0.8rem; font-weight: 600; color: var(--text-mid); }
+  .form-input {
+    padding: 0.75rem 1rem; border-radius: 10px;
+    border: 1.5px solid var(--border); font-family: DM Sans, sans-serif;
+    font-size: 0.875rem; color: var(--text); background: white;
+    outline: none; transition: border-color 0.2s; width: 100%;
+  }
+  .form-input:focus { border-color: var(--purple); }
+  textarea.form-input { resize: vertical; }
+
+  .lang-check, .type-check {
+    display: flex; align-items: center; gap: 6px;
+    padding: 6px 12px; border-radius: 8px;
+    background: white; border: 1.5px solid var(--border);
+    font-size: 0.82rem; cursor: pointer; transition: all 0.2s;
+    font-weight: 500;
+  }
+  .lang-check:hover, .type-check:hover { border-color: var(--purple); background: var(--purple-pale); }
+
+  .candidate-card {
+    background: white; border-radius: 16px;
+    padding: 1.2rem; border: 1px solid var(--border);
+    transition: all 0.3s;
+  }
+  .candidate-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(83,74,183,0.12); border-color: var(--purple-light); }
+
+  .cand-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .cand-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 0.8rem; font-weight: 700;
+    font-family: Syne, sans-serif; flex-shrink: 0;
+  }
+  .cand-name { font-family: Syne, sans-serif; font-weight: 700; font-size: 0.9rem; }
+  .cand-role { font-size: 0.75rem; color: var(--text-muted); }
+  .cand-score {
+    margin-left: auto; background: var(--purple-pale); color: var(--purple);
+    font-family: Syne, sans-serif; font-weight: 800; font-size: 0.85rem;
+    padding: 4px 8px; border-radius: 8px; flex-shrink: 0;
+  }
+  .cand-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
+  .cand-tag {
+    font-size: 0.68rem; padding: 3px 8px; border-radius: 6px;
+    background: var(--grey-bg); color: var(--text-mid); font-weight: 500;
+  }
+  .cand-langs { font-size: 0.75rem; color: var(--text-mid); margin-bottom: 4px; }
+  .cand-visa { font-size: 0.75rem; color: #3B6D11; margin-bottom: 10px; }
+  .cand-btn {
+    width: 100%; background: var(--purple-pale); color: var(--purple);
+    border: none; padding: 0.6rem; border-radius: 8px;
+    font-size: 0.82rem; font-weight: 700; cursor: pointer;
+    font-family: DM Sans, sans-serif; transition: all 0.2s;
+  }
+  .cand-btn:hover { background: var(--purple); color: white; }
+
+  @media (max-width: 768px) {
+    #candidates-grid { grid-template-columns: 1fr; }
+    .profile-step > div[style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
+    div[style*="grid-template-columns: repeat(3, 1fr)"] { grid-template-columns: 1fr !important; }
+  }
+</style>
+
+<script>
+function nextStep(step) {
+  document.querySelectorAll('.profile-step').forEach(s => s.style.display = 'none');
+  document.getElementById('step' + step).style.display = 'block';
+  const bars = document.querySelectorAll('.profile-step').length;
+  document.querySelectorAll('[style*="height:4px"]').forEach((bar, i) => {
+    bar.style.background = i < step - 1 ? 'var(--purple)' : 'var(--border)';
+  });
+  window.scrollTo({top: document.getElementById('create-profile').offsetTop - 80, behavior: 'smooth'});
+}
+
+function submitProfile() {
+  const consent = document.getElementById('consent-check');
+  if (!consent.checked) {
+    consent.style.outline = '2px solid red';
+    return;
+  }
+
+  const form = document.getElementById('candidate-form');
+  const submitBtn = document.querySelector('#step4 button[onclick="submitProfile()"]');
+  submitBtn.textContent = 'Submitting…';
+  submitBtn.disabled = true;
+
+  const data = new FormData(form);
+
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams(data).toString()
+  })
+  .then(() => {
+    document.getElementById('profile-success').style.display = 'block';
+    submitBtn.style.display = 'none';
+  })
+  .catch(() => {
+    submitBtn.textContent = 'Submit my profile →';
+    submitBtn.disabled = false;
+    alert('Something went wrong. Please try again.');
+  });
+}
+
+function filterCandidates() {
+  const type = document.getElementById('f-type').value;
+  const sector = document.getElementById('f-sector').value;
+  const loc = document.getElementById('f-loc').value;
+  const lang = document.getElementById('f-lang').value;
+
+  const cards = document.querySelectorAll('.candidate-card');
+  let visible = 0;
+
+  cards.forEach(card => {
+    const matchType = !type || card.dataset.type === type;
+    const matchSector = !sector || card.dataset.sector === sector;
+    const matchLoc = !loc || card.dataset.loc === loc;
+    const matchLang = !lang || card.dataset.lang.includes(lang);
+
+    if (matchType && matchSector && matchLoc && matchLang) {
+      card.style.display = 'block';
+      visible++;
+    } else {
+      card.style.display = 'none';
+    }
+  });
+
+  document.getElementById('results-count').textContent =
+    visible === 0 ? 'No candidates found' : \`Showing \${visible} verified candidate\${visible !== 1 ? 's' : ''}\`;
+  document.getElementById('no-results').style.display = visible === 0 ? 'block' : 'none';
+  document.getElementById('candidates-grid').style.display = visible === 0 ? 'none' : 'grid';
+}
+
+function resetFilters() {
+  ['f-type','f-sector','f-exp','f-lang','f-loc','f-visa'].forEach(id => {
+    document.getElementById(id).selectedIndex = 0;
+  });
+  filterCandidates();
+}
+</script>
+
+
+<!-- WAITLIST -->
+<section id="waitlist" style="background: var(--grey-bg);">
+  <div style="max-width: 560px; margin: 0 auto; text-align: center;">
+    <div class="section-label" style="text-align:center;">Early access</div>
+    <h2 class="section-title" style="text-align:center;">Be the first to know<br>when we launch.</h2>
+    <p class="section-sub" style="margin: 0 auto 2rem; text-align:center;">Join the Hubro waitlist and get early access, exclusive updates and a free Premium month when we go live.</p>
+    <div style="background: white; border-radius: 20px; padding: 2rem; border: 1px solid var(--border); box-shadow: 0 8px 32px rgba(83,74,183,0.08);">
+      <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 1rem;">
+        <select id="wl-type" style="flex:1; min-width:140px; padding: 0.8rem 1rem; border-radius: 10px; border: 1.5px solid var(--border); font-family: DM Sans, sans-serif; font-size: 0.9rem; color: var(--text); background: white; cursor:pointer;">
+          <option value="">I am a...</option>
+          <option value="individual">Individual / Newcomer</option>
+          <option value="employer">Employer</option>
+          <option value="landlord">Landlord</option>
+        </select>
+      </div>
+      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <input type="email" id="wl-email" placeholder="your@email.com" style="flex:1; min-width:200px; padding: 0.8rem 1rem; border-radius: 10px; border: 1.5px solid var(--border); font-family: DM Sans, sans-serif; font-size: 0.9rem; outline:none;">
+        <button onclick="joinWaitlist()" style="background: var(--purple); color: white; border: none; padding: 0.8rem 1.6rem; border-radius: 10px; font-size: 0.9rem; font-weight: 700; cursor: pointer; font-family: DM Sans, sans-serif; white-space:nowrap; transition: all 0.2s;">Join waitlist →</button>
+      </div>
+      <div id="wl-success" style="display:none; margin-top: 1rem; padding: 0.8rem; background: #EAF3DE; border-radius: 10px; color: #3B6D11; font-size: 0.875rem; font-weight: 500;">
+        ✓ You are on the list! We will be in touch soon.
+      </div>
+      <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 1rem;">No spam. Unsubscribe at any time. GDPR compliant.</p>
+    </div>
+    <div style="display:flex; justify-content:center; gap: 2rem; margin-top: 2rem; flex-wrap:wrap;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:0.82rem; color:var(--text-mid);">
+        <span style="color:var(--purple); font-weight:700;">✓</span> Free to join
+      </div>
+      <div style="display:flex; align-items:center; gap:6px; font-size:0.82rem; color:var(--text-mid);">
+        <span style="color:var(--purple); font-weight:700;">✓</span> Early access priority
+      </div>
+      <div style="display:flex; align-items:center; gap:6px; font-size:0.82rem; color:var(--text-mid);">
+        <span style="color:var(--purple); font-weight:700;">✓</span> 1 month Premium free at launch
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+function joinWaitlist() {
+  const email = document.getElementById('wl-email').value;
+  const type = document.getElementById('wl-type').value;
+  if (!email || !email.includes('@')) {
+    document.getElementById('wl-email').style.borderColor = '#E24B4A';
+    return;
+  }
+  document.getElementById('wl-email').style.borderColor = 'var(--border)';
+  document.getElementById('wl-success').style.display = 'block';
+  document.getElementById('wl-email').value = '';
+  document.getElementById('wl-type').value = '';
+  setTimeout(() => {
+    document.getElementById('wl-success').style.display = 'none';
+  }, 5000);
+}
+</script>
+
+
+<!-- FINAL CTA -->
+<section class="final-cta fade-in">
+  <div class="section-label" style="color:var(--purple-light)">Get started today</div>
+  <h2 class="section-title">Start your journey<br>with confidence.</h2>
+  <p>Join thousands of people already using Hubro to find jobs, housing and community in their new country.</p>
+  <div class="hero-btns" style="justify-content:center">
+    <a href="#waitlist" class="btn-primary btn-primary-white">Join the waitlist</a>
+    <a href="#how" class="btn-outline btn-outline-white">Learn more</a>
+  </div>
+  <div class="app-badges" style="justify-content:center;margin-top:1.5rem">
+    <a href="#" class="app-badge">
+      <span class="badge-icon">🍎</span>
+      <span class="badge-text"><small>Download on the</small><strong>App Store</strong></span>
+    </a>
+    <a href="#" class="app-badge">
+      <span class="badge-icon">▶</span>
+      <span class="badge-text"><small>Get it on</small><strong>Google Play</strong></span>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="index.html" class="logo"><span class="hub">hub</span><span class="ro">ro</span></a>
+  <div class="footer-links" style="display:flex;gap:1rem;flex-wrap:wrap;">
+    <a href="privacy.html" style="color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;">Privacy Policy</a>
+    <a href="terms.html" style="color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;">Terms of Service</a>
+    <a href="cookies.html" style="color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;">Cookie Policy</a>
+    <a href="gdpr.html" style="color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;">GDPR</a>
+    <a href="accessibility.html" style="color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;">Accessibility</a>
+    <a href="mailto:info@gethubro.app" style="color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;">Contact</a>
+  </div>
+  <span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">© 2025 Aevo Group Limited · gethubro.app</span>
+</footer>
+
+<script>
+  // Scroll animations
+  document.body.classList.add('js-ready');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Pricing tabs
+  function switchTab(btn, tabId) {
+    document.querySelectorAll('.pricing-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    ['individuals','employers','landlords'].forEach(id => {
+      document.getElementById('tab-' + id).style.display = id === tabId ? 'grid' : 'none';
+    });
+  }
+
+/* ── TRANSLATIONS ── */
+const TRANSLATIONS = {
+  en: {
+    nav_jobs: "Find Jobs",
+    nav_housing: "Find Housing",
+    nav_employers: "For Employers",
+    nav_landlords: "For Landlords",
+    nav_community: "Community",
+    nav_pricing: "Pricing",
+    nav_cta: "Join waitlist",
+    hero_badge: "Now available in Ireland — Early Access",
+    hero_h1: "Find <span class=\'accent\'>jobs, housing</span> & community in your new country.",
+    hero_p: "Hubro connects international workers, students and families with verified employers, landlords and a trusted community — all in one app.",
+    hero_btn1: "Find Jobs & Housing →",
+    hero_btn2: "I\'m an Employer",
+    hero_btn3: "I\'m a Landlord",
+    trust1: "100% verified listings",
+    trust2: "15 languages supported",
+    trust3: "AI fraud protection",
+    prob_label: "The problem",
+    prob_title: "Starting over in a new country<br>is harder than it should be.",
+    sol_label: "The solution",
+    sol_title: "One app. Everything you need<br>to settle successfully.",
+    sol_sub: "Hubro brings together verified jobs, verified housing and a trusted community so you never have to figure it out alone.",
+    how_label: "How it works",
+    how_title: "Get started in three steps.",
+    waitlist_title: "Be the first to know<br>when we launch.",
+    waitlist_sub: "Join the Hubro waitlist and get early access, exclusive updates and a free Premium month when we go live.",
+    waitlist_btn: "Join waitlist →",
+    footer_copy: "© 2025 Aevo Group Limited. Hubro is a trading name of Aevo Group Limited, incorporated in Dublin, Ireland."
+  },
+  es: {
+    nav_jobs: "Buscar Empleo",
+    nav_housing: "Buscar Vivienda",
+    nav_employers: "Para Empresas",
+    nav_landlords: "Para Propietarios",
+    nav_community: "Comunidad",
+    nav_pricing: "Precios",
+    nav_cta: "Únete a la lista",
+    hero_badge: "Disponible en Irlanda — Acceso Anticipado",
+    hero_h1: "Encuentra <span class=\'accent\'>empleo, vivienda</span> y comunidad en tu nuevo país.",
+    hero_p: "Hubro conecta trabajadores internacionales, estudiantes y familias con empleadores, propietarios y una comunidad de confianza — todo en una sola app.",
+    hero_btn1: "Buscar Empleo y Vivienda →",
+    hero_btn2: "Soy una Empresa",
+    hero_btn3: "Soy Propietario",
+    trust1: "100% anuncios verificados",
+    trust2: "15 idiomas disponibles",
+    trust3: "Protección antifraude IA",
+    prob_label: "El problema",
+    prob_title: "Empezar de cero en un país nuevo<br>es más difícil de lo que debería.",
+    sol_label: "La solución",
+    sol_title: "Una app. Todo lo que necesitas<br>para instalarte con éxito.",
+    sol_sub: "Hubro reúne empleos verificados, vivienda verificada y una comunidad de confianza para que nunca tengas que hacerlo solo.",
+    how_label: "Cómo funciona",
+    how_title: "Empieza en tres pasos.",
+    waitlist_title: "Sé el primero en saber<br>cuándo lanzamos.",
+    waitlist_sub: "Únete a la lista de espera de Hubro y consigue acceso anticipado, actualizaciones exclusivas y un mes Premium gratis al lanzar.",
+    waitlist_btn: "Unirse a la lista →",
+    footer_copy: "© 2025 Aevo Group Limited. Hubro es un nombre comercial de Aevo Group Limited, constituida en Dublín, Irlanda."
+  },
+  pt: {
+    nav_jobs: "Encontrar Emprego",
+    nav_housing: "Encontrar Casa",
+    nav_employers: "Para Empresas",
+    nav_landlords: "Para Senhorios",
+    nav_community: "Comunidade",
+    nav_pricing: "Preços",
+    nav_cta: "Entrar na lista",
+    hero_badge: "Disponível na Irlanda — Acesso Antecipado",
+    hero_h1: "Encontre <span class=\'accent\'>emprego, casa</span> e comunidade no seu novo país.",
+    hero_p: "Hubro conecta trabalhadores internacionais, estudantes e famílias com empregadores, senhorios e uma comunidade de confiança — tudo numa app.",
+    hero_btn1: "Encontrar Emprego e Casa →",
+    hero_btn2: "Sou uma Empresa",
+    hero_btn3: "Sou Senhorio",
+    trust1: "100% anúncios verificados",
+    trust2: "15 idiomas disponíveis",
+    trust3: "Proteção antifraude IA",
+    prob_label: "O problema",
+    prob_title: "Recomeçar num país novo<br>é mais difícil do que deveria ser.",
+    sol_label: "A solução",
+    sol_title: "Uma app. Tudo o que precisas<br>para te instalar com sucesso.",
+    sol_sub: "Hubro reúne empregos verificados, casas verificadas e uma comunidade de confiança para que nunca precises de fazer isto sozinho.",
+    how_label: "Como funciona",
+    how_title: "Começa em três passos.",
+    waitlist_title: "Sê o primeiro a saber<br>quando lançamos.",
+    waitlist_sub: "Junta-te à lista de espera do Hubro e obtém acesso antecipado, atualizações exclusivas e um mês Premium grátis no lançamento.",
+    waitlist_btn: "Entrar na lista →",
+    footer_copy: "© 2025 Aevo Group Limited. Hubro é um nome comercial da Aevo Group Limited, constituída em Dublin, Irlanda."
+  },
+  pl: {
+    nav_jobs: "Znajdź Pracę",
+    nav_housing: "Znajdź Mieszkanie",
+    nav_employers: "Dla Pracodawców",
+    nav_landlords: "Dla Wynajmujących",
+    nav_community: "Społeczność",
+    nav_pricing: "Cennik",
+    nav_cta: "Dołącz do listy",
+    hero_badge: "Dostępne w Irlandii — Wczesny Dostęp",
+    hero_h1: "Znajdź <span class=\'accent\'>pracę, mieszkanie</span> i społeczność w nowym kraju.",
+    hero_p: "Hubro łączy pracowników międzynarodowych, studentów i rodziny ze zweryfikowanymi pracodawcami, wynajmującymi i zaufaną społecznością — wszystko w jednej aplikacji.",
+    hero_btn1: "Znajdź Pracę i Mieszkanie →",
+    hero_btn2: "Jestem Pracodawcą",
+    hero_btn3: "Jestem Wynajmującym",
+    trust1: "100% zweryfikowanych ogłoszeń",
+    trust2: "15 obsługiwanych języków",
+    trust3: "Ochrona przed oszustwami AI",
+    prob_label: "Problem",
+    prob_title: "Zaczynanie od nowa w nowym kraju<br>jest trudniejsze niż powinno być.",
+    sol_label: "Rozwiązanie",
+    sol_title: "Jedna aplikacja. Wszystko czego potrzebujesz<br>by się osiedlić.",
+    sol_sub: "Hubro łączy zweryfikowane oferty pracy, mieszkania i zaufaną społeczność, abyś nigdy nie musiał robić tego sam.",
+    how_label: "Jak to działa",
+    how_title: "Zacznij w trzech krokach.",
+    waitlist_title: "Bądź pierwszym który dowie się<br>o naszym starcie.",
+    waitlist_sub: "Dołącz do listy oczekujących Hubro i uzyskaj wczesny dostęp, ekskluzywne aktualizacje oraz miesiąc Premium gratis.",
+    waitlist_btn: "Dołącz do listy →",
+    footer_copy: "© 2025 Aevo Group Limited. Hubro jest nazwą handlową Aevo Group Limited, zarejestrowanej w Dublinie, Irlandia."
+  },
+  de: {
+    nav_jobs: "Jobs finden",
+    nav_housing: "Wohnung finden",
+    nav_employers: "Für Arbeitgeber",
+    nav_landlords: "Für Vermieter",
+    nav_community: "Community",
+    nav_pricing: "Preise",
+    nav_cta: "Warteliste beitreten",
+    hero_badge: "Jetzt in Irland verfügbar — Früher Zugang",
+    hero_h1: "Finde <span class=\'accent\'>Jobs, Wohnung</span> und Community in deinem neuen Land.",
+    hero_p: "Hubro verbindet internationale Arbeitnehmer, Studenten und Familien mit verifizierten Arbeitgebern, Vermietern und einer vertrauenswürdigen Community — alles in einer App.",
+    hero_btn1: "Jobs & Wohnung finden →",
+    hero_btn2: "Ich bin Arbeitgeber",
+    hero_btn3: "Ich bin Vermieter",
+    trust1: "100% verifizierte Anzeigen",
+    trust2: "15 unterstützte Sprachen",
+    trust3: "KI-Betrugsschutz",
+    prob_label: "Das Problem",
+    prob_title: "In einem neuen Land neu anzufangen<br>ist schwieriger als es sein sollte.",
+    sol_label: "Die Lösung",
+    sol_title: "Eine App. Alles was du brauchst<br>um dich erfolgreich einzuleben.",
+    sol_sub: "Hubro bringt verifizierte Jobs, verifizierte Wohnungen und eine vertrauenswürdige Community zusammen, damit du es nie alleine herausfinden musst.",
+    how_label: "So funktioniert es",
+    how_title: "Starte in drei Schritten.",
+    waitlist_title: "Sei der Erste der erfährt<br>wann wir starten.",
+    waitlist_sub: "Tritt der Hubro-Warteliste bei und erhalte frühen Zugang, exklusive Updates und einen kostenlosen Premium-Monat beim Start.",
+    waitlist_btn: "Warteliste beitreten →",
+    footer_copy: "© 2025 Aevo Group Limited. Hubro ist ein Handelsname der Aevo Group Limited, gegründet in Dublin, Irland."
+  },
+  fr: {
+    nav_jobs: "Trouver un Emploi",
+    nav_housing: "Trouver un Logement",
+    nav_employers: "Pour les Entreprises",
+    nav_landlords: "Pour les Propriétaires",
+    nav_community: "Communauté",
+    nav_pricing: "Tarifs",
+    nav_cta: "Rejoindre la liste",
+    hero_badge: "Disponible en Irlande — Accès Anticipé",
+    hero_h1: "Trouvez <span class=\'accent\'>un emploi, un logement</span> et une communauté dans votre nouveau pays.",
+    hero_p: "Hubro connecte les travailleurs internationaux, les étudiants et les familles avec des employeurs, des propriétaires et une communauté de confiance — tout dans une seule application.",
+    hero_btn1: "Trouver Emploi & Logement →",
+    hero_btn2: "Je suis une Entreprise",
+    hero_btn3: "Je suis Propriétaire",
+    trust1: "100% d\'annonces vérifiées",
+    trust2: "15 langues supportées",
+    trust3: "Protection anti-fraude IA",
+    prob_label: "Le problème",
+    prob_title: "Recommencer dans un nouveau pays<br>est plus difficile que ça ne devrait l\'être.",
+    sol_label: "La solution",
+    sol_title: "Une app. Tout ce dont vous avez besoin<br>pour vous installer avec succès.",
+    sol_sub: "Hubro réunit des offres d\'emploi vérifiées, des logements vérifiés et une communauté de confiance pour que vous n\'ayez jamais à tout faire seul.",
+    how_label: "Comment ça marche",
+    how_title: "Commencez en trois étapes.",
+    waitlist_title: "Soyez le premier à savoir<br>quand nous lançons.",
+    waitlist_sub: "Rejoignez la liste d\'attente Hubro et bénéficiez d\'un accès anticipé, de mises à jour exclusives et d\'un mois Premium offert au lancement.",
+    waitlist_btn: "Rejoindre la liste →",
+    footer_copy: "© 2025 Aevo Group Limited. Hubro est un nom commercial d\'Aevo Group Limited, constituée à Dublin, Irlande."
+  },
+  it: {
+    nav_jobs: "Trova Lavoro",
+    nav_housing: "Trova Casa",
+    nav_employers: "Per le Aziende",
+    nav_landlords: "Per i Proprietari",
+    nav_community: "Comunità",
+    nav_pricing: "Prezzi",
+    nav_cta: "Unisciti alla lista",
+    hero_badge: "Disponibile in Irlanda — Accesso Anticipato",
+    hero_h1: "Trova <span class=\'accent\'>lavoro, casa</span> e comunità nel tuo nuovo paese.",
+    hero_p: "Hubro mette in contatto lavoratori internazionali, studenti e famiglie con datori di lavoro verificati, proprietari e una comunità di fiducia — tutto in un\'unica app.",
+    hero_btn1: "Trova Lavoro e Casa →",
+    hero_btn2: "Sono un\'Azienda",
+    hero_btn3: "Sono un Proprietario",
+    trust1: "100% annunci verificati",
+    trust2: "15 lingue supportate",
+    trust3: "Protezione antifrode IA",
+    prob_label: "Il problema",
+    prob_title: "Ricominciare in un nuovo paese<br>è più difficile di quanto dovrebbe essere.",
+    sol_label: "La soluzione",
+    sol_title: "Un\'app. Tutto ciò di cui hai bisogno<br>per insediarti con successo.",
+    sol_sub: "Hubro riunisce offerte di lavoro verificate, alloggi verificati e una comunità di fiducia in modo che tu non debba mai farcela da solo.",
+    how_label: "Come funziona",
+    how_title: "Inizia in tre passi.",
+    waitlist_title: "Sii il primo a sapere<br>quando lanciamo.",
+    waitlist_sub: "Unisciti alla lista d\'attesa di Hubro e ottieni accesso anticipato, aggiornamenti esclusivi e un mese Premium gratuito al lancio.",
+    waitlist_btn: "Unisciti alla lista →",
+    footer_copy: "© 2025 Aevo Group Limited. Hubro è un nome commerciale di Aevo Group Limited, costituita a Dublino, Irlanda."
+  },
+  zh: {
+    nav_jobs: "找工作",
+    nav_housing: "找住房",
+    nav_employers: "雇主",
+    nav_landlords: "房东",
+    nav_community: "社区",
+    nav_pricing: "定价",
+    nav_cta: "加入候补名单",
+    hero_badge: "爱尔兰现已开放 — 早期访问",
+    hero_h1: "在您的新国家找到<span class=\'accent\'>工作、住房</span>和社区。",
+    hero_p: "Hubro将国际工人、学生和家庭与经过验证的雇主、房东和可信赖的社区联系起来——尽在一个应用程序中。",
+    hero_btn1: "找工作和住房 →",
+    hero_btn2: "我是雇主",
+    hero_btn3: "我是房东",
+    trust1: "100% 经过验证的列表",
+    trust2: "支持15种语言",
+    trust3: "AI反欺诈保护",
+    prob_label: "问题",
+    prob_title: "在新国家重新开始<br>比应该的更难。",
+    sol_label: "解决方案",
+    sol_title: "一个应用。您成功定居所需<br>的一切。",
+    sol_sub: "Hubro汇集了经过验证的工作、住房和可信赖的社区，让您永远不必独自摸索。",
+    how_label: "如何运作",
+    how_title: "三步开始。",
+    waitlist_title: "成为第一个了解<br>我们何时推出的人。",
+    waitlist_sub: "加入Hubro候补名单，获得早期访问、独家更新，以及推出时免费的高级会员月份。",
+    waitlist_btn: "加入候补名单 →",
+    footer_copy: "© 2025 Aevo Group Limited。Hubro是Aevo Group Limited的商号，在爱尔兰都柏林注册成立。"
+  },
+  ja: {
+    nav_jobs: "仕事を探す",
+    nav_housing: "住まいを探す",
+    nav_employers: "採用担当者へ",
+    nav_landlords: "家主へ",
+    nav_community: "コミュニティ",
+    nav_pricing: "料金",
+    nav_cta: "ウェイトリストに参加",
+    hero_badge: "アイルランドで利用可能 — 早期アクセス",
+    hero_h1: "新しい国で<span class=\'accent\'>仕事、住まい</span>、コミュニティを見つけよう。",
+    hero_p: "Hubroは国際的な労働者、学生、家族を認証済みの雇用主、家主、信頼できるコミュニティとつなぎます — すべて1つのアプリで。",
+    hero_btn1: "仕事と住まいを探す →",
+    hero_btn2: "採用担当者として登録",
+    hero_btn3: "家主として登録",
+    trust1: "100%認証済みリスト",
+    trust2: "15言語対応",
+    trust3: "AI不正防止",
+    prob_label: "課題",
+    prob_title: "新しい国でゼロから始めることは<br>思っているより難しい。",
+    sol_label: "解決策",
+    sol_title: "1つのアプリ。成功するために<br>必要なすべてが揃っています。",
+    sol_sub: "Hubroは認証済みの仕事、住まい、信頼できるコミュニティを1つにまとめ、一人で悩む必要がなくなります。",
+    how_label: "使い方",
+    how_title: "3ステップで始めよう。",
+    waitlist_title: "ローンチ情報を<br>いち早くお届けします。",
+    waitlist_sub: "Hubroのウェイトリストに参加して、早期アクセス、限定アップデート、ローンチ時の無料プレミアム1ヶ月を獲得しましょう。",
+    waitlist_btn: "ウェイトリストに参加 →",
+    footer_copy: "© 2025 Aevo Group Limited。HubroはAevo Group Limited（アイルランド・ダブリン登記）の商号です。"
+  }
+};
+
+const LANG_META = {
+  en: { flag: "🇬🇧", name: "English" },
+  es: { flag: "🇪🇸", name: "Español" },
+  pt: { flag: "🇧🇷", name: "Português" },
+  pl: { flag: "🇵🇱", name: "Polski" },
+  de: { flag: "🇩🇪", name: "Deutsch" },
+  fr: { flag: "🇫🇷", name: "Français" },
+  it: { flag: "🇮🇹", name: "Italiano" },
+  zh: { flag: "🇨🇳", name: "中文" },
+  ja: { flag: "🇯🇵", name: "日本語" }
+};
+
+let currentLang = localStorage.getItem("hubro_lang") || "en";
+
+function applyTranslation(lang) {
+  currentLang = lang;
+  localStorage.setItem("hubro_lang", lang);
+  const t = TRANSLATIONS[lang];
+  if (!t) return;
+
+  // Nav links
+  const setNavText = (href, text) => {
+    document.querySelectorAll(\`nav a[href*="\${href}"]\`).forEach(el => {
+      if (!el.classList.contains("logo") && !el.classList.contains("nav-cta") && !el.classList.contains("btn-nav")) {
+        el.textContent = text;
+      }
+    });
+  };
+  setNavText("jobs", t.nav_jobs);
+  setNavText("housing", t.nav_housing);
+  setNavText("employers", t.nav_employers);
+  setNavText("landlords", t.nav_landlords);
+  setNavText("community", t.nav_community);
+  setNavText("pricing", t.nav_pricing);
+
+  // Nav CTA
+  document.querySelectorAll(".nav-cta, .btn-nav.btn-solid").forEach(el => el.textContent = t.nav_cta);
+
+  // Hero badge
+  const badge = document.querySelector(".hero-badge");
+  if (badge) badge.textContent = t.hero_badge;
+
+  // Hero h1
+  const h1 = document.querySelector(".hero h1");
+  if (h1) h1.innerHTML = t.hero_h1;
+
+  // Hero p
+  const hp = document.querySelector(".hero p");
+  if (hp) hp.textContent = t.hero_p;
+
+  // Hero buttons
+  const heroBtns = document.querySelectorAll(".hero-btns a, .hero-btns button");
+  if (heroBtns[0]) heroBtns[0].textContent = t.hero_btn1;
+  if (heroBtns[1]) heroBtns[1].textContent = t.hero_btn2;
+  if (heroBtns[2]) heroBtns[2].textContent = t.hero_btn3;
+
+  // Trust bar
+  const trustItems = document.querySelectorAll(".trust-item");
+  const trustKeys = ["trust1","trust2","trust3"];
+  trustItems.forEach((item, i) => {
+    if (trustKeys[i]) {
+      const dot = item.querySelector(".trust-dot");
+      item.textContent = "";
+      if (dot) item.appendChild(dot);
+      item.appendChild(document.createTextNode(" " + t[trustKeys[i]]));
+    }
+  });
+
+  // Section labels & titles
+  const labels = document.querySelectorAll(".section-label");
+  const titles = document.querySelectorAll(".section-title");
+  const subs = document.querySelectorAll(".section-sub");
+
+  // Problems section
+  if (labels[0]) labels[0].textContent = t.prob_label;
+  if (titles[0]) titles[0].innerHTML = t.prob_title;
+
+  // Solution section
+  if (labels[1]) labels[1].textContent = t.sol_label;
+  if (titles[1]) titles[1].innerHTML = t.sol_title;
+  if (subs[0]) subs[0].textContent = t.sol_sub;
+
+  // How it works
+  if (labels[2]) labels[2].textContent = t.how_label;
+  if (titles[2]) titles[2].textContent = t.how_title;
+
+  // Waitlist section
+  const waitlistTitle = document.querySelector("#waitlist h2");
+  if (waitlistTitle) waitlistTitle.innerHTML = t.waitlist_title;
+  const waitlistSub = document.querySelector("#waitlist p.section-sub");
+  if (waitlistSub) waitlistSub.textContent = t.waitlist_sub;
+  const waitlistBtn = document.querySelector("#waitlist button[onclick]");
+  if (waitlistBtn) waitlistBtn.textContent = t.waitlist_btn;
+
+  // Footer
+  const footerNote = document.querySelector(".footer-bottom span:first-child");
+  if (footerNote) footerNote.textContent = t.footer_copy;
+
+  // Update selector display
+  const meta = LANG_META[lang];
+  const langBtnText = document.getElementById("lang-btn-text");
+  if (langBtnText && meta) langBtnText.textContent = meta.flag + " " + meta.name;
+
+  // Update active state
+  document.querySelectorAll(".lang-option").forEach(opt => {
+    opt.classList.toggle("active", opt.dataset.lang === lang);
+  });
+}
+
+function toggleLangDropdown() {
+  document.getElementById("lang-dropdown").classList.toggle("open");
+}
+
+function selectLang(lang) {
+  applyTranslation(lang);
+  document.getElementById("lang-dropdown").classList.remove("open");
+}
+
+// Close dropdown on outside click
+document.addEventListener("click", function(e) {
+  if (!e.target.closest(".lang-selector")) {
+    const dd = document.getElementById("lang-dropdown");
+    if (dd) dd.classList.remove("open");
+  }
+});
+
+// Apply saved language on load
+document.addEventListener("DOMContentLoaded", function() {
+  applyTranslation(currentLang);
+});
+
+</script>
+</body>
+</html>

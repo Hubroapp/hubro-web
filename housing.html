@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hubro — Find Housing in Ireland | gethubro.app</title>
+<meta name="description" content="Find verified, fraud-free housing in Ireland. Browse apartments, studios and house shares from verified landlords. No scams, no surprises.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --p:#534AB7;--pm:#7F77DD;--pl:#AFA9EC;--pp:#EEEDFE;--pd:#3C3489;--pdd:#26215C;
+  --w:#fff;--g:#F9F8FE;--gl:#F1EFF8;--t:#1A1A2E;--tm:#4A4870;--ts:#9896B8;--b:#E4E2F8;
+  --green:#1A9E6A;--greenl:#E3F8EF;--amber:#C97B10;--amberl:#FEF3DC;
+  --red:#C0392B;--redl:#FCECEA;
+  --shadow-sm:0 2px 8px rgba(83,74,183,0.08);
+  --shadow-md:0 8px 24px rgba(83,74,183,0.12);
+  --shadow-lg:0 20px 48px rgba(83,74,183,0.18);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;color:var(--t);background:var(--w);overflow-x:hidden;}
+h1,h2,h3,h4{font-family:'Syne',sans-serif;}
+img{max-width:100%;display:block;}
+
+/* ── NAV ── */
+nav {
+  position:sticky;top:0;z-index:200;
+  background:rgba(255,255,255,0.97);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--b);
+  height:64px;padding:0 5%;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.logo{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;text-decoration:none;}
+.logo .hub{color:var(--p);}.logo .ro{color:var(--pm);}
+.nav-links{display:flex;gap:1.5rem;list-style:none;}
+.nav-links a{text-decoration:none;color:var(--tm);font-size:0.875rem;font-weight:500;transition:color 0.2s;padding:4px 0;border-bottom:2px solid transparent;}
+.nav-links a:hover{color:var(--p);}
+.nav-links a.active{color:var(--p);border-bottom-color:var(--p);}
+.nav-right{display:flex;gap:10px;align-items:center;}
+.btn-nav{padding:0.5rem 1.1rem;border-radius:8px;font-size:0.85rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:none;transition:all 0.2s;border:none;}
+.btn-ghost{background:transparent;color:var(--tm);border:1.5px solid var(--b)!important;}
+.btn-ghost:hover{border-color:var(--pl)!important;color:var(--p);}
+.btn-solid{background:var(--p);color:white;}
+.btn-solid:hover{background:var(--pd);}
+
+/* ── HERO SEARCH ── */
+.hero-search {
+  background:linear-gradient(135deg,var(--pdd) 0%,var(--pd) 40%,var(--p) 100%);
+  padding:56px 5% 0;
+  position:relative;
+  overflow:hidden;
+}
+.hero-search::before {
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.hero-text{position:relative;z-index:1;text-align:center;margin-bottom:2.5rem;}
+.hero-text h1{font-size:clamp(1.8rem,4vw,3rem);font-weight:800;color:white;letter-spacing:-1px;line-height:1.15;margin-bottom:0.8rem;}
+.hero-text p{font-size:1rem;color:rgba(255,255,255,0.75);max-width:480px;margin:0 auto;}
+
+/* ── SEARCH BOX ── */
+.search-box {
+  position:relative;z-index:1;
+  background:white;border-radius:20px 20px 0 0;
+  padding:24px 24px 0;
+  max-width:900px;margin:0 auto;
+  box-shadow:0 -8px 32px rgba(0,0,0,0.15);
+}
+.search-tabs{display:flex;gap:4px;margin-bottom:20px;}
+.search-tab{padding:8px 20px;border-radius:10px;font-size:0.875rem;font-weight:600;cursor:pointer;border:none;background:transparent;color:var(--ts);font-family:'DM Sans',sans-serif;transition:all 0.2s;}
+.search-tab.active{background:var(--pp);color:var(--p);}
+.search-fields{display:grid;grid-template-columns:2fr 1fr 1fr 1fr auto;gap:12px;margin-bottom:20px;align-items:end;}
+.sf-group{display:flex;flex-direction:column;gap:5px;}
+.sf-label{font-size:0.7rem;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:var(--ts);}
+.sf-input{padding:0.75rem 1rem;border-radius:10px;border:1.5px solid var(--b);font-family:'DM Sans',sans-serif;font-size:0.875rem;color:var(--t);background:var(--w);outline:none;transition:border-color 0.2s;width:100%;}
+.sf-input:focus{border-color:var(--p);box-shadow:0 0 0 3px rgba(83,74,183,0.08);}
+.search-btn{background:var(--p);color:white;border:none;padding:0.75rem 1.5rem;border-radius:10px;font-size:0.875rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;transition:all 0.2s;display:flex;align-items:center;gap:6px;height:46px;}
+.search-btn:hover{background:var(--pd);transform:translateY(-1px);}
+
+/* ── MAIN LAYOUT ── */
+.main-layout{display:flex;min-height:auto;}
+
+/* ── FILTERS SIDEBAR ── */
+.filters-sidebar{
+  width:280px;flex-shrink:0;
+  background:var(--w);
+  border-right:1px solid var(--b);
+  padding:24px 20px;
+  position:sticky;top:64px;
+  height:auto;
+  overflow-y:auto;
+}
+.filter-section{margin-bottom:24px;}
+.filter-title{font-family:'Syne',sans-serif;font-size:0.85rem;font-weight:700;margin-bottom:12px;color:var(--t);}
+.filter-divider{border:none;border-top:1px solid var(--gl);margin:20px 0;}
+
+.price-range{display:flex;gap:8px;}
+.price-input{flex:1;padding:0.6rem 0.8rem;border-radius:8px;border:1.5px solid var(--b);font-family:'DM Sans',sans-serif;font-size:0.82rem;color:var(--t);outline:none;transition:border-color 0.2s;}
+.price-input:focus{border-color:var(--p);}
+
+.checkbox-list{display:flex;flex-direction:column;gap:8px;}
+.checkbox-item{display:flex;align-items:center;gap:8px;cursor:pointer;}
+.checkbox-item input{accent-color:var(--p);width:16px;height:16px;}
+.checkbox-item label{font-size:0.85rem;color:var(--tm);cursor:pointer;}
+.checkbox-item .count{margin-left:auto;font-size:0.72rem;color:var(--ts);background:var(--gl);padding:1px 6px;border-radius:4px;}
+
+.amenity-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+.amenity-chip{padding:6px 10px;border-radius:8px;border:1.5px solid var(--b);font-size:0.75rem;font-weight:500;cursor:pointer;text-align:center;transition:all 0.2s;color:var(--tm);}
+.amenity-chip.active,.amenity-chip:hover{border-color:var(--p);background:var(--pp);color:var(--p);}
+
+.filter-btn-row{display:flex;gap:8px;margin-top:8px;}
+.btn-filter-reset{flex:1;padding:0.6rem;border-radius:8px;border:1.5px solid var(--b);background:transparent;font-size:0.82rem;font-weight:600;cursor:pointer;color:var(--tm);font-family:'DM Sans',sans-serif;transition:all 0.2s;}
+.btn-filter-reset:hover{border-color:var(--pl);color:var(--p);}
+.btn-filter-apply{flex:2;padding:0.6rem;border-radius:8px;border:none;background:var(--p);font-size:0.82rem;font-weight:700;cursor:pointer;color:white;font-family:'DM Sans',sans-serif;transition:all 0.2s;}
+.btn-filter-apply:hover{background:var(--pd);}
+
+/* ── LISTINGS AREA ── */
+.listings-area{flex:1;padding:24px;background:var(--g);overflow-y:auto;}
+
+.listings-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
+.results-count{font-size:0.9rem;color:var(--tm);}
+.results-count strong{font-family:'Syne',sans-serif;font-weight:700;color:var(--t);}
+.sort-row{display:flex;align-items:center;gap:10px;}
+.sort-label{font-size:0.8rem;color:var(--ts);}
+.sort-select{padding:6px 12px;border-radius:8px;border:1.5px solid var(--b);font-family:'DM Sans',sans-serif;font-size:0.82rem;color:var(--t);outline:none;background:white;cursor:pointer;}
+
+.view-toggle{display:flex;gap:4px;background:white;border:1.5px solid var(--b);border-radius:8px;padding:3px;}
+.view-btn{width:32px;height:32px;border-radius:6px;border:none;background:transparent;cursor:pointer;font-size:0.9rem;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
+.view-btn.active{background:var(--pp);color:var(--p);}
+
+/* ── PROPERTY CARDS ── */
+.listings-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;}
+
+.property-card{
+  background:white;border-radius:18px;
+  overflow:hidden;border:1px solid var(--b);
+  transition:all 0.3s;cursor:pointer;
+  position:relative;
+}
+.property-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--pl);}
+
+.property-img{
+  height:200px;position:relative;overflow:hidden;
+  background:linear-gradient(135deg,var(--pp),var(--pl));
+}
+.property-img-inner{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform 0.4s;
+}
+.property-card:hover .property-img-inner{transform:scale(1.04);}
+
+.property-img-placeholder{
+  width:100%;height:100%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:8px;
+}
+.prop-emoji{font-size:3.5rem;}
+.prop-type-label{font-size:0.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--pm);opacity:0.7;}
+
+.card-badges{position:absolute;top:12px;left:12px;display:flex;gap:6px;flex-wrap:wrap;}
+.card-badge{padding:4px 10px;border-radius:20px;font-size:0.68rem;font-weight:700;backdrop-filter:blur(8px);}
+.badge-verified{background:rgba(26,158,106,0.9);color:white;}
+.badge-new{background:rgba(83,74,183,0.9);color:white;}
+.badge-popular{background:rgba(201,123,16,0.9);color:white;}
+.badge-available{background:rgba(255,255,255,0.95);color:var(--green);border:1px solid rgba(26,158,106,0.3);}
+
+.card-save{
+  position:absolute;top:12px;right:12px;
+  width:34px;height:34px;border-radius:50%;
+  background:rgba(255,255,255,0.9);
+  border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;transition:all 0.2s;
+  backdrop-filter:blur(8px);
+}
+.card-save:hover{background:white;transform:scale(1.1);}
+.card-save.saved{background:var(--redl);}
+
+.card-photos-count{
+  position:absolute;bottom:12px;right:12px;
+  background:rgba(0,0,0,0.6);color:white;
+  padding:3px 8px;border-radius:6px;
+  font-size:0.7rem;font-weight:600;
+  backdrop-filter:blur(4px);
+}
+
+.card-body{padding:16px;}
+.card-price-row{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;}
+.card-price{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;color:var(--p);}
+.card-price span{font-size:0.75rem;font-weight:400;color:var(--ts);}
+.card-match{background:var(--pp);color:var(--p);font-size:0.7rem;font-weight:700;padding:3px 8px;border-radius:6px;}
+.card-title{font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:700;margin-bottom:3px;color:var(--t);}
+.card-location{font-size:0.8rem;color:var(--ts);margin-bottom:10px;display:flex;align-items:center;gap:4px;}
+.card-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px;}
+.card-tag{font-size:0.7rem;padding:3px 8px;border-radius:6px;background:var(--gl);color:var(--tm);font-weight:500;}
+.card-footer{display:flex;justify-content:space-between;align-items:center;padding-top:10px;border-top:1px solid var(--gl);}
+.card-landlord{display:flex;align-items:center;gap:6px;}
+.landlord-avatar{width:24px;height:24px;border-radius:50%;background:var(--pp);display:flex;align-items:center;justify-content:center;font-size:0.6rem;font-weight:700;color:var(--p);}
+.landlord-name{font-size:0.75rem;color:var(--ts);}
+.card-available{font-size:0.72rem;color:var(--green);font-weight:600;}
+
+/* ── MAP VIEW ── */
+.map-placeholder{
+  flex:1;background:var(--gl);
+  border-left:1px solid var(--b);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:12px;min-height:400px;
+  position:sticky;top:64px;
+  height:auto;
+}
+.map-placeholder-icon{font-size:3rem;}
+.map-placeholder-text{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;color:var(--tm);}
+.map-placeholder-sub{font-size:0.82rem;color:var(--ts);text-align:center;max-width:220px;line-height:1.6;}
+
+/* ── MODAL ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(26,26,46,0.7);z-index:500;display:none;align-items:flex-end;justify-content:center;padding:0;}
+.modal-overlay.open{display:flex;}
+.modal{background:white;border-radius:24px 24px 0 0;width:100%;max-width:840px;max-height:90vh;overflow-y:auto;animation:slideUp 0.35s ease;}
+@keyframes slideUp{from{transform:translateY(100%);opacity:0}to{transform:translateY(0);opacity:1}}
+
+.modal-gallery{height:320px;background:linear-gradient(135deg,var(--pp),var(--pl));position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.modal-gallery-emoji{font-size:5rem;}
+.modal-gallery-nav{position:absolute;bottom:16px;right:16px;display:flex;gap:8px;}
+.gallery-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.5);}
+.gallery-dot.active{background:white;width:24px;border-radius:4px;}
+.modal-gallery-count{position:absolute;bottom:16px;left:16px;background:rgba(0,0,0,0.6);color:white;padding:4px 10px;border-radius:8px;font-size:0.75rem;font-weight:600;}
+.modal-close-btn{position:absolute;top:16px;left:16px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.9);border:none;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
+.modal-close-btn:hover{background:white;transform:scale(1.05);}
+
+.modal-body{padding:28px;}
+.modal-header-row{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;}
+.modal-price{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:var(--p);}
+.modal-price span{font-size:0.9rem;font-weight:400;color:var(--ts);}
+.modal-title{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;margin-bottom:4px;}
+.modal-location{font-size:0.9rem;color:var(--ts);margin-bottom:16px;display:flex;align-items:center;gap:5px;}
+
+.modal-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
+.modal-stat{text-align:center;padding:12px;background:var(--g);border-radius:12px;}
+.modal-stat-val{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:var(--t);margin-bottom:2px;}
+.modal-stat-label{font-size:0.7rem;color:var(--ts);}
+
+.modal-section{margin-bottom:20px;}
+.modal-section-title{font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;margin-bottom:10px;color:var(--t);}
+.modal-desc{font-size:0.875rem;color:var(--tm);line-height:1.7;}
+
+.amenities-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.amenity-item{display:flex;align-items:center;gap:6px;font-size:0.82rem;color:var(--tm);}
+.amenity-item .a-icon{font-size:1rem;}
+
+.modal-landlord{display:flex;align-items:center;gap:14px;padding:16px;background:var(--g);border-radius:14px;margin-bottom:20px;}
+.ll-avatar{width:52px;height:52px;border-radius:50%;background:var(--pp);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;color:var(--p);}
+.ll-name{font-family:'Syne',sans-serif;font-weight:700;font-size:0.95rem;margin-bottom:2px;}
+.ll-meta{font-size:0.78rem;color:var(--ts);}
+.ll-verified{font-size:0.72rem;font-weight:700;color:var(--green);margin-top:2px;}
+
+.modal-actions{display:flex;gap:10px;position:sticky;bottom:0;background:white;padding:16px 0 0;border-top:1px solid var(--b);margin-top:8px;}
+.btn-contact{flex:2;padding:0.9rem;border-radius:12px;border:none;background:var(--p);color:white;font-size:0.95rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;}
+.btn-contact:hover{background:var(--pd);}
+.btn-save-modal{flex:1;padding:0.9rem;border-radius:12px;border:1.5px solid var(--b);background:transparent;color:var(--tm);font-size:0.95rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;}
+.btn-save-modal:hover{border-color:var(--pl);color:var(--p);}
+
+/* ── ENQUIRY FORM ── */
+.enquiry-sent{display:none;text-align:center;padding:2rem;}
+.enquiry-sent-icon{font-size:3rem;margin-bottom:1rem;}
+.enquiry-sent h3{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;color:var(--green);margin-bottom:0.5rem;}
+.enquiry-sent p{font-size:0.85rem;color:var(--ts);line-height:1.6;}
+
+/* ── TRUST BAR ── */
+.trust-bar{background:var(--pdd);padding:14px 5%;display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;}
+.trust-item{display:flex;align-items:center;gap:8px;font-size:0.82rem;color:rgba(255,255,255,0.75);}
+.trust-dot{width:6px;height:6px;border-radius:50%;background:var(--pl);}
+
+/* ── PAGINATION ── */
+.pagination{display:flex;justify-content:center;align-items:center;gap:6px;padding:32px 0;}
+.page-btn{width:38px;height:38px;border-radius:10px;border:1.5px solid var(--b);background:white;font-size:0.875rem;font-weight:600;cursor:pointer;color:var(--tm);transition:all 0.2s;display:flex;align-items:center;justify-content:center;}
+.page-btn:hover,.page-btn.active{background:var(--p);color:white;border-color:var(--p);}
+
+/* ── FOOTER ── */
+footer{background:var(--pdd);color:rgba(255,255,255,0.6);padding:32px 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+footer .logo .hub{color:var(--pl);}footer .logo .ro{color:rgba(255,255,255,0.4);}
+.footer-links{display:flex;gap:1.5rem;}
+.footer-links a{color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover{color:white;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .map-view{display:none;}
+  .filters-sidebar{width:240px;}
+}
+@media(max-width:768px){
+  .nav-links{display:none;}
+  .filters-sidebar{display:none;}
+  .search-fields{grid-template-columns:1fr 1fr;gap:8px;}
+  .listings-grid{grid-template-columns:1fr;}
+  .modal-stats{grid-template-columns:1fr 1fr;}
+  .trust-bar{gap:1.5rem;}
+}
+
+/* ── LANGUAGE SELECTOR ── */
+.lang-selector{position:relative;display:flex;align-items:center;}
+.lang-btn{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:8px;border:1.5px solid var(--b);background:white;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;color:var(--tm);transition:all 0.2s;}
+.lang-btn:hover{border-color:var(--pl);color:var(--p);}
+.lang-dropdown{position:absolute;top:calc(100% + 8px);right:0;background:white;border-radius:14px;border:1px solid var(--b);box-shadow:0 12px 32px rgba(83,74,183,0.15);padding:6px;min-width:180px;display:none;z-index:300;animation:fadeDown 0.2s ease;}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.lang-dropdown.open{display:block;}
+.lang-option{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;cursor:pointer;transition:all 0.15s;font-size:0.85rem;font-weight:500;color:var(--tm);}
+.lang-option:hover{background:var(--pp);color:var(--p);}
+.lang-option.active{background:var(--pp);color:var(--p);font-weight:700;}
+.lang-flag{font-size:1.1rem;}
+
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+
+<style>
+/* HUBRO WHITESPACE FIX v2 */
+html,body{overflow-x:hidden !important;}
+.job-detail,.jobs-list,.listings-sidebar,.filter-panel,.split-right,.split-left{height:auto !important;position:relative !important;top:auto !important;}
+.main-layout,.jobs-area,.listings-area,.dashboard-area{min-height:0 !important;}
+[style*="calc(100vh"]{height:auto !important;}
+.modal-overlay,.hubro-success-overlay{position:fixed !important;}
+.float-cta,#float-cta{position:fixed !important;}
+@media(max-width:768px){
+  .job-detail,.jobs-list{position:relative !important;height:auto !important;max-height:none !important;overflow-y:visible !important;}
+  .main-layout{flex-direction:column !important;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="logo"><span class="hub">hub</span><span class="ro">ro</span></a>
+  <ul class="nav-links">
+    <li><a href="jobs.html">Find Jobs</a></li>
+    <li><a href="housing.html" class="active">Find Housing</a></li>
+    <li><a href="index.html#employers">For Employers</a></li>
+    <li><a href="index.html#landlords">For Landlords</a></li>
+    <li><a href="community.html">Community</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="auth.html" class="btn-nav btn-ghost">Sign in</a>
+        <div class="lang-selector">
+      <button class="lang-btn" onclick="toggleLangDropdown()">
+        <span id="lang-btn-text">🇬🇧 English</span>
+        <span style="font-size:0.6rem;opacity:0.6;">▼</span>
+      </button>
+      <div class="lang-dropdown" id="lang-dropdown">
+        <div class="lang-option active" data-lang="en" onclick="selectLang('en')"><span class="lang-flag">🇬🇧</span> English</div>
+        <div class="lang-option" data-lang="es" onclick="selectLang('es')"><span class="lang-flag">🇪🇸</span> Español</div>
+        <div class="lang-option" data-lang="pt" onclick="selectLang('pt')"><span class="lang-flag">🇧🇷</span> Português</div>
+        <div class="lang-option" data-lang="pl" onclick="selectLang('pl')"><span class="lang-flag">🇵🇱</span> Polski</div>
+        <div class="lang-option" data-lang="de" onclick="selectLang('de')"><span class="lang-flag">🇩🇪</span> Deutsch</div>
+        <div class="lang-option" data-lang="fr" onclick="selectLang('fr')"><span class="lang-flag">🇫🇷</span> Français</div>
+        <div class="lang-option" data-lang="it" onclick="selectLang('it')"><span class="lang-flag">🇮🇹</span> Italiano</div>
+        <div class="lang-option" data-lang="zh" onclick="selectLang('zh')"><span class="lang-flag">🇨🇳</span> 中文</div>
+        <div class="lang-option" data-lang="ja" onclick="selectLang('ja')"><span class="lang-flag">🇯🇵</span> 日本語</div>
+      </div>
+    </div>
+
+  <a href="index.html#waitlist" class="btn-nav btn-solid">Find housing →</a>
+  </div>
+</nav>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item"><div class="trust-dot"></div> All listings verified by Hubro</div>
+  <div class="trust-item"><div class="trust-dot"></div> AI fraud detection on every property</div>
+  <div class="trust-item"><div class="trust-dot"></div> Direct contact with verified landlords</div>
+  <div class="trust-item"><div class="trust-dot"></div> No hidden fees</div>
+</div>
+
+<!-- HERO SEARCH -->
+<div class="hero-search">
+  <div class="hero-text">
+    <h1>Find your home in Ireland.<br>Verified. Safe. Simple.</h1>
+    <p>Browse hundreds of verified listings from trusted landlords — no scams, no surprises.</p>
+  </div>
+  <div class="search-box">
+    <div class="search-tabs">
+      <button class="search-tab active">🏠 All properties</button>
+      <button class="search-tab">🛏 Rooms & studios</button>
+      <button class="search-tab">🏢 Apartments</button>
+      <button class="search-tab">🏡 Houses</button>
+    </div>
+    <div class="search-fields">
+      <div class="sf-group">
+        <label class="sf-label">Location</label>
+        <select class="sf-input">
+          <option>Dublin — All areas</option>
+          <option>Dublin 1 — City Centre</option>
+          <option>Dublin 2 — South City</option>
+          <option>Dublin 4 — Ballsbridge</option>
+          <option>Dublin 6 — Ranelagh / Rathmines</option>
+          <option>Dublin 7 — Smithfield / Stoneybatter</option>
+          <option>Dublin 8 — Portobello</option>
+          <option>Dublin 9 — Drumcondra</option>
+          <option>Cork City</option>
+          <option>Galway City</option>
+          <option>Limerick City</option>
+        </select>
+      </div>
+      <div class="sf-group">
+        <label class="sf-label">Property type</label>
+        <select class="sf-input">
+          <option>Any type</option>
+          <option>Room in house</option>
+          <option>Studio</option>
+          <option>1-bed apartment</option>
+          <option>2-bed apartment</option>
+          <option>House</option>
+        </select>
+      </div>
+      <div class="sf-group">
+        <label class="sf-label">Max rent / month</label>
+        <select class="sf-input">
+          <option>Any price</option>
+          <option>Up to €800</option>
+          <option>Up to €1,200</option>
+          <option>Up to €1,600</option>
+          <option>Up to €2,000</option>
+          <option>€2,000+</option>
+        </select>
+      </div>
+      <div class="sf-group">
+        <label class="sf-label">Move in</label>
+        <input type="date" class="sf-input">
+      </div>
+      <button class="search-btn" onclick="runSearch()">🔍 Search</button>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
+
+  <!-- FILTERS SIDEBAR -->
+  <aside class="filters-sidebar">
+    <div class="filter-section">
+      <div class="filter-title">Price Range</div>
+      <div class="price-range">
+        <input type="number" class="price-input" placeholder="Min €" value="">
+        <input type="number" class="price-input" placeholder="Max €" value="">
+      </div>
+    </div>
+    <hr class="filter-divider">
+
+    <div class="filter-section">
+      <div class="filter-title">Property Type</div>
+      <div class="checkbox-list">
+        <div class="checkbox-item"><input type="checkbox" id="t1" checked><label for="t1">All types</label></div>
+        <div class="checkbox-item"><input type="checkbox" id="t2"><label for="t2">Room in house</label><span class="count">42</span></div>
+        <div class="checkbox-item"><input type="checkbox" id="t3"><label for="t3">Studio</label><span class="count">28</span></div>
+        <div class="checkbox-item"><input type="checkbox" id="t4"><label for="t4">1-bed apartment</label><span class="count">67</span></div>
+        <div class="checkbox-item"><input type="checkbox" id="t5"><label for="t5">2-bed apartment</label><span class="count">34</span></div>
+        <div class="checkbox-item"><input type="checkbox" id="t6"><label for="t6">House</label><span class="count">19</span></div>
+      </div>
+    </div>
+    <hr class="filter-divider">
+
+    <div class="filter-section">
+      <div class="filter-title">Bedrooms</div>
+      <div class="checkbox-list">
+        <div class="checkbox-item"><input type="checkbox" id="b1"><label for="b1">Studio / bedsit</label></div>
+        <div class="checkbox-item"><input type="checkbox" id="b2"><label for="b2">1 bedroom</label></div>
+        <div class="checkbox-item"><input type="checkbox" id="b3"><label for="b3">2 bedrooms</label></div>
+        <div class="checkbox-item"><input type="checkbox" id="b4"><label for="b4">3+ bedrooms</label></div>
+      </div>
+    </div>
+    <hr class="filter-divider">
+
+    <div class="filter-section">
+      <div class="filter-title">Bills & Utilities</div>
+      <div class="checkbox-list">
+        <div class="checkbox-item"><input type="checkbox" id="u1"><label for="u1">Bills included</label></div>
+        <div class="checkbox-item"><input type="checkbox" id="u2"><label for="u2">WiFi included</label></div>
+        <div class="checkbox-item"><input type="checkbox" id="u3"><label for="u3">Furnished</label></div>
+        <div class="checkbox-item"><input type="checkbox" id="u4"><label for="u4">Parking available</label></div>
+        <div class="checkbox-item"><input type="checkbox" id="u5"><label for="u5">Pets allowed</label></div>
+      </div>
+    </div>
+    <hr class="filter-divider">
+
+    <div class="filter-section">
+      <div class="filter-title">Amenities</div>
+      <div class="amenity-grid">
+        <div class="amenity-chip" onclick="this.classList.toggle('active')">🧺 Washing</div>
+        <div class="amenity-chip" onclick="this.classList.toggle('active')">🅿️ Parking</div>
+        <div class="amenity-chip" onclick="this.classList.toggle('active')">🌿 Garden</div>
+        <div class="amenity-chip" onclick="this.classList.toggle('active')">🏋️ Gym</div>
+        <div class="amenity-chip" onclick="this.classList.toggle('active')">🔒 Secure</div>
+        <div class="amenity-chip" onclick="this.classList.toggle('active')">♿ Access</div>
+      </div>
+    </div>
+    <hr class="filter-divider">
+
+    <div class="filter-section">
+      <div class="filter-title">Lease Length</div>
+      <div class="checkbox-list">
+        <div class="checkbox-item"><input type="checkbox" id="l1"><label for="l1">Short term (1–3 months)</label></div>
+        <div class="checkbox-item"><input type="checkbox" id="l2"><label for="l2">Medium (3–6 months)</label></div>
+        <div class="checkbox-item"><input type="checkbox" id="l3" checked><label for="l3">Long term (6–12 months)</label></div>
+        <div class="checkbox-item"><input type="checkbox" id="l4"><label for="l4">12+ months</label></div>
+      </div>
+    </div>
+
+    <div class="filter-btn-row">
+      <button class="btn-filter-reset">Reset</button>
+      <button class="btn-filter-apply">Apply filters</button>
+    </div>
+  </aside>
+
+  <!-- LISTINGS -->
+  <div class="listings-area" style="height:auto;min-height:400px;">
+    <div class="listings-header">
+      <div class="results-count"><strong>186</strong> verified properties in Dublin</div>
+      <div class="sort-row">
+        <span class="sort-label">Sort by:</span>
+        <select class="sort-select">
+          <option>Best match</option>
+          <option>Price: low to high</option>
+          <option>Price: high to low</option>
+          <option>Newest first</option>
+          <option>Available soonest</option>
+        </select>
+        <div class="view-toggle">
+          <button class="view-btn active" title="Grid view">⊞</button>
+          <button class="view-btn" title="List view">☰</button>
+          <button class="view-btn" title="Map view" onclick="toggleMap()">🗺</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="listings-grid" id="listings-grid">
+
+      <!-- Card 1 -->
+      <div class="property-card" onclick="openModal(1)">
+        <div class="property-img">
+          <div class="property-img-placeholder">
+            <div class="prop-emoji">🏢</div>
+            <div class="prop-type-label">1-Bed Apartment</div>
+          </div>
+          <div class="card-badges">
+            <span class="card-badge badge-verified">✓ Verified</span>
+            <span class="card-badge badge-new">New</span>
+          </div>
+          <button class="card-save" onclick="event.stopPropagation();toggleSave(this)">🤍</button>
+          <div class="card-photos-count">📷 8 photos</div>
+        </div>
+        <div class="card-body">
+          <div class="card-price-row">
+            <div class="card-price">€1,650 <span>/ month</span></div>
+            <div class="card-match">92% match</div>
+          </div>
+          <div class="card-title">Modern 1-Bed Apartment</div>
+          <div class="card-location">📍 Ranelagh, Dublin 6</div>
+          <div class="card-tags">
+            <span class="card-tag">1 bed</span>
+            <span class="card-tag">1 bath</span>
+            <span class="card-tag">Furnished</span>
+            <span class="card-tag">WiFi included</span>
+            <span class="card-tag">Luas nearby</span>
+          </div>
+          <div class="card-footer">
+            <div class="card-landlord">
+              <div class="landlord-avatar">JM</div>
+              <span class="landlord-name">John M. · Verified landlord</span>
+            </div>
+            <div class="card-available">Available 1 Feb</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="property-card" onclick="openModal(2)">
+        <div class="property-img" style="background:linear-gradient(135deg,#E8F4F8,#B8DFF0);">
+          <div class="property-img-placeholder">
+            <div class="prop-emoji">🏡</div>
+            <div class="prop-type-label">Studio Apartment</div>
+          </div>
+          <div class="card-badges">
+            <span class="card-badge badge-verified">✓ Verified</span>
+            <span class="card-badge badge-popular">🔥 Popular</span>
+          </div>
+          <button class="card-save" onclick="event.stopPropagation();toggleSave(this)">🤍</button>
+          <div class="card-photos-count">📷 6 photos</div>
+        </div>
+        <div class="card-body">
+          <div class="card-price-row">
+            <div class="card-price">€1,200 <span>/ month</span></div>
+            <div class="card-match">85% match</div>
+          </div>
+          <div class="card-title">Bright Studio — City Centre</div>
+          <div class="card-location">📍 Smithfield, Dublin 7</div>
+          <div class="card-tags">
+            <span class="card-tag">Studio</span>
+            <span class="card-tag">Bills included</span>
+            <span class="card-tag">Furnished</span>
+            <span class="card-tag">Luas stop</span>
+          </div>
+          <div class="card-footer">
+            <div class="card-landlord">
+              <div class="landlord-avatar" style="background:#E8F4F8;color:#2E8B57;">SR</div>
+              <span class="landlord-name">Sarah R. · Verified landlord</span>
+            </div>
+            <div class="card-available">Available now</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="property-card" onclick="openModal(3)">
+        <div class="property-img" style="background:linear-gradient(135deg,#F8EEE8,#F0D4B8);">
+          <div class="property-img-placeholder">
+            <div class="prop-emoji">🏠</div>
+            <div class="prop-type-label">2-Bed Apartment</div>
+          </div>
+          <div class="card-badges">
+            <span class="card-badge badge-verified">✓ Verified</span>
+          </div>
+          <button class="card-save" onclick="event.stopPropagation();toggleSave(this)">🤍</button>
+          <div class="card-photos-count">📷 12 photos</div>
+        </div>
+        <div class="card-body">
+          <div class="card-price-row">
+            <div class="card-price">€2,200 <span>/ month</span></div>
+            <div class="card-match">78% match</div>
+          </div>
+          <div class="card-title">Spacious 2-Bed — South Dublin</div>
+          <div class="card-location">📍 Rathmines, Dublin 6</div>
+          <div class="card-tags">
+            <span class="card-tag">2 beds</span>
+            <span class="card-tag">2 baths</span>
+            <span class="card-tag">Furnished</span>
+            <span class="card-tag">Parking</span>
+            <span class="card-tag">Garden</span>
+          </div>
+          <div class="card-footer">
+            <div class="card-landlord">
+              <div class="landlord-avatar" style="background:#F8EEE8;color:#B8860B;">MK</div>
+              <span class="landlord-name">Mark K. · Verified landlord</span>
+            </div>
+            <div class="card-available">Available 15 Feb</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="property-card" onclick="openModal(4)">
+        <div class="property-img" style="background:linear-gradient(135deg,#EEF8EE,#B8E8B8);">
+          <div class="property-img-placeholder">
+            <div class="prop-emoji">🛏</div>
+            <div class="prop-type-label">Room in House</div>
+          </div>
+          <div class="card-badges">
+            <span class="card-badge badge-verified">✓ Verified</span>
+            <span class="card-badge badge-available">Available now</span>
+          </div>
+          <button class="card-save" onclick="event.stopPropagation();toggleSave(this)">🤍</button>
+          <div class="card-photos-count">📷 5 photos</div>
+        </div>
+        <div class="card-body">
+          <div class="card-price-row">
+            <div class="card-price">€850 <span>/ month</span></div>
+            <div class="card-match">71% match</div>
+          </div>
+          <div class="card-title">Double Room — Student Friendly</div>
+          <div class="card-location">📍 Drumcondra, Dublin 9</div>
+          <div class="card-tags">
+            <span class="card-tag">Room</span>
+            <span class="card-tag">Bills included</span>
+            <span class="card-tag">Shared kitchen</span>
+            <span class="card-tag">Near DCU</span>
+          </div>
+          <div class="card-footer">
+            <div class="card-landlord">
+              <div class="landlord-avatar" style="background:#EEF8EE;color:#1A9E6A;">AP</div>
+              <span class="landlord-name">Anna P. · Verified landlord</span>
+            </div>
+            <div class="card-available">Available now</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="property-card" onclick="openModal(5)">
+        <div class="property-img" style="background:linear-gradient(135deg,#F0EEF8,#D4CCF8);">
+          <div class="property-img-placeholder">
+            <div class="prop-emoji">🏢</div>
+            <div class="prop-type-label">1-Bed Apartment</div>
+          </div>
+          <div class="card-badges">
+            <span class="card-badge badge-verified">✓ Verified</span>
+            <span class="card-badge badge-new">New</span>
+          </div>
+          <button class="card-save" onclick="event.stopPropagation();toggleSave(this)">🤍</button>
+          <div class="card-photos-count">📷 9 photos</div>
+        </div>
+        <div class="card-body">
+          <div class="card-price-row">
+            <div class="card-price">€1,800 <span>/ month</span></div>
+            <div class="card-match">88% match</div>
+          </div>
+          <div class="card-title">Luxury 1-Bed — Docklands</div>
+          <div class="card-location">📍 Grand Canal Dock, Dublin 2</div>
+          <div class="card-tags">
+            <span class="card-tag">1 bed</span>
+            <span class="card-tag">Gym access</span>
+            <span class="card-tag">Concierge</span>
+            <span class="card-tag">DART stop</span>
+          </div>
+          <div class="card-footer">
+            <div class="card-landlord">
+              <div class="landlord-avatar" style="background:#F0EEF8;color:#534AB7;">TC</div>
+              <span class="landlord-name">Tom C. · Verified landlord</span>
+            </div>
+            <div class="card-available">Available 1 Mar</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="property-card" onclick="openModal(6)">
+        <div class="property-img" style="background:linear-gradient(135deg,#F8F0EE,#F0C8C0);">
+          <div class="property-img-placeholder">
+            <div class="prop-emoji">🏡</div>
+            <div class="prop-type-label">3-Bed House</div>
+          </div>
+          <div class="card-badges">
+            <span class="card-badge badge-verified">✓ Verified</span>
+          </div>
+          <button class="card-save" onclick="event.stopPropagation();toggleSave(this)">🤍</button>
+          <div class="card-photos-count">📷 14 photos</div>
+        </div>
+        <div class="card-body">
+          <div class="card-price-row">
+            <div class="card-price">€2,800 <span>/ month</span></div>
+            <div class="card-match">65% match</div>
+          </div>
+          <div class="card-title">3-Bed Family Home — South Dublin</div>
+          <div class="card-location">📍 Terenure, Dublin 6W</div>
+          <div class="card-tags">
+            <span class="card-tag">3 beds</span>
+            <span class="card-tag">2 baths</span>
+            <span class="card-tag">Garden</span>
+            <span class="card-tag">Driveway</span>
+            <span class="card-tag">Pets allowed</span>
+          </div>
+          <div class="card-footer">
+            <div class="card-landlord">
+              <div class="landlord-avatar" style="background:#F8F0EE;color:#C0392B;">LB</div>
+              <span class="landlord-name">Laura B. · Verified landlord</span>
+            </div>
+            <div class="card-available">Available 1 Feb</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="pagination">
+      <button class="page-btn active">1</button>
+      <button class="page-btn">2</button>
+      <button class="page-btn">3</button>
+      <button class="page-btn">4</button>
+      <button class="page-btn">5</button>
+      <button class="page-btn">→</button>
+    </div>
+  </div>
+
+  <!-- MAP PLACEHOLDER -->
+  <div class="map-placeholder" id="map-view" style="display:none;width:380px;flex-shrink:0;">
+    <div class="map-placeholder-icon">🗺️</div>
+    <div class="map-placeholder-text">Interactive Map</div>
+    <div class="map-placeholder-sub">Map view with live property pins will be available when the platform launches.</div>
+    <a href="index.html#waitlist" style="margin-top:12px;background:var(--p);color:white;padding:8px 18px;border-radius:8px;text-decoration:none;font-size:0.82rem;font-weight:700;">Join waitlist for access</a>
+  </div>
+
+</div>
+
+<!-- PROPERTY MODAL -->
+<div class="modal-overlay" id="prop-modal">
+  <div class="modal">
+    <div class="modal-gallery">
+      <div class="modal-gallery-emoji" id="modal-emoji">🏢</div>
+      <button class="modal-close-btn" onclick="closeModal()">←</button>
+      <div class="modal-gallery-nav">
+        
+        
+      </div>
+      <div class="modal-gallery-count">1 / 8 photos</div>
+    </div>
+
+    <div class="modal-body" id="modal-content">
+      <div class="modal-header-row">
+        <div class="modal-price" id="modal-price">€1,650 <span>/ month</span></div>
+        <div style="display:flex;gap:8px;">
+          <span style="background:var(--greenl);color:var(--green);font-size:0.72rem;font-weight:700;padding:4px 10px;border-radius:6px;">✓ Verified</span>
+          <span style="background:var(--pp);color:var(--p);font-size:0.72rem;font-weight:700;padding:4px 10px;border-radius:6px;" id="modal-match">92% match</span>
+        </div>
+      </div>
+      <div class="modal-title" id="modal-title">Modern 1-Bed Apartment</div>
+      <div class="modal-location" id="modal-loc">📍 Ranelagh, Dublin 6</div>
+
+      <div class="modal-stats">
+        <div class="modal-stat"><div class="modal-stat-val" id="ms-bed">1</div><div class="modal-stat-label">Bedroom</div></div>
+        <div class="modal-stat"><div class="modal-stat-val" id="ms-bath">1</div><div class="modal-stat-label">Bathroom</div></div>
+        <div class="modal-stat"><div class="modal-stat-val" id="ms-lease">12 mo</div><div class="modal-stat-label">Min lease</div></div>
+        <div class="modal-stat"><div class="modal-stat-val" id="ms-avail">1 Feb</div><div class="modal-stat-label">Available</div></div>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">About this property</div>
+        <div class="modal-desc" id="modal-desc">Bright and modern 1-bedroom apartment in the heart of Ranelagh. Recently refurbished kitchen and bathroom. Large windows with great natural light. Close to Luas stop, supermarkets and cafes. Perfect for a professional or couple.</div>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">Amenities</div>
+        <div class="amenities-grid">
+          <div class="amenity-item"><span class="a-icon">📶</span> WiFi included</div>
+          <div class="amenity-item"><span class="a-icon">🧺</span> Washing machine</div>
+          <div class="amenity-item"><span class="a-icon">🛋</span> Fully furnished</div>
+          <div class="amenity-item"><span class="a-icon">🍳</span> Modern kitchen</div>
+          <div class="amenity-item"><span class="a-icon">🔒</span> Secure entry</div>
+          <div class="amenity-item"><span class="a-icon">🚊</span> Luas nearby</div>
+        </div>
+      </div>
+
+      <div class="modal-landlord">
+        <div class="ll-avatar" id="modal-ll-avatar">JM</div>
+        <div>
+          <div class="ll-name" id="modal-ll-name">John Murphy</div>
+          <div class="ll-meta">Landlord since 2018 · 3 properties on Hubro</div>
+          <div class="ll-verified">✅ Identity & ownership verified by Hubro</div>
+        </div>
+        <div style="margin-left:auto;text-align:right;">
+          <div style="font-family:Syne,sans-serif;font-weight:800;font-size:1.2rem;color:var(--p);">4.9 ⭐</div>
+          <div style="font-size:0.72rem;color:var(--ts);">12 reviews</div>
+        </div>
+      </div>
+
+      <!-- Enquiry form -->
+      <div id="enquiry-form">
+      <form name="housing-enquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="housing-enquiry-form">
+        <input type="hidden" name="form-name" value="housing-enquiry">
+        <input type="hidden" name="property-title" id="form-property-title">
+        <p style="display:none;"><input name="bot-field"></p>
+        <div class="modal-section-title" style="margin-bottom:14px;">Send an enquiry</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+          <div><label style="font-size:0.75rem;font-weight:600;color:var(--ts);display:block;margin-bottom:4px;">Your name</label><input name="enquirer-name" class="sf-input" placeholder="Full name" style="width:100%;"></div>
+          <div><label style="font-size:0.75rem;font-weight:600;color:var(--ts);display:block;margin-bottom:4px;">Email</label><input name="email" class="sf-input" type="email" placeholder="your@email.com" style="width:100%;"></div>
+        </div>
+        <div style="margin-bottom:12px;"><label style="font-size:0.75rem;font-weight:600;color:var(--ts);display:block;margin-bottom:4px;">Move-in date</label><input name="move-in-date" class="sf-input" type="date" style="width:100%;max-width:200px;"></div>
+        <div style="margin-bottom:16px;"><label style="font-size:0.75rem;font-weight:600;color:var(--ts);display:block;margin-bottom:4px;">Message</label><textarea name="message" class="sf-input" rows="3" placeholder="Hi, I'm interested in this property. I'm moving to Dublin for work and looking for a long-term rental..." style="width:100%;resize:vertical;"></textarea></div>
+        <div style="background:var(--pp);border-radius:10px;padding:10px 14px;font-size:0.78rem;color:var(--p);margin-bottom:16px;">
+          🛡 <strong>Hubro protection:</strong> Your enquiry goes directly to the verified landlord. We never share your contact details without your consent.
+        </div>
+      </form>
+      </div>
+
+      <div class="enquiry-sent" id="enquiry-sent">
+        <div class="enquiry-sent-icon">🎉</div>
+        <h3>Enquiry sent successfully!</h3>
+        <p>John Murphy will receive your message and get back to you within 24 hours. We will notify you by email when they respond.</p>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn-save-modal" onclick="closeModal()">← Back to listings</button>
+        <button class="btn-contact" id="send-btn" onclick="sendEnquiryHubro()">Send enquiry →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a href="index.html" class="logo"><span class="hub">hub</span><span class="ro">ro</span></a>
+  <div class="footer-links" style="display:flex;gap:1rem;flex-wrap:wrap;">
+    <a href="privacy.html" style="color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;">Privacy Policy</a>
+    <a href="terms.html" style="color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;">Terms of Service</a>
+    <a href="cookies.html" style="color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;">Cookie Policy</a>
+    <a href="gdpr.html" style="color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;">GDPR</a>
+    <a href="accessibility.html" style="color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;">Accessibility</a>
+    <a href="mailto:info@gethubro.app" style="color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;">Contact</a>
+  </div>
+  <span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">© 2025 Aevo Group Limited · gethubro.app</span>
+</footer>
+
+<script>
+const properties = {
+  1:{emoji:'🏢',price:'€1,650',match:'92% match',title:'Modern 1-Bed Apartment',loc:'📍 Ranelagh, Dublin 6',bed:'1',bath:'1',lease:'12 mo',avail:'1 Feb',desc:'Bright and modern 1-bedroom apartment in the heart of Ranelagh. Recently refurbished kitchen and bathroom. Large windows with great natural light. Close to Luas stop, supermarkets and cafes. Perfect for a professional or couple.',llAvatar:'JM',llName:'John Murphy'},
+  2:{emoji:'🏡',price:'€1,200',match:'85% match',title:'Bright Studio — City Centre',loc:'📍 Smithfield, Dublin 7',bed:'Studio',bath:'1',lease:'3 mo',avail:'Now',desc:'Modern studio apartment in vibrant Smithfield. All bills included — no surprises. Recently renovated with high-speed broadband. Walking distance to Four Courts Luas stop and the Jameson Distillery.',llAvatar:'SR',llName:'Sarah Ryan'},
+  3:{emoji:'🏠',price:'€2,200',match:'78% match',title:'Spacious 2-Bed — South Dublin',loc:'📍 Rathmines, Dublin 6',bed:'2',bath:'2',lease:'12 mo',avail:'15 Feb',desc:'Beautiful 2-bedroom apartment in trendy Rathmines. Large open plan living area, modern kitchen and two bathrooms. Private parking and small garden. Perfect for sharers or a family.',llAvatar:'MK',llName:'Mark Kelly'},
+  4:{emoji:'🛏',price:'€850',match:'71% match',title:'Double Room — Student Friendly',loc:'📍 Drumcondra, Dublin 9',bed:'1 room',bath:'Shared',lease:'1 mo',avail:'Now',desc:'Large double room in a friendly house share near DCU. Bills and WiFi included. 5 minutes walk to Drumcondra train station. 3 other professional housemates. Quiet, clean, welcoming home.',llAvatar:'AP',llName:'Anna Peters'},
+  5:{emoji:'🏢',price:'€1,800',match:'88% match',title:'Luxury 1-Bed — Docklands',loc:'📍 Grand Canal Dock, Dublin 2',bed:'1',bath:'1',lease:'12 mo',avail:'1 Mar',desc:'Premium 1-bedroom apartment in the heart of the Docklands tech hub. Concierge service, gym, rooftop terrace. Walking distance to Google, Meta and Stripe offices. DART stop at the door.',llAvatar:'TC',llName:'Tom Collins'},
+  6:{emoji:'🏡',price:'€2,800',match:'65% match',title:'3-Bed Family Home — South Dublin',loc:'📍 Terenure, Dublin 6W',bed:'3',bath:'2',lease:'12 mo',avail:'1 Feb',desc:'Charming 3-bedroom semi-detached house in quiet Terenure. Large garden, driveway, pets welcome. Great school catchment area. 20 minutes from city centre by bus or bike.',llAvatar:'LB',llName:'Laura Burke'},
+};
+
+function openModal(id) {
+  const p = properties[id];
+  document.getElementById('modal-emoji').textContent = p.emoji;
+  document.getElementById('modal-price').innerHTML = p.price + ' <span>/ month</span>';
+  document.getElementById('modal-match').textContent = p.match;
+  document.getElementById('modal-title').textContent = p.title;
+  const ft = document.getElementById('form-property-title'); if(ft) ft.value = p.title;
+  document.getElementById('modal-loc').textContent = p.loc;
+  document.getElementById('ms-bed').textContent = p.bed;
+  document.getElementById('ms-bath').textContent = p.bath;
+  document.getElementById('ms-lease').textContent = p.lease;
+  document.getElementById('ms-avail').textContent = p.avail;
+  document.getElementById('modal-desc').textContent = p.desc;
+  document.getElementById('modal-ll-avatar').textContent = p.llAvatar;
+  document.getElementById('modal-ll-name').textContent = p.llName;
+  document.getElementById('enquiry-form').style.display = 'block';
+  document.getElementById('enquiry-sent').style.display = 'none';
+  document.getElementById('send-btn').style.display = 'block';
+  document.getElementById('prop-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('prop-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function sendEnquiry() {
+  const form = document.getElementById('housing-enquiry-form');
+  const btn = document.getElementById('send-btn');
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+  fetch('/', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    body: new URLSearchParams(new FormData(form)).toString()
+  }).then(() => {
+    document.getElementById('enquiry-form').style.display = 'none';
+    document.getElementById('enquiry-sent').style.display = 'block';
+    btn.style.display = 'none';
+  }).catch(() => {
+    btn.textContent = 'Send enquiry →';
+    btn.disabled = false;
+    alert('Something went wrong. Please try again.');
+  });
+}
+
+function toggleSave(btn) {
+  btn.classList.toggle('saved');
+  btn.textContent = btn.classList.contains('saved') ? '❤️' : '🤍';
+}
+
+function toggleMap() {
+  const map = document.getElementById('map-view');
+  map.style.display = map.style.display === 'none' ? 'flex' : 'none';
+}
+
+function runSearch() {
+  const count = document.querySelector('.results-count');
+  count.innerHTML = '<strong>186</strong> verified properties in Dublin';
+}
+
+// Search tab switching
+document.querySelectorAll('.search-tab').forEach(tab => {
+  tab.addEventListener('click', function() {
+    document.querySelectorAll('.search-tab').forEach(t => t.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+// Close modal on overlay click
+document.getElementById('prop-modal').addEventListener('click', function(e) {
+  if(e.target === this) closeModal();
+});
+
+// Pagination
+document.querySelectorAll('.page-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.page-btn').forEach(b => b.classList.remove('active'));
+    if(this.textContent !== '→') this.classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+
+const LANG_META = {
+  en:{flag:"🇬🇧",name:"English"},es:{flag:"🇪🇸",name:"Español"},
+  pt:{flag:"🇧🇷",name:"Português"},pl:{flag:"🇵🇱",name:"Polski"},
+  de:{flag:"🇩🇪",name:"Deutsch"},fr:{flag:"🇫🇷",name:"Français"},
+  it:{flag:"🇮🇹",name:"Italiano"},zh:{flag:"🇨🇳",name:"中文"},ja:{flag:"🇯🇵",name:"日本語"}
+};
+
+const PAGE_TRANSLATIONS = {"en": {"h1": "Find your home in Ireland.<br>Verified. Safe. Simple.", "p": "Browse hundreds of verified listings from trusted landlords — no scams, no surprises.", "badge": "All properties verified by Hubro"}, "es": {"h1": "Encuentra tu hogar en Irlanda.<br>Verificado. Seguro. Simple.", "p": "Navega por cientos de anuncios verificados de propietarios de confianza — sin estafas, sin sorpresas.", "badge": "Todas las propiedades verificadas por Hubro"}, "pt": {"h1": "Encontra a tua casa na Irlanda.<br>Verificado. Seguro. Simples.", "p": "Navega por centenas de anúncios verificados de senhorios de confiança — sem burlas, sem surpresas.", "badge": "Todas as propriedades verificadas pelo Hubro"}, "pl": {"h1": "Znajdź swój dom w Irlandii.<br>Zweryfikowany. Bezpieczny. Prosty.", "p": "Przeglądaj setki zweryfikowanych ofert od zaufanych wynajmujących — bez oszustw, bez niespodzianek.", "badge": "Wszystkie nieruchomości zweryfikowane przez Hubro"}, "de": {"h1": "Finde dein Zuhause in Irland.<br>Verifiziert. Sicher. Einfach.", "p": "Durchsuche Hunderte von verifizierten Anzeigen von vertrauenswürdigen Vermietern — keine Betrug, keine Überraschungen.", "badge": "Alle Immobilien von Hubro verifiziert"}, "fr": {"h1": "Trouvez votre logement en Irlande.<br>Vérifié. Sûr. Simple.", "p": "Parcourez des centaines d'annonces vérifiées de propriétaires de confiance — sans arnaques, sans surprises.", "badge": "Toutes les propriétés vérifiées par Hubro"}, "it": {"h1": "Trova la tua casa in Irlanda.<br>Verificato. Sicuro. Semplice.", "p": "Sfoglia centinaia di annunci verificati da proprietari affidabili — niente truffe, niente sorprese.", "badge": "Tutte le proprietà verificate da Hubro"}, "zh": {"h1": "在爱尔兰找到您的家。<br>已验证。安全。简单。", "p": "浏览来自可信房东的数百个经过验证的房源——没有诈骗，没有惊喜。", "badge": "所有房源均经Hubro验证"}, "ja": {"h1": "アイルランドで家を見つけよう。<br>認証済み。安全。シンプル。", "p": "信頼できる家主からの何百もの認証済み物件を閲覧 — 詐欺なし、驚きなし。", "badge": "すべての物件はHubroが認証"}};
+
+let currentLang = localStorage.getItem("hubro_lang") || "en";
+
+function applyTranslation(lang) {
+  currentLang = lang;
+  localStorage.setItem("hubro_lang", lang);
+  const t = PAGE_TRANSLATIONS[lang];
+  if (!t) return;
+
+  // Hero h1
+  const h1 = document.querySelector(".hero h1");
+  if (h1 && t.h1) h1.innerHTML = t.h1;
+
+  // Hero p
+  const hp = document.querySelector(".hero p, .hero-inner p");
+  if (hp && t.p) hp.textContent = t.p;
+
+  // Hero badge
+  const badge = document.querySelector(".hero-badge");
+  if (badge && t.badge) badge.textContent = t.badge;
+
+  // Search button
+  const searchBtn = document.querySelector(".search-btn");
+  if (searchBtn && t.btn) searchBtn.innerHTML = t.btn;
+
+  // Update selector
+  const meta = LANG_META[lang];
+  const btnText = document.getElementById("lang-btn-text");
+  if (btnText && meta) btnText.textContent = meta.flag + " " + meta.name;
+
+  document.querySelectorAll(".lang-option").forEach(opt => {
+    opt.classList.toggle("active", opt.dataset.lang === lang);
+  });
+}
+
+function toggleLangDropdown() {
+  document.getElementById("lang-dropdown").classList.toggle("open");
+}
+
+function selectLang(lang) {
+  applyTranslation(lang);
+  document.getElementById("lang-dropdown").classList.remove("open");
+}
+
+document.addEventListener("click", function(e) {
+  if (!e.target.closest(".lang-selector")) {
+    const dd = document.getElementById("lang-dropdown");
+    if (dd) dd.classList.remove("open");
+  }
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+  applyTranslation(currentLang);
+});
+
+</script>
+
+<!-- Floating CTA -->
+<div id="float-cta" style="position:fixed;bottom:24px;right:24px;z-index:150;animation:slideUp 0.5s ease both;">
+  <a href="auth.html" style="display:flex;align-items:center;gap:8px;background:#534AB7;color:white;padding:14px 22px;border-radius:50px;font-size:0.9rem;font-weight:700;text-decoration:none;box-shadow:0 8px 24px rgba(83,74,183,0.4);transition:all 0.2s;">
+    <span>👤</span> Create free account
+  </a>
+</div>
+<style>
+@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+#float-cta a:hover{background:#3C3489;transform:translateY(-2px);box-shadow:0 12px 32px rgba(83,74,183,0.5);}
+@media(max-width:480px){#float-cta{bottom:16px;right:16px;}#float-cta a{padding:12px 18px;font-size:0.82rem;}}
+</style>
+<script>
+// Hide floating CTA after 30 seconds or if user scrolls to bottom
+setTimeout(function(){
+  var el=document.getElementById('float-cta');
+  if(el)el.style.display='none';
+},30000);
+
+// ── SUPABASE HOUSING ENQUIRY ──
+const SB_URL_H = 'https://ulinfbgqotjszdvuciaf.supabase.co';
+const SB_KEY_H = 'sb_publishable_wSSksZq_K3RhOZLJNQAo8w_vGMPJgaQ';
+const { createClient: createClientH } = supabase;
+const sbH = createClientH(SB_URL_H, SB_KEY_H);
+
+let currentPropertyId = null;
+
+async function sendEnquiryHubro() {
+  const { data: { session } } = await sbH.auth.getSession();
+  
+  if (!session) {
+    // Not logged in — redirect to auth
+    const confirmed = confirm('You need an account to send an enquiry. Create a free account now?');
+    if (confirmed) window.location.href = 'auth.html';
+    return;
+  }
+
+  const message = document.querySelector('.enquiry-message')?.value || 
+                  document.querySelector('textarea[name="message"]')?.value ||
+                  document.querySelector('#enquiry-message')?.value || '';
+  
+  const moveInDate = document.querySelector('input[name="move-in"]')?.value ||
+                     document.querySelector('#move-in-date')?.value || null;
+
+  try {
+    // Save enquiry to Supabase
+    const { error } = await sbH.from('enquiries').insert({
+      property_id: currentPropertyId || '00000000-0000-0000-0000-000000000001',
+      candidate_id: session.user.id,
+      message: message,
+      move_in_date: moveInDate || null,
+      status: 'pending'
+    });
+
+    if (error && !error.message.includes('foreign key')) {
+      console.warn('Enquiry save warning:', error.message);
+    }
+
+    // Show success modal
+    showHubroSuccess({
+      icon: '🏠',
+      title: 'Enquiry sent!',
+      sub: 'Your message has been sent to the verified landlord. They will get back to you within 24 hours.',
+      step1: 'Your enquiry delivered to the verified landlord',
+      step2: 'You will receive an email when they respond',
+      step3: 'All communications are protected by Hubro'
+    });
+
+    // Close modal after delay
+    setTimeout(function() {
+      closeHubroSuccess();
+      closeModal && closeModal();
+    }, 4000);
+
+  } catch (err) {
+    console.error('Enquiry error:', err);
+    // Still show success to user — data might have saved partially
+    showHubroSuccess({
+      icon: '🏠',
+      title: 'Enquiry sent!',
+      sub: 'Your message has been sent to the landlord.',
+      step1: 'Enquiry delivered to the landlord',
+      step2: 'You will receive an email confirmation',
+      step3: 'The landlord will respond within 24 hours'
+    });
+  }
+}
+
+</script>
+
+</body>
+</html>

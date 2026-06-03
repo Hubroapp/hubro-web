@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hubro — Pricing & Plans | gethubro.app</title>
+<meta name="description" content="Simple, transparent pricing across all six Hubro departments. Start free, upgrade when you are ready.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --p:#534AB7;--pm:#7F77DD;--pl:#AFA9EC;--pp:#EEEDFE;--pd:#3C3489;--pdd:#26215C;
+  --w:#fff;--g:#F8F7FE;--gl:#F1EFF8;--t:#1A1A2E;--tm:#4A4870;--ts:#8886AA;--b:#E0DEFD;
+  --green:#2D9C6A;--greenl:#E6F7F0;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;color:var(--t);background:var(--w);overflow-x:hidden;}
+h1,h2,h3,h4{font-family:'Syne',sans-serif;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--b);padding:0 5%;height:64px;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;text-decoration:none;}
+.logo .hub{color:var(--p);}.logo .ro{color:var(--pm);}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{text-decoration:none;color:var(--tm);font-size:0.875rem;font-weight:500;transition:color 0.2s;}
+.nav-links a:hover{color:var(--p);}
+.nav-cta{background:var(--p);color:white;border:none;padding:0.55rem 1.2rem;border-radius:8px;font-size:0.875rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:none;transition:all 0.2s;}
+.nav-cta:hover{background:var(--pd);}
+
+.hero{padding:110px 5% 60px;text-align:center;background:linear-gradient(180deg,var(--pp) 0%,var(--w) 100%);}
+.hero-label{font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:1rem;}
+.hero h1{font-size:clamp(2rem,4vw,3.2rem);font-weight:800;letter-spacing:-1px;line-height:1.1;margin-bottom:1rem;}
+.hero p{font-size:1rem;color:var(--tm);max-width:520px;margin:0 auto 2rem;line-height:1.7;}
+
+.dept-nav{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:0 5% 50px;background:var(--w);}
+.dept-pill{padding:8px 16px;border-radius:20px;border:1.5px solid var(--b);background:var(--w);font-size:0.82rem;font-weight:600;cursor:pointer;text-decoration:none;color:var(--tm);transition:all 0.2s;display:flex;align-items:center;gap:6px;}
+.dept-pill:hover,.dept-pill.active{background:var(--p);border-color:var(--p);color:white;}
+
+.dept-section{padding:70px 5%;border-top:1px solid var(--b);}
+.dept-section:nth-child(even){background:var(--g);}
+.dept-header{text-align:center;margin-bottom:3rem;}
+.dept-icon{font-size:2.5rem;margin-bottom:0.8rem;}
+.dept-num{font-size:0.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:0.5rem;}
+.dept-title{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;letter-spacing:-0.5px;margin-bottom:0.8rem;}
+.dept-desc{font-size:0.95rem;color:var(--tm);max-width:560px;margin:0 auto;line-height:1.7;}
+
+.plans-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;max-width:1100px;margin:0 auto;}
+.plan-card{background:var(--w);border-radius:20px;padding:24px;border:1.5px solid var(--b);position:relative;transition:all 0.3s;}
+.plan-card:hover{transform:translateY(-4px);box-shadow:0 20px 48px rgba(83,74,183,0.12);}
+.plan-card.featured{border-color:var(--p);border-width:2px;}
+.plan-card.featured::before{content:'Most popular';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--p);color:white;font-size:0.7rem;font-weight:700;padding:3px 12px;border-radius:20px;}
+.plan-name{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;margin-bottom:4px;}
+.plan-price{margin:12px 0;}
+.plan-amount{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--p);}
+.plan-period{font-size:0.82rem;color:var(--ts);}
+.plan-desc{font-size:0.82rem;color:var(--tm);line-height:1.6;margin-bottom:14px;min-height:40px;}
+.plan-features{list-style:none;display:flex;flex-direction:column;gap:7px;margin-bottom:18px;}
+.plan-features li{font-size:0.82rem;color:var(--tm);display:flex;align-items:flex-start;gap:7px;line-height:1.5;}
+.plan-features li::before{content:'✓';color:var(--p);font-weight:700;flex-shrink:0;margin-top:1px;}
+.plan-features li.no::before{content:'✗';color:var(--ts);}
+.plan-btn{width:100%;padding:0.75rem;border-radius:10px;font-size:0.875rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;text-align:center;text-decoration:none;display:block;transition:all 0.2s;border:none;}
+.btn-primary{background:var(--p);color:white;}
+.btn-primary:hover{background:var(--pd);}
+.btn-outline{background:transparent;color:var(--p);border:1.5px solid var(--p)!important;}
+.btn-outline:hover{background:var(--pp);}
+.btn-free{background:var(--g);color:var(--tm);border:1px solid var(--b)!important;}
+.btn-free:hover{background:var(--pp);color:var(--p);}
+
+.features-list{max-width:760px;margin:3rem auto 0;display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.feature-item{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:var(--w);border-radius:10px;border:1px solid var(--b);}
+.feature-icon{font-size:1rem;flex-shrink:0;margin-top:1px;}
+.feature-text{font-size:0.82rem;color:var(--tm);line-height:1.5;}
+
+.compare-table{max-width:900px;margin:3rem auto 0;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;}
+thead th{text-align:left;padding:10px 14px;font-size:0.72rem;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:var(--ts);border-bottom:2px solid var(--b);}
+thead th:not(:first-child){text-align:center;}
+tbody td{padding:10px 14px;font-size:0.83rem;border-bottom:1px solid var(--gl);vertical-align:middle;}
+tbody td:not(:first-child){text-align:center;}
+tbody tr:hover{background:var(--g);}
+.check-yes{color:var(--p);font-weight:700;font-size:1rem;}
+.check-no{color:var(--ts);}
+.th-featured{background:var(--pp);color:var(--p)!important;border-radius:8px 8px 0 0;}
+
+.section-divider{text-align:center;padding:60px 5%;background:var(--pdd);color:white;}
+.section-divider h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;margin-bottom:1rem;}
+.section-divider p{font-size:0.95rem;color:rgba(255,255,255,0.75);max-width:520px;margin:0 auto 2rem;line-height:1.7;}
+
+.faq{padding:70px 5%;background:var(--w);}
+.faq-grid{max-width:800px;margin:2rem auto 0;display:flex;flex-direction:column;gap:12px;}
+.faq-item{border:1px solid var(--b);border-radius:14px;overflow:hidden;}
+.faq-q{padding:16px 20px;font-weight:600;font-size:0.9rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:var(--w);}
+.faq-q:hover{background:var(--g);}
+.faq-a{padding:0 20px 16px;font-size:0.85rem;color:var(--tm);line-height:1.7;display:none;}
+.faq-item.open .faq-a{display:block;}
+.faq-item.open .faq-arrow{transform:rotate(180deg);}
+.faq-arrow{transition:transform 0.2s;}
+
+.final-cta{padding:80px 5%;background:linear-gradient(135deg,var(--p),var(--pm));text-align:center;}
+.final-cta h2{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;color:white;margin-bottom:1rem;}
+.final-cta p{color:rgba(255,255,255,0.8);max-width:480px;margin:0 auto 2rem;line-height:1.7;}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.btn-white{background:white;color:var(--p);padding:0.85rem 2rem;border-radius:10px;font-size:0.95rem;font-weight:700;text-decoration:none;border:none;cursor:pointer;transition:all 0.2s;}
+.btn-white:hover{background:var(--pp);}
+.btn-outline-white{background:transparent;color:white;border:1.5px solid rgba(255,255,255,0.5);padding:0.85rem 2rem;border-radius:10px;font-size:0.95rem;font-weight:700;text-decoration:none;transition:all 0.2s;}
+.btn-outline-white:hover{background:rgba(255,255,255,0.1);}
+
+footer{background:var(--pdd);color:rgba(255,255,255,0.6);padding:40px 5% 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+footer .logo .hub{color:var(--pl);}footer .logo .ro{color:rgba(255,255,255,0.4);}
+.footer-note{font-size:0.78rem;}
+
+@media(max-width:768px){
+  .nav-links{display:none;}
+  .plans-grid{grid-template-columns:1fr;}
+  .features-list{grid-template-columns:1fr;}
+  .dept-nav{gap:6px;}
+  footer{flex-direction:column;text-align:center;}
+}
+
+/* ── LANGUAGE SELECTOR ── */
+.lang-selector{position:relative;display:flex;align-items:center;}
+.lang-btn{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:8px;border:1.5px solid var(--b);background:white;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;color:var(--tm);transition:all 0.2s;}
+.lang-btn:hover{border-color:var(--pl);color:var(--p);}
+.lang-dropdown{position:absolute;top:calc(100% + 8px);right:0;background:white;border-radius:14px;border:1px solid var(--b);box-shadow:0 12px 32px rgba(83,74,183,0.15);padding:6px;min-width:180px;display:none;z-index:300;animation:fadeDown 0.2s ease;}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.lang-dropdown.open{display:block;}
+.lang-option{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;cursor:pointer;transition:all 0.15s;font-size:0.85rem;font-weight:500;color:var(--tm);}
+.lang-option:hover{background:var(--pp);color:var(--p);}
+.lang-option.active{background:var(--pp);color:var(--p);font-weight:700;}
+.lang-flag{font-size:1.1rem;}
+
+</style>
+
+
+
+<style>
+/* HUBRO WHITESPACE FIX v2 */
+html,body{overflow-x:hidden !important;}
+.job-detail,.jobs-list,.listings-sidebar,.filter-panel,.split-right,.split-left{height:auto !important;position:relative !important;top:auto !important;}
+.main-layout,.jobs-area,.listings-area,.dashboard-area{min-height:0 !important;}
+[style*="calc(100vh"]{height:auto !important;}
+.modal-overlay,.hubro-success-overlay{position:fixed !important;}
+.float-cta,#float-cta{position:fixed !important;}
+@media(max-width:768px){
+  .job-detail,.jobs-list{position:relative !important;height:auto !important;max-height:none !important;overflow-y:visible !important;}
+  .main-layout{flex-direction:column !important;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo"><span class="hub">hub</span><span class="ro">ro</span></a>
+  <ul class="nav-links">
+    <li><a href="jobs.html">Find Jobs</a></li>
+    <li><a href="housing.html">Find Housing</a></li>
+    <li><a href="employers.html">For Employers</a></li>
+    <li><a href="landlords.html">For Landlords</a></li>
+    <li><a href="community.html">Community</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+  </ul>
+      <div class="lang-selector">
+      <button class="lang-btn" onclick="toggleLangDropdown()">
+        <span id="lang-btn-text">🇬🇧 English</span>
+        <span style="font-size:0.6rem;opacity:0.6;">▼</span>
+      </button>
+      <div class="lang-dropdown" id="lang-dropdown">
+        <div class="lang-option active" data-lang="en" onclick="selectLang('en')"><span class="lang-flag">🇬🇧</span> English</div>
+        <div class="lang-option" data-lang="es" onclick="selectLang('es')"><span class="lang-flag">🇪🇸</span> Español</div>
+        <div class="lang-option" data-lang="pt" onclick="selectLang('pt')"><span class="lang-flag">🇧🇷</span> Português</div>
+        <div class="lang-option" data-lang="pl" onclick="selectLang('pl')"><span class="lang-flag">🇵🇱</span> Polski</div>
+        <div class="lang-option" data-lang="de" onclick="selectLang('de')"><span class="lang-flag">🇩🇪</span> Deutsch</div>
+        <div class="lang-option" data-lang="fr" onclick="selectLang('fr')"><span class="lang-flag">🇫🇷</span> Français</div>
+        <div class="lang-option" data-lang="it" onclick="selectLang('it')"><span class="lang-flag">🇮🇹</span> Italiano</div>
+        <div class="lang-option" data-lang="zh" onclick="selectLang('zh')"><span class="lang-flag">🇨🇳</span> 中文</div>
+        <div class="lang-option" data-lang="ja" onclick="selectLang('ja')"><span class="lang-flag">🇯🇵</span> 日本語</div>
+      </div>
+    </div>
+
+  <a href="auth.html" class="nav-cta">Sign up free →</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">Pricing & Plans</div>
+  <h1>Simple, transparent pricing.<br>Start free, upgrade when ready.</h1>
+  <p>Hubro has six specialist departments — each with its own plans. Start with what you need and add more as you grow.</p>
+</div>
+
+<!-- DEPT NAV -->
+<div class="dept-nav">
+  <a href="#dept1" class="dept-pill active">📄 Relocation</a>
+  <a href="#dept2" class="dept-pill">💼 Employment</a>
+  <a href="#dept3" class="dept-pill">🏠 Housing</a>
+  <a href="#dept4" class="dept-pill">🤝 Community</a>
+  <a href="#dept5" class="dept-pill">🏢 Employers</a>
+  <a href="#dept6" class="dept-pill">🔑 Landlords</a>
+</div>
+
+<!-- ── DEPT 1: RELOCATION ── -->
+<div class="dept-section" id="dept1">
+  <div class="dept-header">
+    <div class="dept-icon">📄</div>
+    <div class="dept-num">Department 01</div>
+    <h2 class="dept-title">Relocation & Documentation</h2>
+    <p class="dept-desc">We help you understand exactly which documents you need based on your country of origin, visa type and circumstances — so you never get lost in the paperwork.</p>
+  </div>
+  <div class="plans-grid">
+    <div class="plan-card">
+      <div class="plan-name">Free</div>
+      <div class="plan-price"><span class="plan-amount">€0</span><span class="plan-period">/month</span></div>
+      <div class="plan-desc">General relocation information and basic guides to get started.</div>
+      <ul class="plan-features">
+        <li>General relocation guides</li>
+        <li>Basic document information</li>
+        <li>Community access</li>
+        <li class="no">Personalised checklist</li>
+        <li class="no">Priority support</li>
+      </ul>
+      <a href="index.html#waitlist" class="plan-btn btn-free">Get started free</a>
+    </div>
+    <div class="plan-card featured">
+      <div class="plan-name">Guided</div>
+      <div class="plan-price"><span class="plan-amount">€19</span><span class="plan-period">/month</span></div>
+      <div class="plan-desc">Personalised document checklist and priority support for active relocators.</div>
+      <ul class="plan-features">
+        <li>Everything in Free</li>
+        <li>Personalised document checklist</li>
+        <li>Priority support (&lt;24h response)</li>
+        <li>Live Q&A sessions</li>
+        <li>Step-by-step relocation guide</li>
+      </ul>
+      <a href="index.html#waitlist" class="plan-btn btn-primary">Join waitlist</a>
+    </div>
+    <div class="plan-card">
+      <div class="plan-name">Premium Relocation</div>
+      <div class="plan-price"><span class="plan-amount">€99</span><span class="plan-period">– €299 one-off</span></div>
+      <div class="plan-desc">Complete one-to-one support for complex relocation cases.</div>
+      <ul class="plan-features">
+        <li>Everything in Guided</li>
+        <li>One-to-one personal support</li>
+        <li>Complete relocation roadmap</li>
+        <li>Priority assistance</li>
+        <li>Family & complex case support</li>
+      </ul>
+      <a href="index.html#waitlist" class="plan-btn btn-outline">Join waitlist</a>
+    </div>
+  </div>
+  <div class="features-list">
+    <div class="feature-item"><span class="feature-icon">🔑</span><span class="feature-text">PPS Number guidance & Revenue registration</span></div>
+    <div class="feature-item"><span class="feature-icon">🏦</span><span class="feature-text">Bank account setup support</span></div>
+    <div class="feature-item"><span class="feature-icon">🛂</span><span class="feature-text">Immigration & visa documentation</span></div>
+    <div class="feature-item"><span class="feature-icon">🚗</span><span class="feature-text">Driver licence conversion guidance</span></div>
+    <div class="feature-item"><span class="feature-icon">🏥</span><span class="feature-text">Healthcare registration (GP, PRSI)</span></div>
+    <div class="feature-item"><span class="feature-icon">💼</span><span class="feature-text">Employment documentation support</span></div>
+  </div>
+</div>
+
+<!-- ── DEPT 2: EMPLOYMENT ── -->
+<div class="dept-section" id="dept2">
+  <div class="dept-header">
+    <div class="dept-icon">💼</div>
+    <div class="dept-num">Department 02</div>
+    <h2 class="dept-title">Employment</h2>
+    <p class="dept-desc">Find verified jobs, build a professional CV, track your applications and prepare for interviews — all in one place. Only apply where you match 30% or above.</p>
+  </div>
+  <div class="plans-grid">
+    <div class="plan-card">
+      <div class="plan-name">Free</div>
+      <div class="plan-price"><span class="plan-amount">€0</span><span class="plan-period">/month</span></div>
+      <div class="plan-desc">Search and apply for verified jobs with your CV.</div>
+      <ul class="plan-features">
+        <li>Browse verified job listings</li>
+        <li>Upload CV (AI verified)</li>
+        <li>Apply with match score</li>
+        <li>Application tracking</li>
+        <li class="no">CV optimisation</li>
+        <li class="no">Interview preparation</li>
+      </ul>
+      <a href="index.html#waitlist" class="plan-btn btn-free">Get started free</a>
+    </div>
+    <div class="plan-card featured">
+      <div class="plan-name">Career Plus</div>
+      <div class="plan-price"><span class="plan-amount">€15</span><span class="plan-period">/month</span></div>
+      <div class="plan-desc">CV optimisation, career guidance and priority job alerts.</div>
+      <ul class="plan-features">
+        <li>Everything in Free</li>
+        <li>CV optimisation & AI suggestions</li>
+        <li>Career guidance sessions</li>
+        <li>Priority job alerts</li>
+        <li>CV builder tool</li>
+        <li class="no">Interview preparation</li>
+      </ul>
+      <a href="index.html#waitlist" class="plan-btn btn-primary">Join waitlist</a>
+    </div>
+    <div class="plan-card">
+      <div class="plan-name">Premium Career</div>
+      <div class="plan-price"><span class="plan-amount">€49</span><span class="plan-period">/month</span></div>
+      <div class="plan-desc">Full career support with CV review, interview prep and personal guidance.</div>
+      <ul class="plan-features">
+        <li>Everything in Career Plus</li>
+        <li>Professional CV review</li>
+        <li>Interview preparation</li>
+        <li>Priority applications</li>
+        <li>Personal career guidance</li>
+        <li>Salary negotiation support</li>
+      </ul>
+      <a href="index.html#waitlist" class="plan-btn btn-outline">Join waitlist</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── DEPT 3: HOUSING ── -->
+<div class="dept-section" id="dept3">
+  <div class="dept-header">
+    <div class="dept-icon">🏠</div>
+    <div class="dept-num">Department 03</div>
+    <h2 class="dept-title">Housing</h2>
+    <p class="dept-desc">Find verified accommodation from trusted landlords. Every listing is checked by our AI for fraud and price anomalies before it goes live.</p>
+  </div>
+  <div class="plans-grid">
+    <div class="plan-card">
+      <div class="plan-name">Free</div>
+      <div class="plan-price"><span class="plan-amount">€0</span><span class="plan-period">/month</span></div>
+      <div class="plan-desc">Browse verified housing listings and connect with landlords.</div>
+      <ul class="plan-features">
+        <li>Browse verified listings</li>
+        <li>Basic housing information</li>
+        <li>Landlord messaging</li>
+        <li class="no">Housing alerts</li>
+        <li class="no">Priority matching</li>
+      </ul>
+      <a href="index.html#waitlist" class="plan-btn btn-free">Get started free</a>
+    </div>
+    <div class="plan-card featured">
+      <div class="plan-name">Housing Plus</div>
+      <div class="plan-price"><span class="plan-amount">€15</span><span class="plan-period">/month</span></div>
+      <div class="plan-desc">Instant alerts, rental guidance and priority access to new listings.</div>
+      <ul class="plan-features">
+        <li>Everything in Free</li>
+        <li>Instant housing alerts</li>
+        <li>Rental market guidance</li>
+        <li>Priority notifications</li>
+        <li>Tenant rights information</li>
+      </ul>
+      <a href="index.html#waitlist" class="plan-btn btn-primary">Join waitlist</a>
+    </div>
+    <div class="plan-card">
+      <div class="plan-name">Premium Housing</div>
+      <div class="plan-price"><span class="plan-amount">€49</span><span class="plan-period">/month</span></div>
+      <div class="plan-desc">Full application support, priority matching and housing consultation.</div>
+      <ul class="plan-features">
+        <li>Everything in Housing Plus</li>
+        <li>Application support & review</li>
+        <li>Priority AI matching</li>
+        <li>Housing consultation</li>
+        <li>Deposit protection guidance</li>
+      </ul>
+      <a href="index.html#waitlist" class="plan-btn btn-outline">Join waitlist</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── DEPT 4: COMMUNITY ── -->
+<div class="dept-section" id="dept4">
+  <div class="dept-header">
+    <div class="dept-icon">🤝</div>
+    <div class="dept-num">Department 04</div>
+    <h2 class="dept-title">Community</h2>
+    <p class="dept-desc">Connect with people who have been through the same journey. Get answers, make friends and grow your network in your new city.</p>
+  </div>
+  <div class="plans-grid" style="max-width:680px;margin:0 auto;">
+    <div class="plan-card">
+      <div class="plan-name">Community Free</div>
+      <div class="plan-price"><span class="plan-amount">€0</span><span class="plan-period">/month</span></div>
+      <div class="plan-desc">Basic access to the Hubro community and public events.</div>
+      <ul class="plan-features">
+        <li>Community forum access</li>
+        <li>Public events</li>
+        <li>General discussions</li>
+        <li class="no">Exclusive sessions</li>
+        <li class="no">Private community groups</li>
+      </ul>
+      <a href="index.html#waitlist" class="plan-btn btn-free">Join free</a>
+    </div>
+    <div class="plan-card featured">
+      <div class="plan-name">Community Plus</div>
+      <div class="plan-price"><span class="plan-amount">€9</span><span class="plan-period">/month</span></div>
+      <div class="plan-desc">Exclusive sessions, networking events and private community groups.</div>
+      <ul class="plan-features">
+        <li>Everything in Community Free</li>
+        <li>Exclusive Q&A sessions</li>
+        <li>English classes</li>
+        <li>Workshops & training</li>
+        <li>Networking events (in-person + virtual)</li>
+        <li>Private community groups</li>
+        <li>Career support sessions</li>
+        <li>Cultural integration sessions</li>
+      </ul>
+      <a href="index.html#waitlist" class="plan-btn btn-primary">Join waitlist</a>
+    </div>
+  </div>
+</div>
+
+<!-- DIVIDER -->
+<div class="section-divider">
+  <h2>Plans for businesses too.</h2>
+  <p>Hubro helps employers and landlords find better candidates and tenants more efficiently — with verified profiles and AI-assisted matching.</p>
+</div>
+
+<!-- ── DEPT 5: EMPLOYERS ── -->
+<div class="dept-section" id="dept5">
+  <div class="dept-header">
+    <div class="dept-icon">🏢</div>
+    <div class="dept-num">Department 05</div>
+    <h2 class="dept-title">For Employers</h2>
+    <p class="dept-desc">Access a database of pre-verified international candidates, post jobs with custom screening questions and manage your full hiring pipeline in one place.</p>
+  </div>
+  <div class="plans-grid">
+    <div class="plan-card">
+      <div class="plan-name">Basic</div>
+      <div class="plan-price"><span class="plan-amount">€99</span><span class="plan-period">/month</span></div>
+      <div class="plan-desc">Post jobs and receive verified applications from international candidates.</div>
+      <ul class="plan-features">
+        <li>Up to 5 active job listings</li>
+        <li>Candidate applications with CV</li>
+        <li>Custom screening questions</li>
+        <li>Direct candidate messaging</li>
+        <li>Application management dashboard</li>
+        <li class="no">Enhanced visibility</li>
+        <li class="no">Advanced analytics</li>
+      </ul>
+      <a href="index.html#waitlist" class="plan-btn btn-outline">Join waitlist</a>
+    </div>
+    <div class="plan-card featured">
+      <div class="plan-name">Business</div>
+      <div class="plan-price"><span class="plan-amount">€249</span><span class="plan-period">/month</span></div>
+      <div class="plan-desc">Multiple listings, enhanced visibility and candidate filtering tools.</div>
+      <ul class="plan-features">
+        <li>Up to 20 active job listings</li>
+        <li>Everything in Basic</li>
+        <li>Enhanced listing visibility</li>
+        <li>Advanced candidate filtering</li>
+        <li>Match score reports</li>
+        <li>Candidate database search</li>
+        <li>Basic analytics dashboard</li>
+      </ul>
+      <a href="index.html#waitlist" class="plan-btn btn-primary">Join waitlist</a>
+    </div>
+    <div class="plan-card">
+      <div class="plan-name">Enterprise</div>
+      <div class="plan-price"><span class="plan-amount">€499</span><span class="plan-period">/month</span></div>
+      <div class="plan-desc">Advanced tools, priority support and dedicated account management.</div>
+      <ul class="plan-features">
+        <li>Unlimited job listings</li>
+        <li>Everything in Business</li>
+        <li>Advanced AI-assisted screening</li>
+        <li>Dedicated account manager</li>
+        <li>Priority support (SLA)</li>
+        <li>API integration</li>
+        <li>Custom reporting</li>
+      </ul>
+      <a href="mailto:info@gethubro.app" class="plan-btn btn-outline">Contact us</a>
+    </div>
+  </div>
+  <div class="compare-table">
+    <table>
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Basic<br>€99/mo</th>
+          <th class="th-featured">Business<br>€249/mo</th>
+          <th>Enterprise<br>€499/mo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Active job listings</td><td>Up to 5</td><td class="th-featured" style="background:var(--pp)">Up to 20</td><td>Unlimited</td></tr>
+        <tr><td>Custom screening questions</td><td class="check-yes">✓</td><td class="check-yes" style="background:var(--pp)">✓</td><td class="check-yes">✓</td></tr>
+        <tr><td>Candidate messaging</td><td class="check-yes">✓</td><td class="check-yes" style="background:var(--pp)">✓</td><td class="check-yes">✓</td></tr>
+        <tr><td>Enhanced visibility</td><td class="check-no">—</td><td class="check-yes" style="background:var(--pp)">✓</td><td class="check-yes">✓</td></tr>
+        <tr><td>Candidate database search</td><td class="check-no">—</td><td class="check-yes" style="background:var(--pp)">✓</td><td class="check-yes">✓</td></tr>
+        <tr><td>AI match score reports</td><td class="check-no">—</td><td class="check-yes" style="background:var(--pp)">✓</td><td class="check-yes">✓</td></tr>
+        <tr><td>Dedicated account manager</td><td class="check-no">—</td><td class="check-no" style="background:var(--pp)">—</td><td class="check-yes">✓</td></tr>
+        <tr><td>API integration</td><td class="check-no">—</td><td class="check-no" style="background:var(--pp)">—</td><td class="check-yes">✓</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ── DEPT 6: LANDLORDS ── -->
+<div class="dept-section" id="dept6">
+  <div class="dept-header">
+    <div class="dept-icon">🔑</div>
+    <div class="dept-num">Department 06</div>
+    <h2 class="dept-title">For Landlords</h2>
+    <p class="dept-desc">List your properties and find verified, reliable international tenants — with identity checks, employment verification and AI-powered tenant matching.</p>
+  </div>
+  <div class="plans-grid">
+    <div class="plan-card">
+      <div class="plan-name">Basic</div>
+      <div class="plan-price"><span class="plan-amount">€49</span><span class="plan-period">/month</span></div>
+      <div class="plan-desc">List your property and connect with verified tenants.</div>
+      <ul class="plan-features">
+        <li>1 active property listing</li>
+        <li>Verified tenant profiles</li>
+        <li>Direct tenant messaging</li>
+        <li>Basic match scores</li>
+        <li class="no">Priority visibility</li>
+        <li class="no">Tenant risk reports</li>
+      </ul>
+      <a href="index.html#waitlist" class="plan-btn btn-outline">Join waitlist</a>
+    </div>
+    <div class="plan-card featured">
+      <div class="plan-name">Professional</div>
+      <div class="plan-price"><span class="plan-amount">€99</span><span class="plan-period">/month</span></div>
+      <div class="plan-desc">Multiple properties, priority visibility and advanced tenant filtering.</div>
+      <ul class="plan-features">
+        <li>Up to 5 property listings</li>
+        <li>Everything in Basic</li>
+        <li>Priority listing placement</li>
+        <li>Advanced tenant filtering</li>
+        <li>Employment status access</li>
+        <li class="no">AI tenant matching</li>
+      </ul>
+      <a href="index.html#waitlist" class="plan-btn btn-primary">Join waitlist</a>
+    </div>
+    <div class="plan-card">
+      <div class="plan-name">Premium</div>
+      <div class="plan-price"><span class="plan-amount">€199</span><span class="plan-period">/month</span></div>
+      <div class="plan-desc">Advanced screening, AI tenant matching and full risk reports.</div>
+      <ul class="plan-features">
+        <li>Unlimited property listings</li>
+        <li>Everything in Professional</li>
+        <li>AI tenant matching</li>
+        <li>Detailed tenant risk reports</li>
+        <li>Income & reference verification</li>
+        <li>Priority support</li>
+      </ul>
+      <a href="index.html#waitlist" class="plan-btn btn-outline">Join waitlist</a>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="faq">
+  <div style="text-align:center;margin-bottom:2rem;">
+    <div style="font-size:0.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:0.5rem;">FAQ</div>
+    <h2 style="font-size:clamp(1.4rem,3vw,2rem);font-weight:800;letter-spacing:-0.5px;">Frequently asked questions</h2>
+  </div>
+  <div class="faq-grid">
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Can I use multiple departments with one account? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">Yes — your Hubro account gives you access to all six departments. You can subscribe to plans in any combination. For example, you can be on the Free tier for Employment and the Guided plan for Relocation at the same time.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Can I cancel at any time? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">Yes. All monthly plans can be cancelled at any time with no penalty. You keep access until the end of the billing period. One-off Premium Relocation packages are non-refundable once the service has begun.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Is there a discount for annual plans? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">Yes — all monthly plans are available at a 20% discount when paid annually. Annual pricing will be displayed during checkout once the platform launches.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">How does the 30% match threshold work? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">When you apply for a job or a housing listing, our AI calculates your compatibility score based on your profile, skills, experience, and preferences. If your score is below 30%, the apply button is disabled. This protects your time and ensures employers only receive applications from genuinely relevant candidates.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Is my data safe? Is Hubro GDPR compliant? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">Yes. Hubro is operated by Aevo Group Limited, an Irish company subject to GDPR. All data is stored on EU servers, encrypted at rest and in transit. You can delete your account and all associated data at any time. We never sell your data.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">When will Hubro launch? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">Hubro is currently in early access. Join the waitlist at gethubro.app and you will be among the first to access the platform when we launch in Ireland. Waitlist members receive 1 month of their chosen plan free at launch.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FINAL CTA -->
+<div class="final-cta">
+  <h2>Ready to start your journey?</h2>
+  <p>Join the Hubro waitlist today and get early access plus 1 month free on any paid plan at launch.</p>
+  <div class="cta-btns">
+    <a href="index.html#waitlist" class="btn-white">Join the waitlist →</a>
+    <a href="mailto:info@gethubro.app" class="btn-outline-white">Talk to us</a>
+  </div>
+</div>
+
+<footer>
+  <a href="index.html" class="logo"><span class="hub">hub</span><span class="ro">ro</span></a>
+  <div class="footer-links" style="display:flex;gap:1rem;flex-wrap:wrap;">
+    <a href="privacy.html" style="color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;">Privacy Policy</a>
+    <a href="terms.html" style="color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;">Terms of Service</a>
+    <a href="cookies.html" style="color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;">Cookie Policy</a>
+    <a href="gdpr.html" style="color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;">GDPR</a>
+    <a href="accessibility.html" style="color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;">Accessibility</a>
+    <a href="mailto:info@gethubro.app" style="color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;">Contact</a>
+  </div>
+  <span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">© 2025 Aevo Group Limited · gethubro.app</span>
+</footer>
+
+<script>
+function toggleFaq(el) {
+  el.classList.toggle('open');
+}
+document.querySelectorAll('.dept-pill').forEach(pill => {
+  pill.addEventListener('click', function() {
+    document.querySelectorAll('.dept-pill').forEach(p => p.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+const LANG_META = {
+  en:{flag:"🇬🇧",name:"English"},es:{flag:"🇪🇸",name:"Español"},
+  pt:{flag:"🇧🇷",name:"Português"},pl:{flag:"🇵🇱",name:"Polski"},
+  de:{flag:"🇩🇪",name:"Deutsch"},fr:{flag:"🇫🇷",name:"Français"},
+  it:{flag:"🇮🇹",name:"Italiano"},zh:{flag:"🇨🇳",name:"中文"},ja:{flag:"🇯🇵",name:"日本語"}
+};
+
+const PAGE_TRANSLATIONS = {"en": {"h1": "Simple, transparent pricing.<br>Start free, upgrade when ready.", "p": "Hubro has six specialist departments — each with its own plans.", "badge": "Pricing & Plans"}, "es": {"h1": "Precios simples y transparentes.<br>Empieza gratis, mejora cuando quieras.", "p": "Hubro tiene seis departamentos especializados — cada uno con sus propios planes.", "badge": "Planes y Precios"}, "pt": {"h1": "Preços simples e transparentes.<br>Começa grátis, muda quando quiseres.", "p": "Hubro tem seis departamentos especializados — cada um com os seus próprios planos.", "badge": "Planos e Preços"}, "pl": {"h1": "Proste i przejrzyste ceny.<br>Zacznij za darmo, ulepsz kiedy chcesz.", "p": "Hubro ma sześć wyspecjalizowanych działów — każdy z własnymi planami.", "badge": "Plany i Ceny"}, "de": {"h1": "Einfache, transparente Preise.<br>Starte kostenlos, upgrade wann du willst.", "p": "Hubro hat sechs Fachabteilungen — jede mit eigenen Plänen.", "badge": "Pläne und Preise"}, "fr": {"h1": "Tarifs simples et transparents.<br>Commencez gratuitement, évoluez quand vous voulez.", "p": "Hubro a six départements spécialisés — chacun avec ses propres plans.", "badge": "Plans et Tarifs"}, "it": {"h1": "Prezzi semplici e trasparenti.<br>Inizia gratis, aggiorna quando vuoi.", "p": "Hubro ha sei dipartimenti specializzati — ognuno con i propri piani.", "badge": "Piani e Prezzi"}, "zh": {"h1": "简单透明的定价。<br>免费开始，随时升级。", "p": "Hubro有六个专业部门——每个部门都有自己的计划。", "badge": "计划和定价"}, "ja": {"h1": "シンプルで透明な料金体系。<br>無料で始めて、準備ができたらアップグレード。", "p": "Hubroには6つの専門部門があります — それぞれ独自のプランがあります。", "badge": "プランと料金"}};
+
+let currentLang = localStorage.getItem("hubro_lang") || "en";
+
+function applyTranslation(lang) {
+  currentLang = lang;
+  localStorage.setItem("hubro_lang", lang);
+  const t = PAGE_TRANSLATIONS[lang];
+  if (!t) return;
+
+  // Hero h1
+  const h1 = document.querySelector(".hero h1");
+  if (h1 && t.h1) h1.innerHTML = t.h1;
+
+  // Hero p
+  const hp = document.querySelector(".hero p, .hero-inner p");
+  if (hp && t.p) hp.textContent = t.p;
+
+  // Hero badge
+  const badge = document.querySelector(".hero-badge");
+  if (badge && t.badge) badge.textContent = t.badge;
+
+  // Search button
+  const searchBtn = document.querySelector(".search-btn");
+  if (searchBtn && t.btn) searchBtn.innerHTML = t.btn;
+
+  // Update selector
+  const meta = LANG_META[lang];
+  const btnText = document.getElementById("lang-btn-text");
+  if (btnText && meta) btnText.textContent = meta.flag + " " + meta.name;
+
+  document.querySelectorAll(".lang-option").forEach(opt => {
+    opt.classList.toggle("active", opt.dataset.lang === lang);
+  });
+}
+
+function toggleLangDropdown() {
+  document.getElementById("lang-dropdown").classList.toggle("open");
+}
+
+function selectLang(lang) {
+  applyTranslation(lang);
+  document.getElementById("lang-dropdown").classList.remove("open");
+}
+
+document.addEventListener("click", function(e) {
+  if (!e.target.closest(".lang-selector")) {
+    const dd = document.getElementById("lang-dropdown");
+    if (dd) dd.classList.remove("open");
+  }
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+  applyTranslation(currentLang);
+});
+
+</script>
+</body>
+</html>

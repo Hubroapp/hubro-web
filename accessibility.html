@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accessibility Statement — Hubro | gethubro.app</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--p:#534AB7;--pm:#7F77DD;--pl:#AFA9EC;--pp:#EEEDFE;--pd:#3C3489;--pdd:#26215C;--w:#fff;--g:#F9F8FE;--t:#1A1A2E;--tm:#4A4870;--ts:#9896B8;--b:#E4E2F8;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;color:var(--t);background:var(--g);overflow-x:hidden;}
+h1,h2,h3{font-family:'Syne',sans-serif;}
+nav{background:white;border-bottom:1px solid var(--b);height:60px;padding:0 5%;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.logo{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;text-decoration:none;}
+.logo .hub{color:var(--p);}.logo .ro{color:var(--pm);}
+.nav-back{font-size:0.85rem;color:var(--ts);text-decoration:none;}
+.nav-back:hover{color:var(--p);}
+.hero{background:linear-gradient(135deg,var(--pdd),var(--p));padding:48px 5%;text-align:center;}
+.hero h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:white;margin-bottom:0.5rem;}
+.hero p{color:rgba(255,255,255,0.7);font-size:0.95rem;}
+.content{max-width:800px;margin:0 auto;padding:48px 5%;}
+.last-updated{background:var(--pp);border-radius:10px;padding:10px 16px;font-size:0.82rem;color:var(--p);font-weight:600;margin-bottom:2rem;display:inline-block;}
+.section{background:white;border-radius:16px;padding:28px;margin-bottom:20px;border:1px solid var(--b);}
+.section h2{font-size:1.1rem;font-weight:800;color:var(--t);margin-bottom:1rem;padding-bottom:0.75rem;border-bottom:2px solid var(--pp);}
+.section h3{font-size:0.95rem;font-weight:700;color:var(--p);margin:1rem 0 0.5rem;}
+.section p{font-size:0.875rem;color:var(--tm);line-height:1.8;margin-bottom:0.75rem;}
+.section p:last-child{margin-bottom:0;}
+.section ul{padding-left:1.2rem;margin-bottom:0.75rem;}
+.section ul li{font-size:0.875rem;color:var(--tm);line-height:1.8;margin-bottom:4px;}
+.status-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:20px;font-size:0.75rem;font-weight:700;background:var(--greenl,#E3F8EF);color:#1A9E6A;margin-bottom:1rem;}
+.contact-box{background:var(--pp);border-radius:12px;padding:20px;margin-top:1rem;}
+.contact-box p{color:var(--p)!important;font-weight:500;}
+.contact-box a{color:var(--pd);font-weight:700;}
+footer{background:var(--pdd);color:rgba(255,255,255,0.5);padding:24px 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+footer .logo .hub{color:var(--pl);}footer .logo .ro{color:rgba(255,255,255,0.4);}
+.footer-links{display:flex;gap:1.5rem;flex-wrap:wrap;}
+.footer-links a{color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;}
+.footer-links a:hover{color:white;}
+</style>
+<style>
+/* HUBRO WHITESPACE FIX v2 */
+html,body{overflow-x:hidden !important;}
+.job-detail,.jobs-list,.listings-sidebar,.filter-panel,.split-right,.split-left{height:auto !important;position:relative !important;top:auto !important;}
+.main-layout,.jobs-area,.listings-area,.dashboard-area{min-height:0 !important;}
+[style*="calc(100vh"]{height:auto !important;}
+.modal-overlay,.hubro-success-overlay{position:fixed !important;}
+.float-cta,#float-cta{position:fixed !important;}
+@media(max-width:768px){
+  .job-detail,.jobs-list{position:relative !important;height:auto !important;max-height:none !important;overflow-y:visible !important;}
+  .main-layout{flex-direction:column !important;}
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="logo"><span class="hub">hub</span><span class="ro">ro</span></a>
+  <a href="index.html" class="nav-back">← Back to Hubro</a>
+</nav>
+<div class="hero">
+  <h1>Accessibility Statement</h1>
+  <p>Our commitment to making Hubro accessible to everyone</p>
+</div>
+<div class="content">
+  <div class="last-updated">Last updated: 1 June 2025</div>
+
+  <div class="section">
+    <div class="status-badge">✓ Actively improving accessibility</div>
+    <h2>Our commitment</h2>
+    <p>Hubro is committed to ensuring digital accessibility for people with disabilities. We are continually improving the user experience for everyone and applying relevant accessibility standards.</p>
+    <p>We believe that international residents in Ireland deserve a platform that is usable by everyone, regardless of ability or disability.</p>
+  </div>
+
+  <div class="section">
+    <h2>Conformance status</h2>
+    <p>We aim to conform to the <strong>Web Content Accessibility Guidelines (WCAG) 2.1 Level AA</strong>. These guidelines explain how to make web content more accessible to people with disabilities.</p>
+    <p>Hubro is currently <strong>partially conformant</strong> with WCAG 2.1 Level AA. We are actively working to address remaining accessibility issues.</p>
+  </div>
+
+  <div class="section">
+    <h2>Accessibility features</h2>
+    <h3>Currently implemented:</h3>
+    <ul>
+      <li>Semantic HTML structure with proper heading hierarchy</li>
+      <li>High colour contrast ratios throughout the platform</li>
+      <li>Responsive design that works on all screen sizes</li>
+      <li>Keyboard navigation support for main actions</li>
+      <li>Alt text on informational images</li>
+      <li>Language selector for 9 languages</li>
+      <li>Clear focus indicators on interactive elements</li>
+      <li>Form labels associated with their inputs</li>
+      <li>Error messages that describe what went wrong</li>
+    </ul>
+    <h3>In progress:</h3>
+    <ul>
+      <li>Full screen reader compatibility</li>
+      <li>ARIA labels on complex interactive components</li>
+      <li>Skip navigation links</li>
+      <li>Enhanced keyboard navigation for modals</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Known limitations</h2>
+    <p>We are aware of the following accessibility limitations and are working to address them:</p>
+    <ul>
+      <li>Some complex interactive components (job search filters, property search) may not be fully accessible to screen reader users — we are working on ARIA improvements</li>
+      <li>Some PDF documents may not be fully accessible — we are working on accessible alternatives</li>
+      <li>Some older content may not meet all accessibility standards</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Technical specifications</h2>
+    <p>Hubro relies on the following technologies for conformance:</p>
+    <ul>
+      <li>HTML5</li>
+      <li>CSS3</li>
+      <li>JavaScript</li>
+    </ul>
+    <p>The platform has been tested with the following tools and browsers:</p>
+    <ul>
+      <li>Chrome (desktop and mobile)</li>
+      <li>Safari (iOS)</li>
+      <li>Firefox</li>
+      <li>Microsoft Edge</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Feedback and contact</h2>
+    <p>We welcome your feedback on the accessibility of Hubro. If you experience any accessibility barriers or have suggestions for improvement, please contact us:</p>
+    <div class="contact-box">
+      <p>📧 <a href="mailto:info@gethubro.app">info@gethubro.app</a></p>
+      <p>🏢 Aevo Group Limited, Dublin, Ireland</p>
+      <p>⏱️ We aim to respond within 5 business days</p>
+    </div>
+    <p style="margin-top:1rem;">If you are not satisfied with our response, you can contact the <strong>Irish Human Rights and Equality Commission</strong> at <a href="https://www.ihrec.ie" style="color:var(--p);">ihrec.ie</a>.</p>
+  </div>
+</div>
+<footer>
+  <a href="index.html" class="logo"><span class="hub">hub</span><span class="ro">ro</span></a>
+  <div class="footer-links" style="display:flex;gap:1rem;flex-wrap:wrap;">
+    <a href="privacy.html" style="color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;">Privacy Policy</a>
+    <a href="terms.html" style="color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;">Terms of Service</a>
+    <a href="cookies.html" style="color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;">Cookie Policy</a>
+    <a href="gdpr.html" style="color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;">GDPR</a>
+    <a href="accessibility.html" style="color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;">Accessibility</a>
+    <a href="mailto:info@gethubro.app" style="color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;">Contact</a>
+  </div>
+  <span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">© 2025 Aevo Group Limited · gethubro.app</span>
+</footer>
+</body>
+</html>

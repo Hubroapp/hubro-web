@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You're on the list! — Hubro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --p:#534AB7;--pm:#7F77DD;--pl:#AFA9EC;--pp:#EEEDFE;--pd:#3C3489;--pdd:#26215C;
+  --w:#fff;--g:#F9F8FE;--t:#1A1A2E;--tm:#4A4870;--ts:#9896B8;--b:#E4E2F8;
+  --green:#1A9E6A;--greenl:#E3F8EF;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;color:var(--t);background:var(--g);min-height:100vh;display:flex;flex-direction:column;}
+h1,h2,h3{font-family:'Syne',sans-serif;}
+
+nav{background:rgba(255,255,255,0.97);border-bottom:1px solid var(--b);height:64px;padding:0 5%;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;text-decoration:none;}
+.logo .hub{color:var(--p);}.logo .ro{color:var(--pm);}
+.btn-nav{padding:0.5rem 1.1rem;border-radius:8px;font-size:0.85rem;font-weight:600;text-decoration:none;background:var(--p);color:white;transition:all 0.2s;}
+.btn-nav:hover{background:var(--pd);}
+
+.hero{flex:1;display:flex;align-items:center;justify-content:center;padding:60px 5%;text-align:center;}
+.hero-inner{max-width:100%;max-width:600px;}
+
+.success-icon{
+  width:96px;height:96px;border-radius:50%;
+  background:linear-gradient(135deg,var(--p),var(--pm));
+  display:flex;align-items:center;justify-content:center;
+  font-size:2.8rem;margin:0 auto 2rem;
+  box-shadow:0 16px 40px rgba(83,74,183,0.3);
+  animation:popIn 0.6s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+@keyframes popIn{from{opacity:0;transform:scale(0.5)}to{opacity:1;transform:scale(1)}}
+
+.confetti{font-size:1.5rem;margin-bottom:1rem;animation:float 3s ease-in-out infinite;}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+h1{font-size:clamp(2rem,4vw,3rem);font-weight:800;letter-spacing:-1px;line-height:1.1;margin-bottom:1rem;animation:fadeUp 0.6s 0.2s ease both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+.subtitle{font-size:1.05rem;color:var(--tm);line-height:1.7;margin-bottom:2.5rem;max-width:480px;margin-left:auto;margin-right:auto;animation:fadeUp 0.6s 0.3s ease both;}
+
+.what-next{background:white;border-radius:20px;padding:2rem;border:1px solid var(--b);margin-bottom:2rem;text-align:left;animation:fadeUp 0.6s 0.4s ease both;}
+.what-next h3{font-size:0.9rem;font-weight:700;margin-bottom:1.2rem;color:var(--t);}
+.next-item{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px;}
+.next-item:last-child{margin-bottom:0;}
+.next-num{width:28px;height:28px;border-radius:50%;background:var(--pp);color:var(--p);font-family:'Syne',sans-serif;font-weight:800;font-size:0.8rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.next-title{font-weight:600;font-size:0.88rem;margin-bottom:2px;}
+.next-desc{font-size:0.8rem;color:var(--ts);line-height:1.5;}
+
+.actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:2rem;animation:fadeUp 0.6s 0.5s ease both;}
+.btn-primary{background:var(--p);color:white;padding:0.85rem 2rem;border-radius:12px;font-size:0.95rem;font-weight:700;text-decoration:none;transition:all 0.2s;display:inline-flex;align-items:center;gap:8px;}
+.btn-primary:hover{background:var(--pd);transform:translateY(-2px);box-shadow:0 8px 24px rgba(83,74,183,0.3);}
+.btn-outline{background:transparent;color:var(--p);border:1.5px solid var(--p);padding:0.85rem 2rem;border-radius:12px;font-size:0.95rem;font-weight:600;text-decoration:none;transition:all 0.2s;}
+.btn-outline:hover{background:var(--pp);}
+.btn-discord{background:#5865F2;color:white;padding:0.85rem 2rem;border-radius:12px;font-size:0.95rem;font-weight:700;text-decoration:none;transition:all 0.2s;display:inline-flex;align-items:center;gap:8px;}
+.btn-discord:hover{background:#4752C4;transform:translateY(-2px);}
+
+.share-section{animation:fadeUp 0.6s 0.6s ease both;}
+.share-title{font-size:0.82rem;color:var(--ts);margin-bottom:1rem;}
+.share-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.share-btn{padding:8px 18px;border-radius:20px;font-size:0.82rem;font-weight:600;text-decoration:none;transition:all 0.2s;border:1.5px solid var(--b);color:var(--tm);background:white;display:inline-flex;align-items:center;gap:6px;}
+.share-btn:hover{border-color:var(--pl);color:var(--p);background:var(--pp);}
+
+.founder-note{margin-top:2.5rem;padding:1.5rem;background:white;border-radius:16px;border:1px solid var(--b);text-align:left;animation:fadeUp 0.6s 0.7s ease both;}
+.founder-top{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+.founder-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--p),var(--pm));display:flex;align-items:center;justify-content:center;color:white;font-family:'Syne',sans-serif;font-weight:800;font-size:0.9rem;}
+.founder-name{font-weight:700;font-size:0.9rem;}
+.founder-role{font-size:0.75rem;color:var(--ts);}
+.founder-msg{font-size:0.85rem;color:var(--tm);line-height:1.7;font-style:italic;}
+
+footer{background:var(--pdd);color:rgba(255,255,255,0.5);padding:24px 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+footer .logo .hub{color:var(--pl);}footer .logo .ro{color:rgba(255,255,255,0.4);}
+.footer-note{font-size:0.78rem;}
+
+/* ═══════════════════════════════════════════════
+   HUBRO GLOBAL RESPONSIVE + TYPOGRAPHY SYSTEM
+   Injected across all pages
+═══════════════════════════════════════════════ */
+
+/* 1. RESET & BOX MODEL */
+*, *::before, *::after {
+  box-sizing: border-box;
+  -webkit-text-size-adjust: 100%;
+}
+html {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+body {
+  overflow-x: hidden;
+  min-width: 320px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+img, video, canvas, svg {
+  max-width: 100%;
+  display: block;
+}
+
+/* 2. TYPOGRAPHY SCALE — fluid, clamp-based */
+h1 {
+  font-size: clamp(1.75rem, 5vw, 3.2rem) !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.03em !important;
+  font-weight: 800 !important;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+h2 {
+  font-size: clamp(1.4rem, 3.5vw, 2.4rem) !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.02em !important;
+  font-weight: 800 !important;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+h3 {
+  font-size: clamp(1.05rem, 2vw, 1.25rem) !important;
+  line-height: 1.3 !important;
+  font-weight: 700 !important;
+  word-break: break-word;
+}
+h4 {
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem) !important;
+  line-height: 1.4 !important;
+  font-weight: 700 !important;
+}
+p {
+  line-height: 1.7;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* 3. NAVIGATION — mobile first */
+nav {
+  padding: 0 4% !important;
+  height: 60px !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 200 !important;
+}
+.nav-links {
+  gap: 1.2rem !important;
+}
+.nav-links a {
+  font-size: 0.82rem !important;
+  white-space: nowrap;
+}
+
+/* 4. SECTIONS — fluid padding */
+section {
+  padding: clamp(40px, 8vw, 80px) clamp(16px, 5%, 80px) !important;
+}
+
+/* 5. GRID FIXES — prevent overflow */
+.grid-2, .grid-3,
+[style*="grid-template-columns"] {
+  min-width: 0;
+}
+.grid-2 > *, .grid-3 > * {
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* 6. CARDS — safe overflow */
+.plan-card, .benefit-card, .activity-card, 
+.job-card, .property-card, .candidate-card,
+.testimonial, .step-card, .tenant-card {
+  overflow: hidden;
+  word-break: break-word;
+}
+
+/* 7. FORMS — full width on small screens */
+.form-input, input, select, textarea {
+  max-width: 100% !important;
+  min-width: 0 !important;
+}
+
+/* 8. TRUST BAR */
+.trust-bar {
+  padding: 12px 4% !important;
+  gap: 1rem !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+}
+.trust-item {
+  font-size: 0.78rem !important;
+  white-space: nowrap;
+}
+
+/* 9. HERO sections */
+.hero, .hero-search {
+  padding: clamp(40px, 8vw, 72px) clamp(16px, 5%, 80px) 0 !important;
+}
+.hero h1, .hero-inner h1 {
+  font-size: clamp(1.75rem, 5vw, 3.2rem) !important;
+}
+
+/* 10. SEARCH BOX */
+.search-box {
+  padding: 20px 16px 0 !important;
+  border-radius: 16px 16px 0 0 !important;
+}
+.search-fields, .search-main {
+  gap: 10px !important;
+}
+
+/* 11. LANGUAGE SELECTOR */
+.lang-selector {
+  flex-shrink: 0;
+}
+.lang-btn {
+  font-size: 0.78rem !important;
+  padding: 5px 10px !important;
+}
+.lang-dropdown {
+  right: 0 !important;
+  left: auto !important;
+  min-width: 160px !important;
+}
+
+/* 12. TABLES — horizontal scroll on small screens */
+.table-wrap {
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch;
+}
+table {
+  min-width: 500px;
+}
+
+/* 13. DASHBOARD STATS */
+.dash-stats {
+  gap: 10px !important;
+}
+
+/* 14. FOOTER */
+footer {
+  padding: 28px clamp(16px, 5%, 80px) !important;
+  gap: 1rem !important;
+}
+.footer-links {
+  flex-wrap: wrap !important;
+  gap: 1rem !important;
+}
+
+/* 15. MODAL */
+.modal, .modal-overlay .modal {
+  max-height: 92vh !important;
+  border-radius: 20px 20px 0 0 !important;
+}
+
+/* 16. BUTTONS — no overflow */
+.btn, button, a[class*="btn"] {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ═══════════════════════════
+   BREAKPOINT: TABLET (768px)
+═══════════════════════════ */
+@media (max-width: 768px) {
+
+  /* Nav */
+  .nav-links { display: none !important; }
+  nav { padding: 0 4% !important; }
+  .nav-right { gap: 6px !important; }
+  .btn-nav { padding: 6px 12px !important; font-size: 0.78rem !important; }
+
+  /* Trust bar */
+  .trust-bar { display: none !important; }
+
+  /* Hero buttons */
+  .hero-btns, .cta-btns {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 10px !important;
+  }
+  .hero-btns a, .hero-btns button,
+  .cta-btns a, .cta-btns button {
+    width: 100% !important;
+    max-width: 340px !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+  /* Hero stats */
+  .hero-stats, .member-bar {
+    gap: 1.5rem !important;
+    justify-content: center !important;
+  }
+
+  /* Grids → single column */
+  .steps-grid,
+  .benefits-grid,
+  .activities-grid,
+  .tenants-grid,
+  .candidates-grid,
+  .testimonials-grid,
+  .lang-grid,
+  .discord-channels,
+  .amenities-grid,
+  .amenity-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* 2-col grids → single */
+  .grid-2, .pricing-grid, .rules-grid,
+  .form-grid, .form-row-2, .search-fields {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* 3-col grids → single */
+  .grid-3, .benefits-grid, .pricing-grid[style*="3"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Jobs layout */
+  .main-layout { flex-direction: column !important; }
+  .filters-sidebar { 
+    display: none !important; 
+    width: 100% !important;
+  }
+  .jobs-list { 
+    width: 100% !important; 
+    height: auto !important;
+    position: relative !important;
+    top: auto !important;
+  }
+  .job-detail { 
+    display: none !important;
+    height: auto !important;
+  }
+  .jobs-area { flex-direction: column !important; }
+
+  /* Housing */
+  .listings-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .listings-area { padding: 16px !important; }
+
+  /* Search box */
+  .search-fields, .search-main {
+    grid-template-columns: 1fr !important;
+    flex-direction: column !important;
+  }
+  .search-btn {
+    width: 100% !important;
+    justify-content: center !important;
+    height: auto !important;
+    padding: 0.85rem !important;
+  }
+
+  /* Dashboard */
+  .dash-stats {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .dashboard-preview { padding: 16px !important; }
+
+  /* Modal */
+  .modal { 
+    padding: 20px 16px !important; 
+    max-height: 95vh !important;
+  }
+  .modal-stats {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .modal-gallery { height: 220px !important; }
+
+  /* Forms */
+  .form-grid, .price-range, .salary-range,
+  .add-question-row {
+    flex-direction: column !important;
+    grid-template-columns: 1fr !important;
+  }
+  .form-full { grid-column: 1 !important; }
+
+  /* Cards */
+  .pricing-grid {
+    grid-template-columns: 1fr !important;
+    max-width: 420px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* Landlord/employer hero */
+  .hero-inner { max-width: 100% !important; }
+  .hero-stats { margin-top: 1.5rem !important; }
+
+  /* Compare table */
+  .compare-wrap { margin-top: 1.5rem !important; }
+
+  /* Community language grid */
+  .lang-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Footer */
+  footer {
+    flex-direction: column !important;
+    text-align: center !important;
+  }
+  .footer-links { justify-content: center !important; }
+
+  /* Waitlist form */
+  .hw-row, .hw-row.hubro-wl-input-row {
+    flex-direction: column !important;
+  }
+  .hw-btn, .hubro-wl-btn {
+    width: 100% !important;
+  }
+  .hw-benefits, .hubro-wl-benefits {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+  }
+
+  /* Step arrows */
+  .step-arrow { display: none !important; }
+}
+
+/* ═══════════════════════════
+   BREAKPOINT: MOBILE (480px)
+═══════════════════════════ */
+@media (max-width: 480px) {
+
+  /* Even smaller text */
+  .nav-cta, .btn-solid {
+    display: none !important;
+  }
+
+  /* Hero */
+  .hero, .hero-search {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  /* Stats 1 col */
+  .dash-stats {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .hero-stats {
+    flex-direction: column !important;
+    gap: 1rem !important;
+    align-items: center !important;
+  }
+  .member-bar {
+    flex-direction: column !important;
+    gap: 1rem !important;
+  }
+
+  /* Section padding */
+  section {
+    padding: 36px 14px !important;
+  }
+
+  /* Cards full width */
+  .property-card, .job-card, .plan-card {
+    border-radius: 14px !important;
+  }
+
+  /* Hide decorative elements */
+  .stat-card::after { display: none !important; }
+
+  /* Language grid 2 cols */
+  .lang-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Discord channels 1 col */
+  .discord-channels {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Amenity grid */
+  .amenity-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Pricing */
+  .pricing-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Search box */
+  .search-box {
+    margin: 1rem 0 0 !important;
+    border-radius: 14px 14px 0 0 !important;
+    padding: 16px 12px 0 !important;
+  }
+  .popular-searches {
+    padding-bottom: 14px !important;
+  }
+
+  /* Waitlist */
+  .hw-box, .hubro-wl-inner {
+    padding: 1.2rem !important;
+    border-radius: 14px !important;
+  }
+}
+
+/* ═══════════════════════════
+   BREAKPOINT: LARGE (1400px+)
+═══════════════════════════ */
+@media (min-width: 1400px) {
+  section {
+    padding-left: max(5%, calc((100vw - 1200px) / 2)) !important;
+    padding-right: max(5%, calc((100vw - 1200px) / 2)) !important;
+  }
+  nav {
+    padding-left: max(4%, calc((100vw - 1200px) / 2)) !important;
+    padding-right: max(4%, calc((100vw - 1200px) / 2)) !important;
+  }
+}
+
+/* ═══════════════════════════
+   UTILITY — prevent overflow
+═══════════════════════════ */
+.overflow-safe {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.wrap-safe {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+</style>
+
+<style>
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;border:none;background:transparent;}
+.hamburger span{width:22px;height:2px;background:var(--t,#1A1A2E);border-radius:2px;transition:all 0.3s;}
+.mobile-menu{display:none;position:fixed;inset:0;background:rgba(26,26,46,0.95);z-index:500;flex-direction:column;align-items:center;justify-content:center;gap:2rem;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{font-family:Syne,sans-serif;font-size:1.5rem;font-weight:700;color:white;text-decoration:none;transition:color 0.2s;}
+.mobile-menu a:hover{color:var(--pl,#AFA9EC);}
+.mobile-close{position:absolute;top:20px;right:20px;font-size:1.5rem;color:white;cursor:pointer;background:none;border:none;font-family:DM Sans,sans-serif;}
+@media(max-width:768px){.hamburger{display:flex!important;}}
+</style>
+
+
+
+<style>
+/* HUBRO WHITESPACE FIX v2 */
+html,body{overflow-x:hidden !important;}
+.job-detail,.jobs-list,.listings-sidebar,.filter-panel,.split-right,.split-left{height:auto !important;position:relative !important;top:auto !important;}
+.main-layout,.jobs-area,.listings-area,.dashboard-area{min-height:0 !important;}
+[style*="calc(100vh"]{height:auto !important;}
+.modal-overlay,.hubro-success-overlay{position:fixed !important;}
+.float-cta,#float-cta{position:fixed !important;}
+@media(max-width:768px){
+  .job-detail,.jobs-list{position:relative !important;height:auto !important;max-height:none !important;overflow-y:visible !important;}
+  .main-layout{flex-direction:column !important;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo"><span class="hub">hub</span><span class="ro">ro</span></a>
+  <a href="index.html" class="btn-nav">Back to Hubro</a>
+<button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+  <span></span><span></span><span></span>
+</button>
+<div class="mobile-menu" id="mobile-menu">
+  <button class="mobile-close" onclick="toggleMobileMenu()">✕</button>
+  <a href="index.html" onclick="toggleMobileMenu()">Home</a>
+  <a href="jobs.html" onclick="toggleMobileMenu()">Find Jobs</a>
+  <a href="housing.html" onclick="toggleMobileMenu()">Find Housing</a>
+  <a href="employers.html" onclick="toggleMobileMenu()">For Employers</a>
+  <a href="landlords.html" onclick="toggleMobileMenu()">For Landlords</a>
+  <a href="community.html" onclick="toggleMobileMenu()">Community</a>
+  <a href="pricing.html" onclick="toggleMobileMenu()">Pricing</a>
+</div>
+<script>
+function toggleMobileMenu(){
+  var m=document.getElementById('mobile-menu');
+  m.classList.toggle('open');
+  document.body.style.overflow=m.classList.contains('open')?'hidden':'';
+}
+</script>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+
+    <div class="success-icon">🎉</div>
+
+    <h1>You are on the list!</h1>
+    <p class="subtitle">Thank you for joining the Hubro waitlist. You will be among the first to access the platform when we launch in Ireland — and you get 1 month Premium free.</p>
+
+    <div class="what-next">
+      <h3>What happens next</h3>
+      <div class="next-item">
+        <div class="next-num">1</div>
+        <div>
+          <div class="next-title">You will receive a confirmation email</div>
+          <div class="next-desc">Check your inbox — we have sent you a welcome email with more details about Hubro.</div>
+        </div>
+      </div>
+      <div class="next-item">
+        <div class="next-num">2</div>
+        <div>
+          <div class="next-title">We will keep you updated</div>
+          <div class="next-desc">As we build Hubro you will receive exclusive updates, behind-the-scenes progress and early access news.</div>
+        </div>
+      </div>
+      <div class="next-item">
+        <div class="next-num">3</div>
+        <div>
+          <div class="next-title">Early access when we launch</div>
+          <div class="next-desc">Waitlist members get priority access before the public launch — plus 1 month Premium completely free.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <a href="community.html" class="btn-discord">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.079.11 18.1.127 18.113a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+        Join our Community
+      </a>
+      <a href="index.html" class="btn-outline">Explore Hubro →</a>
+    </div>
+
+    <div class="share-section">
+      <div class="share-title">Know someone who would benefit from Hubro? Share it with them 👇</div>
+      <div class="share-btns">
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://gethubro.app" target="_blank" class="share-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://twitter.com/intent/tweet?text=Just%20joined%20the%20Hubro%20waitlist%20-%20a%20platform%20helping%20international%20residents%20in%20Ireland%20find%20verified%20jobs%20and%20housing.%20Join%20here%3A%20https%3A%2F%2Fgethubro.app" target="_blank" class="share-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.631L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          Share on X
+        </a>
+        <a href="https://wa.me/?text=Just%20joined%20Hubro%20-%20a%20platform%20for%20international%20residents%20in%20Ireland.%20Join%20the%20waitlist%3A%20https%3A%2F%2Fgethubro.app" target="_blank" class="share-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+          WhatsApp
+        </a>
+        <a href="javascript:void(0)" onclick="copyLink()" class="share-btn" id="copy-btn">
+          📋 Copy link
+        </a>
+      </div>
+    </div>
+
+    <div class="founder-note">
+      <div class="founder-top">
+        <div class="founder-avatar">IV</div>
+        <div>
+          <div class="founder-name">Ivan Balaguer Valero</div>
+          <div class="founder-role">Founder, Hubro · Aevo Group Limited · Dublin</div>
+        </div>
+      </div>
+      <p class="founder-msg">"I built Hubro because I went through the same challenges when I moved to Ireland. Finding housing, finding work, navigating a new system in a new country — it's harder than it should be. Hubro exists to change that. Thank you for being part of this journey from the very beginning."</p>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <a href="index.html" class="logo"><span class="hub">hub</span><span class="ro">ro</span></a>
+  <div class="footer-links" style="display:flex;gap:1rem;flex-wrap:wrap;">
+    <a href="privacy.html" style="color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;">Privacy Policy</a>
+    <a href="terms.html" style="color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;">Terms of Service</a>
+    <a href="cookies.html" style="color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;">Cookie Policy</a>
+    <a href="gdpr.html" style="color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;">GDPR</a>
+    <a href="accessibility.html" style="color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;">Accessibility</a>
+    <a href="mailto:info@gethubro.app" style="color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;">Contact</a>
+  </div>
+  <span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">© 2025 Aevo Group Limited · gethubro.app</span>
+</footer>
+
+<script>
+function copyLink() {
+  navigator.clipboard.writeText('https://gethubro.app').then(function() {
+    var btn = document.getElementById('copy-btn');
+    btn.textContent = '✓ Copied!';
+    btn.style.borderColor = '#1A9E6A';
+    btn.style.color = '#1A9E6A';
+    setTimeout(function() {
+      btn.textContent = '📋 Copy link';
+      btn.style.borderColor = '';
+      btn.style.color = '';
+    }, 2000);
+  });
+}
+
+// Confetti animation on load
+window.addEventListener('load', function() {
+  var colors = ['#534AB7','#7F77DD','#AFA9EC','#1A9E6A','#F59E0B'];
+  for (var i = 0; i < 60; i++) {
+    createConfettiPiece(colors[Math.floor(Math.random() * colors.length)]);
+  }
+});
+
+function createConfettiPiece(color) {
+  var el = document.createElement('div');
+  el.style.cssText = [
+    'position:fixed',
+    'top:-10px',
+    'left:' + Math.random() * 100 + 'vw',
+    'width:' + (Math.random() * 8 + 4) + 'px',
+    'height:' + (Math.random() * 8 + 4) + 'px',
+    'background:' + color,
+    'border-radius:' + (Math.random() > 0.5 ? '50%' : '2px'),
+    'opacity:' + (Math.random() * 0.7 + 0.3),
+    'z-index:9999',
+    'pointer-events:none',
+    'animation:confettiFall ' + (Math.random() * 2 + 1.5) + 's ' + Math.random() * 1.5 + 's ease-in forwards'
+  ].join(';');
+  document.body.appendChild(el);
+  setTimeout(function() { el.remove(); }, 4000);
+}
+</script>
+
+<style>
+@keyframes confettiFall {
+  to { transform: translateY(105vh) rotate(720deg); opacity: 0; }
+}
+</style>
+
+</body>
+</html>

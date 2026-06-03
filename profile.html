@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Profile — Hubro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{
+  --p:#534AB7;--pm:#7F77DD;--pl:#AFA9EC;--pp:#EEEDFE;--pd:#3C3489;--pdd:#26215C;
+  --w:#fff;--g:#F9F8FE;--t:#1A1A2E;--tm:#4A4870;--ts:#9896B8;--b:#E4E2F8;
+  --green:#1A9E6A;--greenl:#E3F8EF;--amber:#C97B10;--amberl:#FEF3DC;--red:#C0392B;--redl:#FCECEA;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;color:var(--t);background:var(--g);overflow-x:hidden;}
+h1,h2,h3,h4{font-family:'Syne',sans-serif;}
+
+nav{background:white;border-bottom:1px solid var(--b);height:60px;padding:0 5%;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.logo{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;text-decoration:none;}
+.logo .hub{color:var(--p);}.logo .ro{color:var(--pm);}
+.nav-right{display:flex;gap:10px;align-items:center;}
+.btn-nav{padding:6px 14px;border-radius:8px;font-size:0.82rem;font-weight:600;text-decoration:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;}
+.btn-ghost{background:transparent;color:var(--tm);border:1.5px solid var(--b)!important;}
+.btn-ghost:hover{border-color:var(--pl)!important;color:var(--p);}
+.btn-solid{background:var(--p);color:white;}
+.btn-solid:hover{background:var(--pd);}
+
+/* LOADING */
+.loading-screen{position:fixed;inset:0;background:var(--g);display:flex;align-items:center;justify-content:center;z-index:999;flex-direction:column;gap:1rem;}
+.loading-spinner{width:40px;height:40px;border:3px solid var(--b);border-top-color:var(--p);border-radius:50%;animation:spin 0.8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* LAYOUT */
+.dashboard{max-width:1100px;margin:0 auto;padding:32px 5%;display:grid;grid-template-columns:280px 1fr;gap:24px;}
+@media(max-width:768px){.dashboard{grid-template-columns:1fr;padding:16px;}}
+
+/* SIDEBAR */
+.sidebar{display:flex;flex-direction:column;gap:16px;}
+.profile-card{background:white;border-radius:20px;padding:24px;border:1px solid var(--b);text-align:center;}
+.avatar{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--p),var(--pm));margin:0 auto 1rem;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:white;overflow:hidden;position:relative;cursor:pointer;}
+.avatar img{width:100%;height:100%;object-fit:cover;}
+.avatar-edit{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.5);color:white;font-size:0.65rem;font-weight:700;padding:3px;opacity:0;transition:opacity 0.2s;}
+.avatar:hover .avatar-edit{opacity:1;}
+.profile-name{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;margin-bottom:4px;}
+.profile-email{font-size:0.8rem;color:var(--ts);margin-bottom:12px;}
+.profile-type{display:inline-block;padding:4px 12px;border-radius:20px;font-size:0.72rem;font-weight:700;background:var(--pp);color:var(--p);margin-bottom:16px;}
+.profile-score{background:var(--g);border-radius:12px;padding:12px;margin-bottom:16px;}
+.score-label{font-size:0.72rem;color:var(--ts);margin-bottom:6px;}
+.score-bar{height:6px;background:var(--b);border-radius:3px;overflow:hidden;margin-bottom:4px;}
+.score-fill{height:100%;background:linear-gradient(90deg,var(--p),var(--pm));border-radius:3px;transition:width 1s ease;}
+.score-num{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--p);}
+.btn-logout{width:100%;padding:8px;border-radius:8px;border:1.5px solid var(--b);background:transparent;color:var(--ts);font-size:0.82rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;}
+.btn-logout:hover{border-color:var(--red);color:var(--red);}
+
+.nav-menu{background:white;border-radius:16px;border:1px solid var(--b);overflow:hidden;}
+.nav-item{display:flex;align-items:center;gap:10px;padding:12px 16px;font-size:0.875rem;font-weight:500;color:var(--tm);cursor:pointer;transition:all 0.2s;border-left:3px solid transparent;text-decoration:none;}
+.nav-item:hover{background:var(--g);color:var(--p);}
+.nav-item.active{background:var(--pp);color:var(--p);font-weight:700;border-left-color:var(--p);}
+.nav-item-icon{font-size:1rem;width:20px;text-align:center;}
+
+/* MAIN CONTENT */
+.main{display:flex;flex-direction:column;gap:20px;}
+.tab-content{display:none;}
+.tab-content.active{display:flex;flex-direction:column;gap:16px;}
+
+/* CARDS */
+.card{background:white;border-radius:16px;padding:24px;border:1px solid var(--b);}
+.card-title{font-size:1rem;font-weight:800;margin-bottom:1rem;display:flex;align-items:center;gap:8px;}
+.card-title span{font-size:1.1rem;}
+
+/* FORM */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:600px){.form-grid{grid-template-columns:1fr;}}
+.form-group{display:flex;flex-direction:column;gap:5px;}
+.form-group.full{grid-column:1/-1;}
+.form-label{font-size:0.78rem;font-weight:600;color:var(--tm);}
+.form-input{padding:0.75rem 1rem;border-radius:10px;border:1.5px solid var(--b);font-family:'DM Sans',sans-serif;font-size:0.875rem;color:var(--t);outline:none;transition:border-color 0.2s;background:white;}
+.form-input:focus{border-color:var(--p);box-shadow:0 0 0 3px rgba(83,74,183,0.08);}
+select.form-input{cursor:pointer;}
+.btn-save{padding:0.75rem 2rem;border-radius:10px;border:none;background:var(--p);color:white;font-family:'DM Sans',sans-serif;font-size:0.875rem;font-weight:700;cursor:pointer;transition:all 0.2s;}
+.btn-save:hover{background:var(--pd);}
+.save-success{display:none;font-size:0.82rem;color:var(--green);font-weight:500;margin-left:12px;}
+
+/* CV SECTION */
+.cv-box{display:flex;align-items:center;gap:14px;padding:16px;background:var(--g);border-radius:12px;border:1px solid var(--b);}
+.cv-icon{font-size:2rem;flex-shrink:0;}
+.cv-info{flex:1;}
+.cv-name{font-weight:600;font-size:0.9rem;margin-bottom:3px;}
+.cv-meta{font-size:0.75rem;color:var(--ts);}
+.cv-actions{display:flex;gap:8px;}
+.btn-cv{padding:7px 14px;border-radius:8px;font-size:0.78rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;}
+.btn-cv-upload{background:var(--p);color:white;border:none;}
+.btn-cv-upload:hover{background:var(--pd);}
+.btn-cv-view{background:transparent;color:var(--p);border:1.5px solid var(--p);}
+.btn-cv-view:hover{background:var(--pp);}
+
+/* APPLICATIONS */
+.application-item{display:flex;align-items:center;gap:14px;padding:14px;border:1px solid var(--b);border-radius:12px;transition:all 0.2s;}
+.application-item:hover{border-color:var(--pl);background:var(--g);}
+.app-logo{width:40px;height:40px;border-radius:10px;background:var(--pp);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
+.app-info{flex:1;}
+.app-title{font-weight:700;font-size:0.9rem;margin-bottom:2px;}
+.app-company{font-size:0.78rem;color:var(--ts);}
+.app-status{padding:4px 10px;border-radius:20px;font-size:0.7rem;font-weight:700;white-space:nowrap;}
+.status-submitted{background:var(--amberl);color:var(--amber);}
+.status-under_review{background:var(--pp);color:var(--p);}
+.status-shortlisted{background:var(--greenl);color:var(--green);}
+.status-rejected{background:var(--redl);color:var(--red);}
+.status-hired{background:var(--greenl);color:var(--green);}
+
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+@media(max-width:600px){.stats-grid{grid-template-columns:1fr 1fr;}}
+.stat-box{background:var(--g);border-radius:12px;padding:16px;text-align:center;}
+.stat-num{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:var(--p);line-height:1;}
+.stat-label{font-size:0.72rem;color:var(--ts);margin-top:4px;}
+
+/* EMPTY STATE */
+.empty-state{text-align:center;padding:2rem;color:var(--ts);}
+.empty-icon{font-size:2.5rem;margin-bottom:0.8rem;}
+.empty-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--tm);margin-bottom:0.5rem;}
+.empty-sub{font-size:0.82rem;line-height:1.6;}
+.empty-btn{display:inline-block;margin-top:1rem;padding:8px 20px;border-radius:8px;background:var(--p);color:white;font-size:0.82rem;font-weight:700;text-decoration:none;}
+
+/* SKILLS */
+.skills-wrap{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;}
+.skill-tag{padding:4px 12px;border-radius:20px;background:var(--pp);color:var(--p);font-size:0.78rem;font-weight:600;display:flex;align-items:center;gap:6px;}
+.skill-tag button{background:none;border:none;color:var(--p);cursor:pointer;font-size:0.7rem;padding:0;}
+.skill-input-row{display:flex;gap:8px;margin-top:8px;}
+.skill-input{flex:1;padding:8px 12px;border-radius:8px;border:1.5px solid var(--b);font-family:'DM Sans',sans-serif;font-size:0.82rem;outline:none;}
+.skill-input:focus{border-color:var(--p);}
+.btn-add-skill{padding:8px 14px;border-radius:8px;background:var(--p);color:white;border:none;font-size:0.78rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;}
+</style>
+
+
+
+
+<style>
+/* HUBRO WHITESPACE FIX v2 */
+html,body{overflow-x:hidden !important;}
+.job-detail,.jobs-list,.listings-sidebar,.filter-panel,.split-right,.split-left{height:auto !important;position:relative !important;top:auto !important;}
+.main-layout,.jobs-area,.listings-area,.dashboard-area{min-height:0 !important;}
+[style*="calc(100vh"]{height:auto !important;}
+.modal-overlay,.hubro-success-overlay{position:fixed !important;}
+.float-cta,#float-cta{position:fixed !important;}
+@media(max-width:768px){
+  .job-detail,.jobs-list{position:relative !important;height:auto !important;max-height:none !important;overflow-y:visible !important;}
+  .main-layout{flex-direction:column !important;}
+}
+</style>
+</head>
+<body>
+
+<!-- Loading screen -->
+<div class="loading-screen" id="loading-screen">
+  <div class="loading-spinner"></div>
+  <p style="font-size:0.85rem;color:var(--ts);">Loading your profile...</p>
+</div>
+
+<nav>
+  <a href="index.html" class="logo"><span class="hub">hub</span><span class="ro">ro</span></a>
+  <div class="nav-right">
+    <a href="jobs.html" class="btn-nav btn-ghost">Find Jobs</a>
+    <a href="housing.html" class="btn-nav btn-ghost">Find Housing</a>
+  </div>
+</nav>
+
+<div class="dashboard" id="dashboard" style="display:none;">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="profile-card">
+      <div class="avatar" id="avatar-btn" onclick="document.getElementById('avatar-input').click()">
+        <span id="avatar-initials">?</span>
+        <div class="avatar-edit">Edit</div>
+      </div>
+      <input type="file" id="avatar-input" accept="image/*" style="display:none;" onchange="uploadAvatar(this)">
+      <div class="profile-name" id="profile-name">Loading...</div>
+      <div class="profile-email" id="profile-email"></div>
+      <div class="profile-type" id="profile-type">Candidate</div>
+      <div class="profile-score">
+        <div class="score-label">Profile completion</div>
+        <div class="score-bar"><div class="score-fill" id="score-fill" style="width:0%"></div></div>
+        <div class="score-num" id="score-num">0%</div>
+      </div>
+      <button class="btn-logout" onclick="signOut()">Sign out</button>
+    </div>
+
+    <nav class="nav-menu">
+      <a class="nav-item active" onclick="showTab('overview')" href="#">
+        <span class="nav-item-icon">📊</span> Overview
+      </a>
+      <a class="nav-item" onclick="showTab('profile')" href="#">
+        <span class="nav-item-icon">👤</span> My Profile
+      </a>
+      <a class="nav-item" onclick="showTab('cv')" href="#">
+        <span class="nav-item-icon">📄</span> My CV
+      </a>
+      <a class="nav-item" onclick="showTab('applications')" href="#">
+        <span class="nav-item-icon">💼</span> Applications
+      </a>
+      <a class="nav-item" onclick="showTab('housing')" href="#">
+        <span class="nav-item-icon">🏠</span> Housing Enquiries
+      </a>
+      <a class="nav-item" onclick="showTab('settings')" href="#">
+        <span class="nav-item-icon">⚙️</span> Settings
+      </a>
+    </nav>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- OVERVIEW TAB -->
+    <div class="tab-content active" id="tab-overview">
+      <div class="card">
+        <div class="card-title"><span>📊</span> Your Activity</div>
+        <div class="stats-grid">
+          <div class="stat-box">
+            <div class="stat-num" id="stat-applications">0</div>
+            <div class="stat-label">Applications sent</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num" id="stat-enquiries">0</div>
+            <div class="stat-label">Housing enquiries</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num" id="stat-score">–</div>
+            <div class="stat-label">CV score</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span>🚀</span> Quick actions</div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <a href="jobs.html" style="padding:10px 18px;border-radius:10px;background:var(--p);color:white;font-size:0.85rem;font-weight:700;text-decoration:none;">Browse Jobs →</a>
+          <a href="housing.html" style="padding:10px 18px;border-radius:10px;background:white;color:var(--p);border:1.5px solid var(--p);font-size:0.85rem;font-weight:700;text-decoration:none;">Browse Housing →</a>
+          <a href="community.html" style="padding:10px 18px;border-radius:10px;background:white;color:var(--tm);border:1.5px solid var(--b);font-size:0.85rem;font-weight:700;text-decoration:none;">Community →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span>💼</span> Recent Applications</div>
+        <div id="recent-applications">
+          <div class="empty-state">
+            <div class="empty-icon">💼</div>
+            <div class="empty-title">No applications yet</div>
+            <div class="empty-sub">Start applying to verified jobs in Ireland</div>
+            <a href="jobs.html" class="empty-btn">Browse Jobs →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROFILE TAB -->
+    <div class="tab-content" id="tab-profile">
+      <div class="card">
+        <div class="card-title"><span>👤</span> Personal Information</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Full name</label>
+            <input type="text" class="form-input" id="edit-name" placeholder="Your full name">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone number</label>
+            <input type="tel" class="form-input" id="edit-phone" placeholder="+353 ...">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Country of origin</label>
+            <input type="text" class="form-input" id="edit-country" placeholder="e.g. Spain">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Current location</label>
+            <input type="text" class="form-input" id="edit-location" placeholder="e.g. Dublin">
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span>💼</span> Professional Profile</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Job title / Role</label>
+            <input type="text" class="form-input" id="edit-jobtitle" placeholder="e.g. Software Engineer">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Sector</label>
+            <select class="form-input" id="edit-sector">
+              <option value="">Select sector...</option>
+              <option>Technology / Software</option>
+              <option>Healthcare / Medical</option>
+              <option>Finance / Banking</option>
+              <option>Hospitality / Tourism</option>
+              <option>Construction / Trades</option>
+              <option>Education</option>
+              <option>Retail / Sales</option>
+              <option>Transport / Logistics</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Years of experience</label>
+            <select class="form-input" id="edit-experience">
+              <option value="">Select...</option>
+              <option>Less than 1 year</option>
+              <option>1–2 years</option>
+              <option>3–5 years</option>
+              <option>5–10 years</option>
+              <option>10+ years</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Visa status</label>
+            <select class="form-input" id="edit-visa">
+              <option value="">Select...</option>
+              <option value="eu_citizen">EU Citizen</option>
+              <option value="work_permit">Work Permit</option>
+              <option value="student_visa">Student Visa</option>
+              <option value="applying">Currently Applying</option>
+              <option value="needs_sponsorship">Needs Sponsorship</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label class="form-label">Brief introduction</label>
+            <textarea class="form-input" id="edit-intro" rows="3" placeholder="Tell employers a bit about yourself..."></textarea>
+          </div>
+        </div>
+
+        <div style="margin-top:16px;">
+          <div class="form-label">Skills</div>
+          <div class="skills-wrap" id="skills-wrap"></div>
+          <div class="skill-input-row">
+            <input type="text" class="skill-input" id="skill-input" placeholder="Add a skill..." onkeypress="if(event.key==='Enter')addSkill()">
+            <button class="btn-add-skill" onclick="addSkill()">+ Add</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;">
+        <button class="btn-save" onclick="saveProfile()">Save changes</button>
+        <span class="save-success" id="profile-saved">✓ Saved!</span>
+      </div>
+    </div>
+
+    <!-- CV TAB -->
+    <div class="tab-content" id="tab-cv">
+      <div class="card">
+        <div class="card-title"><span>📄</span> My CV</div>
+        <input type="file" id="cv-upload-input" accept=".pdf" style="display:none;" onchange="uploadCV(this)">
+        
+        <div id="cv-current" style="display:none;">
+          <div class="cv-box" style="margin-bottom:16px;">
+            <div class="cv-icon">📄</div>
+            <div class="cv-info">
+              <div class="cv-name" id="cv-filename">My CV.pdf</div>
+              <div class="cv-meta" id="cv-meta">Uploaded · Ready to send</div>
+            </div>
+            <div class="cv-actions">
+              <a id="cv-view-btn" href="#" target="_blank" class="btn-cv btn-cv-view">View</a>
+              <button class="btn-cv btn-cv-upload" onclick="document.getElementById('cv-upload-input').click()">Replace</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="cv-empty">
+          <div class="empty-state" style="border:2px dashed var(--b);border-radius:16px;padding:2rem;">
+            <div class="empty-icon">📄</div>
+            <div class="empty-title">No CV uploaded yet</div>
+            <div class="empty-sub">Upload your CV to start applying to jobs. PDF format only, max 10MB.</div>
+            <button onclick="document.getElementById('cv-upload-input').click()" class="empty-btn" style="border:none;cursor:pointer;font-family:'DM Sans',sans-serif;">Upload CV →</button>
+          </div>
+        </div>
+
+        <div id="cv-uploading" style="display:none;margin-top:1rem;">
+          <div style="height:6px;background:var(--b);border-radius:3px;overflow:hidden;margin-bottom:8px;">
+            <div id="cv-upload-bar" style="height:100%;background:var(--p);width:0%;transition:width 0.3s;border-radius:3px;"></div>
+          </div>
+          <div style="font-size:0.78rem;color:var(--ts);" id="cv-upload-status">Uploading...</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span>💡</span> CV Tips for Ireland</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:0.85rem;color:var(--tm);">
+            <span style="color:var(--green);font-weight:700;flex-shrink:0;">✓</span>
+            Keep your CV to 1–2 pages maximum
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:0.85rem;color:var(--tm);">
+            <span style="color:var(--green);font-weight:700;flex-shrink:0;">✓</span>
+            Include your right to work status clearly
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:0.85rem;color:var(--tm);">
+            <span style="color:var(--green);font-weight:700;flex-shrink:0;">✓</span>
+            Use a professional email address
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:0.85rem;color:var(--tm);">
+            <span style="color:var(--green);font-weight:700;flex-shrink:0;">✓</span>
+            Irish employers prefer reverse chronological order
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:0.85rem;color:var(--tm);">
+            <span style="color:var(--red);font-weight:700;flex-shrink:0;">✗</span>
+            Do not include a photo on your CV in Ireland
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- APPLICATIONS TAB -->
+    <div class="tab-content" id="tab-applications">
+      <div class="card">
+        <div class="card-title"><span>💼</span> My Applications</div>
+        <div id="applications-list">
+          <div class="empty-state">
+            <div class="empty-icon">💼</div>
+            <div class="empty-title">No applications yet</div>
+            <div class="empty-sub">Apply to verified jobs in Ireland — your applications will appear here.</div>
+            <a href="jobs.html" class="empty-btn">Browse Jobs →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HOUSING TAB -->
+    <div class="tab-content" id="tab-housing">
+      <div class="card">
+        <div class="card-title"><span>🏠</span> My Housing Enquiries</div>
+        <div id="enquiries-list">
+          <div class="empty-state">
+            <div class="empty-icon">🏠</div>
+            <div class="empty-title">No enquiries yet</div>
+            <div class="empty-sub">Browse verified housing listings and send enquiries to landlords.</div>
+            <a href="housing.html" class="empty-btn">Browse Housing →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SETTINGS TAB -->
+    <div class="tab-content" id="tab-settings">
+      <div class="card">
+        <div class="card-title"><span>⚙️</span> Account Settings</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Email address</label>
+            <input type="email" class="form-input" id="settings-email" disabled style="opacity:0.6;">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Language preference</label>
+            <select class="form-input" id="settings-language">
+              <option value="en">🇬🇧 English</option>
+              <option value="es">🇪🇸 Español</option>
+              <option value="pt">🇧🇷 Português</option>
+              <option value="pl">🇵🇱 Polski</option>
+              <option value="de">🇩🇪 Deutsch</option>
+              <option value="fr">🇫🇷 Français</option>
+              <option value="it">🇮🇹 Italiano</option>
+              <option value="zh">🇨🇳 中文</option>
+              <option value="ja">🇯🇵 日本語</option>
+            </select>
+          </div>
+        </div>
+        <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--b);">
+          <h4 style="font-size:0.9rem;margin-bottom:12px;color:var(--red);">Danger Zone</h4>
+          <button onclick="if(confirm('Are you sure you want to delete your account? This cannot be undone.'))deleteAccount()" style="padding:8px 16px;border-radius:8px;border:1.5px solid var(--red);background:transparent;color:var(--red);font-size:0.82rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;">Delete my account</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span>🔔</span> Notifications</div>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-size:0.875rem;font-weight:600;">New job matches</div>
+              <div style="font-size:0.75rem;color:var(--ts);">Get notified when new jobs match your profile</div>
+            </div>
+            <input type="checkbox" checked style="accent-color:var(--p);width:16px;height:16px;">
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-size:0.875rem;font-weight:600;">Application updates</div>
+              <div style="font-size:0.75rem;color:var(--ts);">Get notified when employers respond</div>
+            </div>
+            <input type="checkbox" checked style="accent-color:var(--p);width:16px;height:16px;">
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-size:0.875rem;font-weight:600;">Community updates</div>
+              <div style="font-size:0.75rem;color:var(--ts);">Events, Q&A sessions and community news</div>
+            </div>
+            <input type="checkbox" style="accent-color:var(--p);width:16px;height:16px;">
+          </div>
+        </div>
+        <div style="margin-top:16px;">
+          <button class="btn-save" onclick="saveSettings()">Save settings</button>
+          <span class="save-success" id="settings-saved">✓ Saved!</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const SUPABASE_URL = 'https://ulinfbgqotjszdvuciaf.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_wSSksZq_K3RhOZLJNQAo8w_vGMPJgaQ';
+const { createClient } = supabase;
+const sb = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+let currentUser = null;
+let currentProfile = null;
+let userSkills = [];
+
+// ── INIT ──
+async function init() {
+  const { data: { session } } = await sb.auth.getSession();
+  if (!session) {
+    window.location.href = 'auth.html';
+    return;
+  }
+  currentUser = session.user;
+  await loadProfile();
+  await loadStats();
+  document.getElementById('loading-screen').style.display = 'none';
+  document.getElementById('dashboard').style.display = 'grid';
+}
+
+async function loadProfile() {
+  const { data: profile } = await sb.from('profiles').select('*').eq('id', currentUser.id).single();
+  const { data: candidate } = await sb.from('candidates').select('*').eq('profile_id', currentUser.id).single();
+
+  currentProfile = profile;
+
+  // Update sidebar
+  const name = profile?.full_name || currentUser.email.split('@')[0];
+  document.getElementById('profile-name').textContent = name;
+  document.getElementById('profile-email').textContent = currentUser.email;
+  document.getElementById('profile-type').textContent = profile?.user_type || 'Candidate';
+  document.getElementById('settings-email').value = currentUser.email;
+
+  // Avatar initials
+  const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0,2);
+  if (profile?.avatar_url) {
+    document.getElementById('avatar-initials').innerHTML = `<img src="${profile.avatar_url}" style="width:100%;height:100%;object-fit:cover;">`;
+  } else {
+    document.getElementById('avatar-initials').textContent = initials;
+  }
+
+  // Profile completion
+  let completion = 20;
+  if (profile?.full_name) completion += 15;
+  if (profile?.phone) completion += 10;
+  if (candidate?.job_title) completion += 15;
+  if (candidate?.cv_url) completion += 25;
+  if (candidate?.skills?.length > 0) completion += 15;
+
+  document.getElementById('score-fill').style.width = completion + '%';
+  document.getElementById('score-num').textContent = completion + '%';
+
+  // Fill profile form
+  if (profile) {
+    document.getElementById('edit-name').value = profile.full_name || '';
+    document.getElementById('edit-phone').value = profile.phone || '';
+    document.getElementById('edit-country').value = profile.country_of_origin || '';
+    document.getElementById('edit-location').value = profile.current_location || '';
+  }
+
+  // Fill candidate form
+  if (candidate) {
+    document.getElementById('edit-jobtitle').value = candidate.job_title || '';
+    document.getElementById('edit-sector').value = candidate.sector || '';
+    document.getElementById('edit-experience').value = candidate.years_experience || '';
+    document.getElementById('edit-visa').value = candidate.visa_status || '';
+    document.getElementById('edit-intro').value = candidate.brief_intro || '';
+
+    // CV
+    if (candidate.cv_url) {
+      document.getElementById('cv-empty').style.display = 'none';
+      document.getElementById('cv-current').style.display = 'block';
+      const urlParts = candidate.cv_url.split('/');
+      document.getElementById('cv-filename').textContent = decodeURIComponent(urlParts[urlParts.length-1]).replace(/^\d+_/, '');
+      document.getElementById('cv-meta').textContent = 'Uploaded · Ready to send';
+      document.getElementById('cv-view-btn').href = candidate.cv_url;
+      document.getElementById('stat-score').textContent = (candidate.cv_score || 0) + '/100';
+    }
+
+    // Skills
+    userSkills = candidate.skills || [];
+    renderSkills();
+  }
+}
+
+async function loadStats() {
+  const { count: appCount } = await sb.from('applications').select('*', {count:'exact',head:true}).eq('candidate_id', currentUser.id);
+  const { count: enqCount } = await sb.from('enquiries').select('*', {count:'exact',head:true}).eq('candidate_id', currentUser.id);
+
+  document.getElementById('stat-applications').textContent = appCount || 0;
+  document.getElementById('stat-enquiries').textContent = enqCount || 0;
+
+  // Load recent applications
+  const { data: apps } = await sb.from('applications').select('*, jobs(title, employers(company_name))').eq('candidate_id', currentUser.id).order('created_at', {ascending:false}).limit(5);
+
+  if (apps && apps.length > 0) {
+    const html = apps.map(app => `
+      <div class="application-item">
+        <div class="app-logo">💼</div>
+        <div class="app-info">
+          <div class="app-title">${app.jobs?.title || 'Job Application'}</div>
+          <div class="app-company">${app.jobs?.employers?.company_name || 'Company'}</div>
+        </div>
+        <span class="app-status status-${app.status}">${app.status.replace('_',' ')}</span>
+      </div>
+    `).join('');
+    document.getElementById('recent-applications').innerHTML = html;
+    document.getElementById('applications-list').innerHTML = html;
+  }
+}
+
+// ── TABS ──
+function showTab(tab) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+// ── SKILLS ──
+function renderSkills() {
+  const wrap = document.getElementById('skills-wrap');
+  wrap.innerHTML = userSkills.map((skill, i) => `
+    <div class="skill-tag">${skill}<button onclick="removeSkill(${i})">✕</button></div>
+  `).join('');
+}
+
+function addSkill() {
+  const input = document.getElementById('skill-input');
+  const skill = input.value.trim();
+  if (skill && !userSkills.includes(skill)) {
+    userSkills.push(skill);
+    renderSkills();
+    input.value = '';
+  }
+}
+
+function removeSkill(index) {
+  userSkills.splice(index, 1);
+  renderSkills();
+}
+
+// ── SAVE PROFILE ──
+async function saveProfile() {
+  try {
+    await sb.from('profiles').upsert({
+      id: currentUser.id,
+      email: currentUser.email,
+      full_name: document.getElementById('edit-name').value,
+      phone: document.getElementById('edit-phone').value,
+      country_of_origin: document.getElementById('edit-country').value,
+      current_location: document.getElementById('edit-location').value,
+    });
+
+    await sb.from('candidates').upsert({
+      profile_id: currentUser.id,
+      job_title: document.getElementById('edit-jobtitle').value,
+      sector: document.getElementById('edit-sector').value,
+      years_experience: document.getElementById('edit-experience').value,
+      visa_status: document.getElementById('edit-visa').value,
+      brief_intro: document.getElementById('edit-intro').value,
+      skills: userSkills,
+    }, { onConflict: 'profile_id' });
+
+    const saved = document.getElementById('profile-saved');
+    saved.style.display = 'inline';
+    setTimeout(() => saved.style.display = 'none', 3000);
+    await loadProfile();
+  } catch (err) {
+    alert('Error saving: ' + err.message);
+  }
+}
+
+// ── UPLOAD CV ──
+async function uploadCV(input) {
+  const file = input.files[0];
+  if (!file || file.type !== 'application/pdf') {
+    alert('Please upload a PDF file.');
+    return;
+  }
+  if (file.size > 10 * 1024 * 1024) {
+    alert('File too large. Maximum 10MB.');
+    return;
+  }
+
+  document.getElementById('cv-uploading').style.display = 'block';
+  const bar = document.getElementById('cv-upload-bar');
+  const status = document.getElementById('cv-upload-status');
+
+  let p = 0;
+  const interval = setInterval(() => {
+    p = Math.min(p + 10, 90);
+    bar.style.width = p + '%';
+  }, 200);
+
+  try {
+    const fileName = currentUser.id + '/' + Date.now() + '_' + file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+    const { error } = await sb.storage.from('cvs').upload(fileName, file, { upsert: true });
+    if (error) throw error;
+
+    const { data: urlData } = sb.storage.from('cvs').getPublicUrl(fileName);
+
+    await sb.from('candidates').upsert({
+      profile_id: currentUser.id,
+      cv_url: urlData.publicUrl
+    }, { onConflict: 'profile_id' });
+
+    clearInterval(interval);
+    bar.style.width = '100%';
+    status.textContent = 'CV uploaded successfully!';
+
+    setTimeout(async () => {
+      document.getElementById('cv-uploading').style.display = 'none';
+      await loadProfile();
+    }, 1000);
+
+  } catch (err) {
+    clearInterval(interval);
+    document.getElementById('cv-uploading').style.display = 'none';
+    alert('Upload failed: ' + err.message);
+  }
+}
+
+// ── UPLOAD AVATAR ──
+async function uploadAvatar(input) {
+  const file = input.files[0];
+  if (!file) return;
+
+  try {
+    const fileName = currentUser.id + '/avatar.' + file.name.split('.').pop();
+    const { error } = await sb.storage.from('logos').upload(fileName, file, { upsert: true });
+    if (error) throw error;
+
+    const { data: urlData } = sb.storage.from('logos').getPublicUrl(fileName);
+
+    await sb.from('profiles').upsert({
+      id: currentUser.id,
+      email: currentUser.email,
+      avatar_url: urlData.publicUrl
+    });
+
+    document.getElementById('avatar-initials').innerHTML = `<img src="${urlData.publicUrl}" style="width:100%;height:100%;object-fit:cover;">`;
+  } catch (err) {
+    alert('Avatar upload failed: ' + err.message);
+  }
+}
+
+// ── SAVE SETTINGS ──
+async function saveSettings() {
+  const lang = document.getElementById('settings-language').value;
+  localStorage.setItem('hubro_lang', lang);
+  const saved = document.getElementById('settings-saved');
+  saved.style.display = 'inline';
+  setTimeout(() => saved.style.display = 'none', 3000);
+}
+
+// ── SIGN OUT ──
+async function signOut() {
+  await sb.auth.signOut();
+  window.location.href = 'index.html';
+}
+
+// ── DELETE ACCOUNT ──
+async function deleteAccount() {
+  await sb.from('profiles').delete().eq('id', currentUser.id);
+  await sb.auth.signOut();
+  window.location.href = 'index.html';
+}
+
+// Start
+init();
+</script>
+</body>
+</html>

@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hubro — Find Jobs in Ireland | gethubro.app</title>
+<meta name="description" content="Find verified jobs in Ireland. Browse opportunities from verified employers with your real match score. No fake listings, no wasted applications.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --p:#534AB7;--pm:#7F77DD;--pl:#AFA9EC;--pp:#EEEDFE;--pd:#3C3489;--pdd:#26215C;
+  --w:#fff;--g:#F9F8FE;--gl:#F1EFF8;--t:#1A1A2E;--tm:#4A4870;--ts:#9896B8;--b:#E4E2F8;
+  --green:#1A9E6A;--greenl:#E3F8EF;--amber:#C97B10;--amberl:#FEF3DC;
+  --red:#C0392B;--redl:#FCECEA;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;color:var(--t);background:var(--w);overflow-x:hidden;}
+h1,h2,h3,h4{font-family:'Syne',sans-serif;}
+
+nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--b);height:64px;padding:0 5%;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;text-decoration:none;}
+.logo .hub{color:var(--p);}.logo .ro{color:var(--pm);}
+.nav-links{display:flex;gap:1.5rem;list-style:none;}
+.nav-links a{text-decoration:none;color:var(--tm);font-size:0.875rem;font-weight:500;transition:color 0.2s;padding:4px 0;border-bottom:2px solid transparent;}
+.nav-links a:hover{color:var(--p);}
+.nav-links a.active{color:var(--p);border-bottom-color:var(--p);}
+.nav-right{display:flex;gap:10px;align-items:center;}
+.btn-nav{padding:0.5rem 1.1rem;border-radius:8px;font-size:0.85rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:none;transition:all 0.2s;border:none;}
+.btn-ghost{background:transparent;color:var(--tm);border:1.5px solid var(--b)!important;}
+.btn-ghost:hover{border-color:var(--pl)!important;color:var(--p);}
+.btn-solid{background:var(--p);color:white;}
+.btn-solid:hover{background:var(--pd);}
+
+.hero{background:linear-gradient(135deg,var(--pdd) 0%,var(--pd) 50%,var(--p) 100%);padding:52px 5% 0;position:relative;overflow:hidden;}
+.hero-inner{position:relative;z-index:1;text-align:center;margin-bottom:2.5rem;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.9);padding:6px 14px;border-radius:20px;font-size:0.78rem;font-weight:600;margin-bottom:1.2rem;border:1px solid rgba(255,255,255,0.15);}
+.hero h1{font-size:clamp(1.8rem,4vw,3rem);font-weight:800;color:white;letter-spacing:-1px;line-height:1.1;margin-bottom:0.8rem;}
+.hero p{font-size:1rem;color:rgba(255,255,255,0.75);max-width:500px;margin:0 auto;}
+
+.search-box{position:relative;z-index:1;background:white;border-radius:20px 20px 0 0;padding:24px 24px 0;max-width:920px;margin:2rem auto 0;box-shadow:0 -8px 32px rgba(0,0,0,0.15);}
+.search-main{display:flex;gap:12px;margin-bottom:16px;align-items:flex-end;}
+.search-field{flex:1;display:flex;flex-direction:column;gap:5px;}
+.search-label{font-size:0.7rem;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:var(--ts);}
+.search-input{padding:0.8rem 1rem;border-radius:10px;border:1.5px solid var(--b);font-family:'DM Sans',sans-serif;font-size:0.9rem;color:var(--t);outline:none;transition:border-color 0.2s;width:100%;}
+.search-input:focus{border-color:var(--p);}
+.search-btn{background:var(--p);color:white;border:none;padding:0.8rem 2rem;border-radius:10px;font-size:0.9rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;transition:all 0.2s;height:48px;display:flex;align-items:center;gap:8px;}
+.search-btn:hover{background:var(--pd);}
+.popular-searches{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding-bottom:18px;}
+.popular-label{font-size:0.72rem;color:var(--ts);}
+.popular-chip{padding:4px 12px;border-radius:20px;background:var(--gl);border:1px solid var(--b);font-size:0.75rem;color:var(--tm);cursor:pointer;transition:all 0.2s;font-weight:500;}
+.popular-chip:hover{background:var(--pp);border-color:var(--pl);color:var(--p);}
+
+.trust-bar{background:var(--pdd);padding:13px 5%;display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;}
+.trust-item{display:flex;align-items:center;gap:8px;font-size:0.82rem;color:rgba(255,255,255,0.7);}
+.trust-dot{width:6px;height:6px;border-radius:50%;background:var(--pl);}
+
+.main-layout{display:flex;min-height:auto;}
+
+.filters-sidebar{width:260px;flex-shrink:0;background:var(--w);border-right:1px solid var(--b);padding:22px 18px;position:sticky;top:64px;height:auto;overflow-y:auto;}
+.filter-section{margin-bottom:22px;}
+.filter-title{font-family:'Syne',sans-serif;font-size:0.85rem;font-weight:700;margin-bottom:10px;color:var(--t);}
+.filter-divider{border:none;border-top:1px solid var(--gl);margin:18px 0;}
+.checkbox-list{display:flex;flex-direction:column;gap:7px;}
+.checkbox-item{display:flex;align-items:center;gap:8px;cursor:pointer;}
+.checkbox-item input{accent-color:var(--p);width:15px;height:15px;}
+.checkbox-item label{font-size:0.84rem;color:var(--tm);cursor:pointer;}
+.checkbox-item .count{margin-left:auto;font-size:0.7rem;color:var(--ts);background:var(--gl);padding:1px 6px;border-radius:4px;}
+.salary-range{display:flex;gap:8px;}
+.salary-input{flex:1;padding:0.6rem 0.8rem;border-radius:8px;border:1.5px solid var(--b);font-family:'DM Sans',sans-serif;font-size:0.82rem;color:var(--t);outline:none;}
+.filter-btn-row{display:flex;gap:8px;margin-top:8px;}
+.btn-filter-reset{flex:1;padding:0.6rem;border-radius:8px;border:1.5px solid var(--b);background:transparent;font-size:0.82rem;font-weight:600;cursor:pointer;color:var(--tm);font-family:'DM Sans',sans-serif;}
+.btn-filter-apply{flex:2;padding:0.6rem;border-radius:8px;border:none;background:var(--p);font-size:0.82rem;font-weight:700;cursor:pointer;color:white;font-family:'DM Sans',sans-serif;}
+
+.jobs-area{flex:1;display:flex;}
+.jobs-list{width:420px;flex-shrink:0;border-right:1px solid var(--b);overflow-y:auto;height:auto;position:sticky;top:64px;}
+.jobs-list-header{padding:16px 20px;border-bottom:1px solid var(--b);display:flex;justify-content:space-between;align-items:center;background:white;position:sticky;top:0;z-index:10;}
+.results-count{font-size:0.85rem;color:var(--tm);}
+.results-count strong{font-family:'Syne',sans-serif;font-weight:700;color:var(--t);}
+.sort-select{padding:5px 10px;border-radius:8px;border:1.5px solid var(--b);font-family:'DM Sans',sans-serif;font-size:0.78rem;color:var(--t);outline:none;background:white;}
+
+.job-list-item{padding:16px 20px;border-bottom:1px solid var(--gl);cursor:pointer;transition:all 0.2s;position:relative;}
+.job-list-item:hover{background:var(--g);}
+.job-list-item.active{background:var(--pp);border-left:3px solid var(--p);}
+.jli-top{display:flex;gap:12px;align-items:flex-start;margin-bottom:8px;}
+.company-logo{width:44px;height:44px;border-radius:12px;background:var(--pp);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;border:1px solid var(--b);}
+.jli-title{font-family:'Syne',sans-serif;font-weight:700;font-size:0.92rem;margin-bottom:2px;color:var(--t);}
+.jli-company{font-size:0.78rem;color:var(--ts);}
+.jli-match{margin-left:auto;font-family:'Syne',sans-serif;font-size:0.78rem;font-weight:800;padding:3px 8px;border-radius:6px;white-space:nowrap;flex-shrink:0;}
+.match-excellent{background:var(--pp);color:var(--p);}
+.match-good{background:var(--greenl);color:var(--green);}
+.match-ok{background:var(--amberl);color:var(--amber);}
+.match-low{background:var(--gl);color:var(--ts);}
+.jli-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px;}
+.jli-tag{font-size:0.68rem;padding:2px 7px;border-radius:5px;background:var(--gl);color:var(--tm);font-weight:500;}
+.jli-footer{display:flex;justify-content:space-between;align-items:center;}
+.jli-salary{font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;color:var(--p);}
+.jli-date{font-size:0.7rem;color:var(--ts);}
+.jli-saved{position:absolute;top:14px;right:16px;background:none;border:none;cursor:pointer;font-size:0.9rem;opacity:0.4;transition:opacity 0.2s;}
+.jli-saved:hover{opacity:1;}
+
+.job-detail{flex:1;overflow-y:auto;height:auto;background:var(--g);}
+.job-detail-inner{max-width:680px;padding:28px;}
+.jd-header{background:white;border-radius:20px;padding:24px;margin-bottom:16px;border:1px solid var(--b);}
+.jd-top{display:flex;gap:16px;align-items:flex-start;margin-bottom:16px;}
+.jd-logo{width:64px;height:64px;border-radius:16px;background:var(--pp);display:flex;align-items:center;justify-content:center;font-size:2rem;border:1px solid var(--b);flex-shrink:0;}
+.jd-title{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;margin-bottom:4px;}
+.jd-company{font-size:0.9rem;color:var(--tm);margin-bottom:4px;}
+.jd-meta{font-size:0.82rem;color:var(--ts);display:flex;gap:12px;flex-wrap:wrap;}
+
+.jd-score-bar{background:var(--pp);border-radius:14px;padding:16px 20px;margin-bottom:16px;display:flex;align-items:center;gap:16px;}
+.score-ring{width:64px;height:64px;border-radius:50%;border:5px solid rgba(83,74,183,0.2);border-top-color:var(--p);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.score-ring-val{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:var(--p);}
+.score-breakdown{flex:1;}
+.score-label{font-family:'Syne',sans-serif;font-size:0.875rem;font-weight:700;margin-bottom:4px;}
+.score-bars{display:flex;flex-direction:column;gap:5px;margin-top:8px;}
+.score-row{display:flex;align-items:center;gap:8px;}
+.score-name{font-size:0.72rem;color:var(--tm);width:80px;flex-shrink:0;}
+.score-bar-wrap{flex:1;height:5px;background:rgba(83,74,183,0.15);border-radius:3px;overflow:hidden;}
+.score-bar-fill{height:100%;border-radius:3px;background:var(--p);}
+.score-pct{font-size:0.7rem;font-weight:700;color:var(--p);width:30px;text-align:right;}
+
+.jd-actions{display:flex;gap:10px;}
+.btn-apply{flex:2;padding:0.85rem;border-radius:12px;border:none;background:var(--p);color:white;font-size:0.95rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;}
+.btn-apply:hover{background:var(--pd);transform:translateY(-1px);}
+.btn-apply:disabled{background:var(--b);color:var(--ts);cursor:not-allowed;transform:none;}
+.btn-save-job{flex:1;padding:0.85rem;border-radius:12px;border:1.5px solid var(--b);background:white;color:var(--tm);font-size:0.95rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;}
+.btn-save-job:hover{border-color:var(--pl);color:var(--p);}
+
+.jd-section{background:white;border-radius:16px;padding:20px;margin-bottom:16px;border:1px solid var(--b);}
+.jd-section-title{font-family:'Syne',sans-serif;font-size:0.9rem;font-weight:700;margin-bottom:12px;color:var(--t);}
+.jd-body{font-size:0.875rem;color:var(--tm);line-height:1.8;}
+.jd-list{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.jd-list li{font-size:0.875rem;color:var(--tm);display:flex;align-items:flex-start;gap:8px;line-height:1.6;}
+.jd-list li::before{content:'→';color:var(--p);font-weight:700;flex-shrink:0;}
+.skill-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.skill-tag{padding:5px 12px;border-radius:8px;background:var(--pp);color:var(--p);font-size:0.78rem;font-weight:600;}
+.skill-tag.missing{background:var(--gl);color:var(--ts);}
+.company-card{display:flex;gap:14px;align-items:center;}
+.company-logo-lg{width:52px;height:52px;border-radius:14px;background:var(--pp);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;}
+.company-name{font-family:'Syne',sans-serif;font-weight:700;font-size:0.95rem;margin-bottom:2px;}
+.company-meta{font-size:0.78rem;color:var(--ts);}
+.company-verified{font-size:0.72rem;font-weight:700;color:var(--green);margin-top:3px;}
+
+.questions-list{display:flex;flex-direction:column;gap:10px;}
+.question-card{background:var(--g);border-radius:12px;padding:14px;border:1px solid var(--b);}
+.question-text{font-size:0.875rem;font-weight:600;margin-bottom:8px;}
+.question-options{display:flex;gap:8px;flex-wrap:wrap;}
+.q-option{padding:5px 14px;border-radius:8px;border:1.5px solid var(--b);background:white;font-size:0.82rem;cursor:pointer;transition:all 0.2s;font-family:'DM Sans',sans-serif;}
+.q-option:hover,.q-option.selected{border-color:var(--p);background:var(--pp);color:var(--p);font-weight:600;}
+.q-text-input{width:100%;padding:8px 12px;border-radius:8px;border:1.5px solid var(--b);font-family:'DM Sans',sans-serif;font-size:0.85rem;outline:none;margin-top:4px;}
+.q-text-input:focus{border-color:var(--p);}
+
+.modal-overlay{position:fixed;inset:0;background:rgba(26,26,46,0.7);z-index:500;display:none;align-items:flex-end;justify-content:center;}
+.modal-overlay.open{display:flex;}
+.modal{background:white;border-radius:24px 24px 0 0;width:100%;max-width:680px;max-height:88vh;overflow-y:auto;animation:slideUp 0.35s ease;}
+@keyframes slideUp{from{transform:translateY(100%);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-header{padding:24px 28px 0;display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;}
+.modal-close{width:34px;height:34px;border-radius:8px;background:var(--g);border:1px solid var(--b);cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;}
+.modal-body-pad{padding:0 28px 28px;}
+
+.apply-success{display:none;text-align:center;padding:2rem;}
+.apply-success-icon{font-size:3rem;margin-bottom:1rem;}
+
+footer{background:var(--pdd);color:rgba(255,255,255,0.6);padding:32px 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+footer .logo .hub{color:var(--pl);}footer .logo .ro{color:rgba(255,255,255,0.4);}
+.footer-links{display:flex;gap:1.5rem;}
+.footer-links a{color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;}
+.footer-links a:hover{color:white;}
+
+@media(max-width:1100px){.job-detail{display:none;}.jobs-list{width:100%;}}
+@media(max-width:768px){.nav-links{display:none;}.filters-sidebar{display:none;}.search-main{flex-direction:column;}.search-btn{width:100%;justify-content:center;}}
+
+/* ── LANGUAGE SELECTOR ── */
+.lang-selector{position:relative;display:flex;align-items:center;}
+.lang-btn{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:8px;border:1.5px solid var(--b);background:white;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:600;color:var(--tm);transition:all 0.2s;}
+.lang-btn:hover{border-color:var(--pl);color:var(--p);}
+.lang-dropdown{position:absolute;top:calc(100% + 8px);right:0;background:white;border-radius:14px;border:1px solid var(--b);box-shadow:0 12px 32px rgba(83,74,183,0.15);padding:6px;min-width:180px;display:none;z-index:300;animation:fadeDown 0.2s ease;}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.lang-dropdown.open{display:block;}
+.lang-option{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;cursor:pointer;transition:all 0.15s;font-size:0.85rem;font-weight:500;color:var(--tm);}
+.lang-option:hover{background:var(--pp);color:var(--p);}
+.lang-option.active{background:var(--pp);color:var(--p);font-weight:700;}
+.lang-flag{font-size:1.1rem;}
+
+
+/* ═══════════════════════════════════════════════
+   HUBRO GLOBAL RESPONSIVE + TYPOGRAPHY SYSTEM
+   Injected across all pages
+═══════════════════════════════════════════════ */
+
+/* 1. RESET & BOX MODEL */
+*, *::before, *::after {
+  box-sizing: border-box;
+  -webkit-text-size-adjust: 100%;
+}
+html {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+body {
+  overflow-x: hidden;
+  min-width: 320px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+img, video, canvas, svg {
+  max-width: 100%;
+  display: block;
+}
+
+/* 2. TYPOGRAPHY SCALE — fluid, clamp-based */
+h1 {
+  font-size: clamp(1.75rem, 5vw, 3.2rem) !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.03em !important;
+  font-weight: 800 !important;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+h2 {
+  font-size: clamp(1.4rem, 3.5vw, 2.4rem) !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.02em !important;
+  font-weight: 800 !important;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+h3 {
+  font-size: clamp(1.05rem, 2vw, 1.25rem) !important;
+  line-height: 1.3 !important;
+  font-weight: 700 !important;
+  word-break: break-word;
+}
+h4 {
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem) !important;
+  line-height: 1.4 !important;
+  font-weight: 700 !important;
+}
+p {
+  line-height: 1.7;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* 3. NAVIGATION — mobile first */
+nav {
+  padding: 0 4% !important;
+  height: 60px !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 200 !important;
+}
+.nav-links {
+  gap: 1.2rem !important;
+}
+.nav-links a {
+  font-size: 0.82rem !important;
+  white-space: nowrap;
+}
+
+/* 4. SECTIONS — fluid padding */
+section {
+  padding: clamp(40px, 8vw, 80px) clamp(16px, 5%, 80px) !important;
+}
+
+/* 5. GRID FIXES — prevent overflow */
+.grid-2, .grid-3,
+[style*="grid-template-columns"] {
+  min-width: 0;
+}
+.grid-2 > *, .grid-3 > * {
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* 6. CARDS — safe overflow */
+.plan-card, .benefit-card, .activity-card, 
+.job-card, .property-card, .candidate-card,
+.testimonial, .step-card, .tenant-card {
+  overflow: hidden;
+  word-break: break-word;
+}
+
+/* 7. FORMS — full width on small screens */
+.form-input, input, select, textarea {
+  max-width: 100% !important;
+  min-width: 0 !important;
+}
+
+/* 8. TRUST BAR */
+.trust-bar {
+  padding: 12px 4% !important;
+  gap: 1rem !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+}
+.trust-item {
+  font-size: 0.78rem !important;
+  white-space: nowrap;
+}
+
+/* 9. HERO sections */
+.hero, .hero-search {
+  padding: clamp(40px, 8vw, 72px) clamp(16px, 5%, 80px) 0 !important;
+}
+.hero h1, .hero-inner h1 {
+  font-size: clamp(1.75rem, 5vw, 3.2rem) !important;
+}
+
+/* 10. SEARCH BOX */
+.search-box {
+  padding: 20px 16px 0 !important;
+  border-radius: 16px 16px 0 0 !important;
+}
+.search-fields, .search-main {
+  gap: 10px !important;
+}
+
+/* 11. LANGUAGE SELECTOR */
+.lang-selector {
+  flex-shrink: 0;
+}
+.lang-btn {
+  font-size: 0.78rem !important;
+  padding: 5px 10px !important;
+}
+.lang-dropdown {
+  right: 0 !important;
+  left: auto !important;
+  min-width: 160px !important;
+}
+
+/* 12. TABLES — horizontal scroll on small screens */
+.table-wrap {
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch;
+}
+table {
+  min-width: 500px;
+}
+
+/* 13. DASHBOARD STATS */
+.dash-stats {
+  gap: 10px !important;
+}
+
+/* 14. FOOTER */
+footer {
+  padding: 28px clamp(16px, 5%, 80px) !important;
+  gap: 1rem !important;
+}
+.footer-links {
+  flex-wrap: wrap !important;
+  gap: 1rem !important;
+}
+
+/* 15. MODAL */
+.modal, .modal-overlay .modal {
+  max-height: 92vh !important;
+  border-radius: 20px 20px 0 0 !important;
+}
+
+/* 16. BUTTONS — no overflow */
+.btn, button, a[class*="btn"] {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ═══════════════════════════
+   BREAKPOINT: TABLET (768px)
+═══════════════════════════ */
+@media (max-width: 768px) {
+
+  /* Nav */
+  .nav-links { display: none !important; }
+  nav { padding: 0 4% !important; }
+  .nav-right { gap: 6px !important; }
+  .btn-nav { padding: 6px 12px !important; font-size: 0.78rem !important; }
+
+  /* Trust bar */
+  .trust-bar { display: none !important; }
+
+  /* Hero buttons */
+  .hero-btns, .cta-btns {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 10px !important;
+  }
+  .hero-btns a, .hero-btns button,
+  .cta-btns a, .cta-btns button {
+    width: 100% !important;
+    max-width: 340px !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+  /* Hero stats */
+  .hero-stats, .member-bar {
+    gap: 1.5rem !important;
+    justify-content: center !important;
+  }
+
+  /* Grids → single column */
+  .steps-grid,
+  .benefits-grid,
+  .activities-grid,
+  .tenants-grid,
+  .candidates-grid,
+  .testimonials-grid,
+  .lang-grid,
+  .discord-channels,
+  .amenities-grid,
+  .amenity-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* 2-col grids → single */
+  .grid-2, .pricing-grid, .rules-grid,
+  .form-grid, .form-row-2, .search-fields {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* 3-col grids → single */
+  .grid-3, .benefits-grid, .pricing-grid[style*="3"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Jobs layout */
+  .main-layout { flex-direction: column !important; }
+  .filters-sidebar { 
+    display: none !important; 
+    width: 100% !important;
+  }
+  .jobs-list { 
+    width: 100% !important; 
+    height: auto !important;
+    position: relative !important;
+    top: auto !important;
+  }
+  .job-detail { 
+    display: none !important;
+    height: auto !important;
+  }
+  .jobs-area { flex-direction: column !important; }
+
+  /* Housing */
+  .listings-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .listings-area { padding: 16px !important; }
+
+  /* Search box */
+  .search-fields, .search-main {
+    grid-template-columns: 1fr !important;
+    flex-direction: column !important;
+  }
+  .search-btn {
+    width: 100% !important;
+    justify-content: center !important;
+    height: auto !important;
+    padding: 0.85rem !important;
+  }
+
+  /* Dashboard */
+  .dash-stats {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .dashboard-preview { padding: 16px !important; }
+
+  /* Modal */
+  .modal { 
+    padding: 20px 16px !important; 
+    max-height: 95vh !important;
+  }
+  .modal-stats {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .modal-gallery { height: 220px !important; }
+
+  /* Forms */
+  .form-grid, .price-range, .salary-range,
+  .add-question-row {
+    flex-direction: column !important;
+    grid-template-columns: 1fr !important;
+  }
+  .form-full { grid-column: 1 !important; }
+
+  /* Cards */
+  .pricing-grid {
+    grid-template-columns: 1fr !important;
+    max-width: 420px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* Landlord/employer hero */
+  .hero-inner { max-width: 100% !important; }
+  .hero-stats { margin-top: 1.5rem !important; }
+
+  /* Compare table */
+  .compare-wrap { margin-top: 1.5rem !important; }
+
+  /* Community language grid */
+  .lang-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Footer */
+  footer {
+    flex-direction: column !important;
+    text-align: center !important;
+  }
+  .footer-links { justify-content: center !important; }
+
+  /* Waitlist form */
+  .hw-row, .hw-row.hubro-wl-input-row {
+    flex-direction: column !important;
+  }
+  .hw-btn, .hubro-wl-btn {
+    width: 100% !important;
+  }
+  .hw-benefits, .hubro-wl-benefits {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+  }
+
+  /* Step arrows */
+  .step-arrow { display: none !important; }
+}
+
+/* ═══════════════════════════
+   BREAKPOINT: MOBILE (480px)
+═══════════════════════════ */
+@media (max-width: 480px) {
+
+  /* Even smaller text */
+  .nav-cta, .btn-solid {
+    display: none !important;
+  }
+
+  /* Hero */
+  .hero, .hero-search {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  /* Stats 1 col */
+  .dash-stats {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .hero-stats {
+    flex-direction: column !important;
+    gap: 1rem !important;
+    align-items: center !important;
+  }
+  .member-bar {
+    flex-direction: column !important;
+    gap: 1rem !important;
+  }
+
+  /* Section padding */
+  section {
+    padding: 36px 14px !important;
+  }
+
+  /* Cards full width */
+  .property-card, .job-card, .plan-card {
+    border-radius: 14px !important;
+  }
+
+  /* Hide decorative elements */
+  .stat-card::after { display: none !important; }
+
+  /* Language grid 2 cols */
+  .lang-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Discord channels 1 col */
+  .discord-channels {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Amenity grid */
+  .amenity-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Pricing */
+  .pricing-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Search box */
+  .search-box {
+    margin: 1rem 0 0 !important;
+    border-radius: 14px 14px 0 0 !important;
+    padding: 16px 12px 0 !important;
+  }
+  .popular-searches {
+    padding-bottom: 14px !important;
+  }
+
+  /* Waitlist */
+  .hw-box, .hubro-wl-inner {
+    padding: 1.2rem !important;
+    border-radius: 14px !important;
+  }
+}
+
+/* ═══════════════════════════
+   BREAKPOINT: LARGE (1400px+)
+═══════════════════════════ */
+@media (min-width: 1400px) {
+  section {
+    padding-left: max(5%, calc((100vw - 1200px) / 2)) !important;
+    padding-right: max(5%, calc((100vw - 1200px) / 2)) !important;
+  }
+  nav {
+    padding-left: max(4%, calc((100vw - 1200px) / 2)) !important;
+    padding-right: max(4%, calc((100vw - 1200px) / 2)) !important;
+  }
+}
+
+/* ═══════════════════════════
+   UTILITY — prevent overflow
+═══════════════════════════ */
+.overflow-safe {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.wrap-safe {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+</style>
+
+<style>
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;border:none;background:transparent;}
+.hamburger span{width:22px;height:2px;background:var(--t,#1A1A2E);border-radius:2px;transition:all 0.3s;}
+.mobile-menu{display:none;position:fixed;inset:0;background:rgba(26,26,46,0.95);z-index:500;flex-direction:column;align-items:center;justify-content:center;gap:2rem;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{font-family:Syne,sans-serif;font-size:1.5rem;font-weight:700;color:white;text-decoration:none;transition:color 0.2s;}
+.mobile-menu a:hover{color:var(--pl,#AFA9EC);}
+.mobile-close{position:absolute;top:20px;right:20px;font-size:1.5rem;color:white;cursor:pointer;background:none;border:none;font-family:DM Sans,sans-serif;}
+@media(max-width:768px){.hamburger{display:flex!important;}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+
+<style>
+/* HUBRO WHITESPACE FIX v2 */
+html,body{overflow-x:hidden !important;}
+.job-detail,.jobs-list,.listings-sidebar,.filter-panel,.split-right,.split-left{height:auto !important;position:relative !important;top:auto !important;}
+.main-layout,.jobs-area,.listings-area,.dashboard-area{min-height:0 !important;}
+[style*="calc(100vh"]{height:auto !important;}
+.modal-overlay,.hubro-success-overlay{position:fixed !important;}
+.float-cta,#float-cta{position:fixed !important;}
+@media(max-width:768px){
+  .job-detail,.jobs-list{position:relative !important;height:auto !important;max-height:none !important;overflow-y:visible !important;}
+  .main-layout{flex-direction:column !important;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo"><span class="hub">hub</span><span class="ro">ro</span></a>
+  <ul class="nav-links">
+    <li><a href="jobs.html" class="active">Find Jobs</a></li>
+    <li><a href="housing.html">Find Housing</a></li>
+    <li><a href="index.html#employers">For Employers</a></li>
+    <li><a href="index.html#landlords">For Landlords</a></li>
+    <li><a href="community.html">Community</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="auth.html" class="btn-nav btn-ghost">Sign in</a>
+        <div class="lang-selector">
+      <button class="lang-btn" onclick="toggleLangDropdown()">
+        <span id="lang-btn-text">🇬🇧 English</span>
+        <span style="font-size:0.6rem;opacity:0.6;">▼</span>
+      </button>
+      <div class="lang-dropdown" id="lang-dropdown">
+        <div class="lang-option active" data-lang="en" onclick="selectLang('en')"><span class="lang-flag">🇬🇧</span> English</div>
+        <div class="lang-option" data-lang="es" onclick="selectLang('es')"><span class="lang-flag">🇪🇸</span> Español</div>
+        <div class="lang-option" data-lang="pt" onclick="selectLang('pt')"><span class="lang-flag">🇧🇷</span> Português</div>
+        <div class="lang-option" data-lang="pl" onclick="selectLang('pl')"><span class="lang-flag">🇵🇱</span> Polski</div>
+        <div class="lang-option" data-lang="de" onclick="selectLang('de')"><span class="lang-flag">🇩🇪</span> Deutsch</div>
+        <div class="lang-option" data-lang="fr" onclick="selectLang('fr')"><span class="lang-flag">🇫🇷</span> Français</div>
+        <div class="lang-option" data-lang="it" onclick="selectLang('it')"><span class="lang-flag">🇮🇹</span> Italiano</div>
+        <div class="lang-option" data-lang="zh" onclick="selectLang('zh')"><span class="lang-flag">🇨🇳</span> 中文</div>
+        <div class="lang-option" data-lang="ja" onclick="selectLang('ja')"><span class="lang-flag">🇯🇵</span> 日本語</div>
+      </div>
+    </div>
+
+  <a href="index.html#waitlist" class="btn-nav btn-solid">Find jobs →</a>
+  </div>
+<button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+  <span></span><span></span><span></span>
+</button>
+<div class="mobile-menu" id="mobile-menu">
+  <button class="mobile-close" onclick="toggleMobileMenu()">✕</button>
+  <a href="index.html" onclick="toggleMobileMenu()">Home</a>
+  <a href="jobs.html" onclick="toggleMobileMenu()">Find Jobs</a>
+  <a href="housing.html" onclick="toggleMobileMenu()">Find Housing</a>
+  <a href="employers.html" onclick="toggleMobileMenu()">For Employers</a>
+  <a href="landlords.html" onclick="toggleMobileMenu()">For Landlords</a>
+  <a href="community.html" onclick="toggleMobileMenu()">Community</a>
+  <a href="pricing.html" onclick="toggleMobileMenu()">Pricing</a>
+</div>
+<script>
+function toggleMobileMenu(){
+  var m=document.getElementById('mobile-menu');
+  m.classList.toggle('open');
+  document.body.style.overflow=m.classList.contains('open')?'hidden':'';
+}
+</script>
+</nav>
+
+<div class="trust-bar">
+  <div class="trust-item"><div class="trust-dot"></div> All employers verified by Hubro</div>
+  <div class="trust-item"><div class="trust-dot"></div> Real match score on every listing</div>
+  <div class="trust-item"><div class="trust-dot"></div> Apply only where you match 30%+</div>
+  <div class="trust-item"><div class="trust-dot"></div> No fake listings</div>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">🇮🇪 Verified jobs in Ireland</div>
+    <h1>Find your next job.<br>Know your match before you apply.</h1>
+    <p>Every listing shows your real compatibility score. Apply only where it counts.</p>
+  </div>
+  <div class="search-box">
+    <div class="search-main">
+      <div class="search-field" style="flex:2;">
+        <label class="search-label">Job title, skill or keyword</label>
+        <input class="search-input" placeholder="e.g. Software Engineer, Nurse, Marketing Manager..." id="search-keyword">
+      </div>
+      <div class="search-field">
+        <label class="search-label">Location</label>
+        <select class="search-input">
+          <option>Ireland — All</option><option>Dublin</option><option>Cork</option>
+          <option>Galway</option><option>Limerick</option><option>Remote</option>
+        </select>
+      </div>
+      <div class="search-field">
+        <label class="search-label">Sector</label>
+        <select class="search-input">
+          <option>All sectors</option><option>Technology</option><option>Healthcare</option>
+          <option>Finance</option><option>Hospitality</option><option>Education</option>
+        </select>
+      </div>
+      <button class="search-btn">🔍 Search jobs</button>
+    </div>
+    <div class="popular-searches">
+      <span class="popular-label">Popular:</span>
+      <span class="popular-chip" onclick="document.getElementById('search-keyword').value='Software Engineer'">Software Engineer</span>
+      <span class="popular-chip" onclick="document.getElementById('search-keyword').value='Nurse'">Nurse</span>
+      <span class="popular-chip" onclick="document.getElementById('search-keyword').value='Customer Support'">Customer Support</span>
+      <span class="popular-chip" onclick="document.getElementById('search-keyword').value='Marketing'">Marketing</span>
+      <span class="popular-chip" onclick="document.getElementById('search-keyword').value='Data Analyst'">Data Analyst</span>
+    </div>
+  </div>
+</div>
+
+<div class="main-layout">
+  <aside class="filters-sidebar">
+    <div class="filter-section">
+      <div class="filter-title">Job Type</div>
+      <div class="checkbox-list">
+        <div class="checkbox-item"><input type="checkbox" id="jt0" checked><label for="jt0">All types</label></div>
+        <div class="checkbox-item"><input type="checkbox" id="jt1"><label for="jt1">Full-time</label><span class="count">142</span></div>
+        <div class="checkbox-item"><input type="checkbox" id="jt2"><label for="jt2">Part-time</label><span class="count">38</span></div>
+        <div class="checkbox-item"><input type="checkbox" id="jt3"><label for="jt3">Contract</label><span class="count">29</span></div>
+        <div class="checkbox-item"><input type="checkbox" id="jt4"><label for="jt4">Internship</label><span class="count">14</span></div>
+      </div>
+    </div>
+    <hr class="filter-divider">
+    <div class="filter-section">
+      <div class="filter-title">Work Mode</div>
+      <div class="checkbox-list">
+        <div class="checkbox-item"><input type="checkbox" id="wm1"><label for="wm1">On-site</label><span class="count">98</span></div>
+        <div class="checkbox-item"><input type="checkbox" id="wm2" checked><label for="wm2">Hybrid</label><span class="count">74</span></div>
+        <div class="checkbox-item"><input type="checkbox" id="wm3"><label for="wm3">Remote</label><span class="count">51</span></div>
+      </div>
+    </div>
+    <hr class="filter-divider">
+    <div class="filter-section">
+      <div class="filter-title">Salary (€/year)</div>
+      <div class="salary-range">
+        <input type="number" class="salary-input" placeholder="Min">
+        <input type="number" class="salary-input" placeholder="Max">
+      </div>
+    </div>
+    <hr class="filter-divider">
+    <div class="filter-section">
+      <div class="filter-title">Experience Level</div>
+      <div class="checkbox-list">
+        <div class="checkbox-item"><input type="checkbox" id="el1"><label for="el1">Entry level</label><span class="count">42</span></div>
+        <div class="checkbox-item"><input type="checkbox" id="el2" checked><label for="el2">Mid level</label><span class="count">87</span></div>
+        <div class="checkbox-item"><input type="checkbox" id="el3"><label for="el3">Senior</label><span class="count">54</span></div>
+        <div class="checkbox-item"><input type="checkbox" id="el4"><label for="el4">Manager</label><span class="count">22</span></div>
+      </div>
+    </div>
+    <hr class="filter-divider">
+    <div class="filter-section">
+      <div class="filter-title">Match Score</div>
+      <div class="checkbox-list">
+        <div class="checkbox-item"><input type="checkbox" id="ms1"><label for="ms1">90%+ Excellent</label></div>
+        <div class="checkbox-item"><input type="checkbox" id="ms2" checked><label for="ms2">70%+ Strong</label></div>
+        <div class="checkbox-item"><input type="checkbox" id="ms3"><label for="ms3">30%+ Can apply</label></div>
+      </div>
+    </div>
+    <hr class="filter-divider">
+    <div class="filter-section">
+      <div class="filter-title">Visa Sponsorship</div>
+      <div class="checkbox-list">
+        <div class="checkbox-item"><input type="checkbox" id="vs1"><label for="vs1">Sponsorship available</label></div>
+      </div>
+    </div>
+    <div class="filter-btn-row">
+      <button class="btn-filter-reset">Reset</button>
+      <button class="btn-filter-apply">Apply</button>
+    </div>
+  </aside>
+
+  <div class="jobs-area">
+    <div class="jobs-list">
+      <div class="jobs-list-header">
+        <div class="results-count"><strong>223</strong> jobs match your profile</div>
+        <select class="sort-select"><option>Best match</option><option>Most recent</option><option>Salary: high-low</option></select>
+      </div>
+
+      <div class="job-list-item active" onclick="showJob(1,this)">
+        <div class="jli-top">
+          <div class="company-logo">💳</div>
+          <div style="flex:1;"><div class="jli-title">Software Engineer</div><div class="jli-company">Stripe · Dublin · Hybrid</div></div>
+          <div class="jli-match match-excellent">94%</div>
+        </div>
+        <div class="jli-tags"><span class="jli-tag">Full-time</span><span class="jli-tag">Python</span><span class="jli-tag">React</span><span class="jli-tag">Visa ✓</span></div>
+        <div class="jli-footer"><div class="jli-salary">€65,000 – €80,000</div><div class="jli-date">2 days ago</div></div>
+        <button class="jli-saved" onclick="event.stopPropagation();this.textContent=this.textContent=='🤍'?'❤️':'🤍'">🤍</button>
+      </div>
+
+      <div class="job-list-item" onclick="showJob(2,this)">
+        <div class="jli-top">
+          <div class="company-logo">🧡</div>
+          <div style="flex:1;"><div class="jli-title">Frontend Developer</div><div class="jli-company">HubSpot · Remote</div></div>
+          <div class="jli-match match-good">88%</div>
+        </div>
+        <div class="jli-tags"><span class="jli-tag">Full-time</span><span class="jli-tag">React</span><span class="jli-tag">TypeScript</span><span class="jli-tag">Remote</span></div>
+        <div class="jli-footer"><div class="jli-salary">€55,000 – €70,000</div><div class="jli-date">4 days ago</div></div>
+        <button class="jli-saved" onclick="event.stopPropagation();this.textContent=this.textContent=='🤍'?'❤️':'🤍'">🤍</button>
+      </div>
+
+      <div class="job-list-item" onclick="showJob(3,this)">
+        <div class="jli-top">
+          <div class="company-logo">📊</div>
+          <div style="flex:1;"><div class="jli-title">Data Engineer</div><div class="jli-company">Workday · Dublin · On-site</div></div>
+          <div class="jli-match match-good">82%</div>
+        </div>
+        <div class="jli-tags"><span class="jli-tag">Full-time</span><span class="jli-tag">Python</span><span class="jli-tag">SQL</span><span class="jli-tag">AWS</span></div>
+        <div class="jli-footer"><div class="jli-salary">€60,000 – €75,000</div><div class="jli-date">1 week ago</div></div>
+        <button class="jli-saved" onclick="event.stopPropagation();this.textContent=this.textContent=='🤍'?'❤️':'🤍'">🤍</button>
+      </div>
+
+      <div class="job-list-item" onclick="showJob(4,this)">
+        <div class="jli-top">
+          <div class="company-logo">🎯</div>
+          <div style="flex:1;"><div class="jli-title">Product Manager</div><div class="jli-company">Intercom · Dublin · Hybrid</div></div>
+          <div class="jli-match match-ok">74%</div>
+        </div>
+        <div class="jli-tags"><span class="jli-tag">Full-time</span><span class="jli-tag">Product</span><span class="jli-tag">Agile</span></div>
+        <div class="jli-footer"><div class="jli-salary">€70,000 – €90,000</div><div class="jli-date">3 days ago</div></div>
+        <button class="jli-saved" onclick="event.stopPropagation();this.textContent=this.textContent=='🤍'?'❤️':'🤍'">🤍</button>
+      </div>
+
+      <div class="job-list-item" onclick="showJob(5,this)">
+        <div class="jli-top">
+          <div class="company-logo">🏥</div>
+          <div style="flex:1;"><div class="jli-title">Registered Nurse</div><div class="jli-company">St Vincent's Hospital · Dublin</div></div>
+          <div class="jli-match match-good">86%</div>
+        </div>
+        <div class="jli-tags"><span class="jli-tag">Full-time</span><span class="jli-tag">Healthcare</span><span class="jli-tag">Visa ✓</span></div>
+        <div class="jli-footer"><div class="jli-salary">€38,000 – €50,000</div><div class="jli-date">Today</div></div>
+        <button class="jli-saved" onclick="event.stopPropagation();this.textContent=this.textContent=='🤍'?'❤️':'🤍'">🤍</button>
+      </div>
+
+      <div class="job-list-item" onclick="showJob(6,this)">
+        <div class="jli-top">
+          <div class="company-logo">🌍</div>
+          <div style="flex:1;"><div class="jli-title">Customer Success Manager</div><div class="jli-company">Salesforce · Dublin · Hybrid</div></div>
+          <div class="jli-match match-ok">68%</div>
+        </div>
+        <div class="jli-tags"><span class="jli-tag">Full-time</span><span class="jli-tag">SaaS</span><span class="jli-tag">Spanish req.</span></div>
+        <div class="jli-footer"><div class="jli-salary">€50,000 – €65,000</div><div class="jli-date">5 days ago</div></div>
+        <button class="jli-saved" onclick="event.stopPropagation();this.textContent=this.textContent=='🤍'?'❤️':'🤍'">🤍</button>
+      </div>
+
+      <div class="job-list-item" onclick="showJob(7,this)" style="opacity:0.55;">
+        <div class="jli-top">
+          <div class="company-logo">🏦</div>
+          <div style="flex:1;"><div class="jli-title">Finance Manager</div><div class="jli-company">AIB · Dublin · On-site</div></div>
+          <div class="jli-match match-low">18%</div>
+        </div>
+        <div class="jli-tags"><span class="jli-tag">Full-time</span><span class="jli-tag">Finance</span><span class="jli-tag">ACA required</span></div>
+        <div class="jli-footer"><div class="jli-salary">€55,000 – €70,000</div><div class="jli-date">Today</div></div>
+      </div>
+    </div>
+
+    <div class="job-detail" style="height:auto;min-height:400px;overflow-y:auto;">
+      <div class="job-detail-inner" id="job-detail-content">
+        <div class="jd-header">
+          <div class="jd-top">
+            <div class="jd-logo" id="jd-logo">💳</div>
+            <div>
+              <div class="jd-title" id="jd-title">Software Engineer</div>
+              <div class="jd-company" id="jd-company">Stripe · Dublin, Ireland</div>
+              <div class="jd-meta">
+                <span>💼 Full-time</span><span>🏠 Hybrid</span>
+                <span id="jd-salary">💶 €65,000 – €80,000</span>
+                <span>📅 2 days ago</span><span>✈️ Visa sponsorship</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="jd-score-bar" id="jd-score-bar">
+            <div class="score-ring"><span class="score-ring-val" id="jd-score-val">94%</span></div>
+            <div class="score-breakdown">
+              <div class="score-label" id="jd-score-label">Excellent match — you are among the top candidates</div>
+              <div class="score-bars">
+                <div class="score-row"><span class="score-name">Skills</span><div class="score-bar-wrap"><div class="score-bar-fill" id="sb-skills" style="width:95%"></div></div><span class="score-pct" id="sp-skills">95%</span></div>
+                <div class="score-row"><span class="score-name">Experience</span><div class="score-bar-wrap"><div class="score-bar-fill" id="sb-exp" style="width:90%"></div></div><span class="score-pct" id="sp-exp">90%</span></div>
+                <div class="score-row"><span class="score-name">Education</span><div class="score-bar-wrap"><div class="score-bar-fill" id="sb-edu" style="width:95%"></div></div><span class="score-pct" id="sp-edu">95%</span></div>
+                <div class="score-row"><span class="score-name">Languages</span><div class="score-bar-wrap"><div class="score-bar-fill" id="sb-lang" style="width:90%"></div></div><span class="score-pct" id="sp-lang">90%</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="jd-actions">
+            <button class="btn-apply" id="jd-apply-btn" onclick="openApplyModal()">Apply now →</button>
+            <button class="btn-save-job" onclick="this.textContent=this.textContent.includes('🤍')?'❤️ Saved':'🤍 Save job'">🤍 Save job</button>
+          </div>
+        </div>
+
+        <div class="jd-section">
+          <div class="jd-section-title">About the role</div>
+          <div class="jd-body" id="jd-desc">We are looking for an experienced Software Engineer to join our infrastructure team in Dublin. You will design and build the systems that power payments for millions of businesses worldwide.</div>
+        </div>
+
+        <div class="jd-section">
+          <div class="jd-section-title">Responsibilities</div>
+          <ul class="jd-list" id="jd-resp">
+            <li>Design and implement scalable backend services in Python and Go</li>
+            <li>Collaborate with cross-functional teams to ship new product features</li>
+            <li>Contribute to architectural decisions and technical roadmap</li>
+            <li>Mentor junior engineers and participate in code reviews</li>
+            <li>Ensure high availability and performance of production systems</li>
+          </ul>
+        </div>
+
+        <div class="jd-section">
+          <div class="jd-section-title">Required skills</div>
+          <div style="margin-bottom:8px;font-size:0.78rem;color:var(--ts);">Green = you have this · Grey = may be missing</div>
+          <div class="skill-tags" id="jd-skills">
+            <span class="skill-tag">Python ✓</span><span class="skill-tag">React ✓</span>
+            <span class="skill-tag">PostgreSQL ✓</span><span class="skill-tag">AWS ✓</span>
+            <span class="skill-tag">Docker ✓</span>
+            <span class="skill-tag missing">Go (?)</span><span class="skill-tag missing">Kubernetes (?)</span>
+          </div>
+        </div>
+
+        <div class="jd-section">
+          <div class="jd-section-title">About the company</div>
+          <div class="company-card">
+            <div class="company-logo-lg" id="jd-comp-logo">💳</div>
+            <div>
+              <div class="company-name" id="jd-comp-name">Stripe</div>
+              <div class="company-meta" id="jd-comp-meta">Financial technology · 5,000+ employees · Dublin HQ</div>
+              <div class="company-verified">✅ Verified employer on Hubro</div>
+            </div>
+            <div style="margin-left:auto;text-align:right;">
+              <div style="font-family:Syne,sans-serif;font-weight:800;font-size:1.1rem;color:var(--p);" id="jd-rating">4.8 ⭐</div>
+              <div style="font-size:0.72rem;color:var(--ts);" id="jd-reviews">24 reviews</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- APPLY MODAL -->
+<div class="modal-overlay" id="apply-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <h3 style="font-family:Syne,sans-serif;font-size:1.1rem;font-weight:700;" id="apply-modal-title">Apply — Software Engineer at Stripe</h3>
+        <p style="font-size:0.82rem;color:var(--ts);margin-top:2px;">Your CV and answers will be sent directly to the employer</p>
+      </div>
+      <button class="modal-close" onclick="closeApplyModal()">✕</button>
+    </div>
+    <div class="modal-body-pad">
+    <form name="job-application" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="apply-form">
+      <input type="hidden" name="form-name" value="job-application">
+      <input type="hidden" name="job-title" id="form-job-title">
+      <p style="display:none;"><input name="bot-field"></p>
+      <div style="background:var(--pp);border-radius:12px;padding:14px 16px;margin-bottom:20px;display:flex;align-items:center;gap:12px;">
+        <div style="font-family:Syne,sans-serif;font-weight:800;font-size:1.4rem;color:var(--p);" id="modal-score">94%</div>
+        <div>
+          <div style="font-weight:700;font-size:0.875rem;" id="modal-score-label">Excellent match</div>
+          <div style="font-size:0.75rem;color:var(--ts);">You are among the top candidates for this role</div>
+        </div>
+      </div>
+
+      <div style="margin-bottom:18px;">
+        <div style="font-family:Syne,sans-serif;font-weight:700;font-size:0.875rem;margin-bottom:10px;">CV to be sent</div>
+        
+        <!-- Hidden file input -->
+        <input type="file" id="cv-file-input" accept=".pdf" style="display:none;" onchange="handleCVUpload(this)">
+        
+        <!-- CV display box -->
+        <div id="cv-box" style="display:flex;align-items:center;gap:12px;padding:12px;background:var(--g);border-radius:10px;border:1px solid var(--b);">
+          <span style="font-size:1.3rem;">📄</span>
+          <div id="cv-info">
+            <div style="font-weight:600;font-size:0.85rem;" id="cv-name">No CV uploaded yet</div>
+            <div style="font-size:0.72rem;color:var(--ts);" id="cv-status">Upload your CV to apply</div>
+          </div>
+          <button onclick="document.getElementById('cv-file-input').click()" style="margin-left:auto;padding:6px 12px;border-radius:6px;border:1.5px solid var(--p);background:var(--pp);color:var(--p);font-size:0.75rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">
+            📎 Upload CV
+          </button>
+        </div>
+        
+        <!-- Upload progress -->
+        <div id="cv-upload-progress" style="display:none;margin-top:8px;">
+          <div style="height:4px;background:var(--b);border-radius:2px;overflow:hidden;">
+            <div id="cv-progress-bar" style="height:100%;background:var(--p);width:0%;transition:width 0.3s;border-radius:2px;"></div>
+          </div>
+          <div style="font-size:0.72rem;color:var(--ts);margin-top:4px;" id="cv-progress-text">Uploading...</div>
+        </div>
+        
+        <!-- Upload success -->
+        <div id="cv-upload-success" style="display:none;margin-top:8px;padding:8px 12px;background:var(--greenl);border-radius:8px;font-size:0.78rem;color:var(--green);font-weight:500;">
+          ✅ CV uploaded successfully and ready to send
+        </div>
+        
+        <!-- Not logged in warning -->
+        <div id="cv-login-warning" style="display:none;margin-top:8px;padding:8px 12px;background:#FEF3DC;border-radius:8px;font-size:0.78rem;color:#C97B10;">
+          ⚠️ <a href="auth.html" style="color:#C97B10;font-weight:700;">Sign in or create account</a> to upload your CV
+        </div>
+      </div>
+
+      <div style="font-family:Syne,sans-serif;font-weight:700;font-size:0.875rem;margin-bottom:12px;">Employer questions</div>
+      <div class="questions-list">
+        <div class="question-card">
+          <div class="question-text">Do you have permission to work in Ireland? *</div>
+          <div class="question-options">
+            <button class="q-option selected" onclick="selectOption(this)">Yes</button>
+            <button class="q-option" onclick="selectOption(this)">No</button>
+          </div>
+        </div>
+        <div class="question-card">
+          <div class="question-text">Years of Python experience?</div>
+          <div class="question-options">
+            <button class="q-option" onclick="selectOption(this)">1–2 years</button>
+            <button class="q-option" onclick="selectOption(this)">3–5 years</button>
+            <button class="q-option selected" onclick="selectOption(this)">5+ years</button>
+          </div>
+        </div>
+        <div class="question-card">
+          <div class="question-text">Available to start within 1 month? *</div>
+          <div class="question-options">
+            <button class="q-option selected" onclick="selectOption(this)">Yes</button>
+            <button class="q-option" onclick="selectOption(this)">No</button>
+          </div>
+        </div>
+        <div class="question-card">
+          <div class="question-text">Cover letter (optional)</div>
+          <textarea name="cover-letter" class="q-text-input" rows="3" placeholder="Why are you interested in this role?"></textarea>
+        </div>
+      </div>
+
+      <div style="background:var(--greenl);border-radius:10px;padding:10px 14px;font-size:0.78rem;color:var(--green);margin:16px 0;">
+        🛡 <strong>Hubro protection:</strong> Your application goes directly to the verified employer team.
+      </div>
+
+      <label style="display:flex;gap:8px;cursor:pointer;margin-bottom:18px;align-items:flex-start;">
+        <input type="checkbox" checked style="accent-color:var(--p);margin-top:3px;">
+        <span style="font-size:0.8rem;color:var(--tm);line-height:1.6;">I confirm this CV is accurate and I consent to sharing my profile with this employer.</span>
+      </label>
+
+    </form>
+
+      <div class="apply-success" id="apply-success">
+        <div class="apply-success-icon">🎉</div>
+        <h3 style="font-family:Syne,sans-serif;font-size:1.1rem;font-weight:700;color:var(--green);margin-bottom:0.5rem;">Application sent successfully!</h3>
+        <p style="font-size:0.85rem;color:var(--ts);line-height:1.6;">The employer will review your application and respond within 5 business days.</p>
+      </div>
+
+      <div style="display:flex;gap:10px;" id="apply-btn-row">
+        <button style="flex:1;padding:0.85rem;border-radius:12px;border:1.5px solid var(--b);background:transparent;font-size:0.9rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;" onclick="closeApplyModal()">Cancel</button>
+        <button style="flex:2;padding:0.85rem;border-radius:12px;border:none;background:var(--p);color:white;font-size:0.9rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;" onclick="submitApplication()">Send application →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a href="index.html" class="logo"><span class="hub">hub</span><span class="ro">ro</span></a>
+  <div class="footer-links" style="display:flex;gap:1rem;flex-wrap:wrap;">
+    <a href="privacy.html" style="color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;">Privacy Policy</a>
+    <a href="terms.html" style="color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;">Terms of Service</a>
+    <a href="cookies.html" style="color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;">Cookie Policy</a>
+    <a href="gdpr.html" style="color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;">GDPR</a>
+    <a href="accessibility.html" style="color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;">Accessibility</a>
+    <a href="mailto:info@gethubro.app" style="color:rgba(255,255,255,0.5);font-size:0.78rem;text-decoration:none;">Contact</a>
+  </div>
+  <span style="font-size:0.78rem;color:rgba(255,255,255,0.5);">© 2025 Aevo Group Limited · gethubro.app</span>
+</footer>
+
+<script>
+const jobs={1:{logo:'💳',title:'Software Engineer',company:'Stripe · Dublin, Ireland',salary:'💶 €65,000 – €80,000',score:'94%',label:'Excellent match — you are among the top candidates',s:95,e:90,edu:95,l:90,desc:'We are looking for an experienced Software Engineer to join our infrastructure team in Dublin. You will design and build the systems that power payments for millions of businesses worldwide.',cLogo:'💳',cName:'Stripe',cMeta:'Financial technology · 5,000+ employees · Dublin HQ',rating:'4.8 ⭐',reviews:'24 reviews',canApply:true},2:{logo:'🧡',title:'Frontend Developer',company:'HubSpot · Remote',salary:'💶 €55,000 – €70,000',score:'88%',label:'Strong match — you are a great candidate',s:90,e:85,edu:88,l:89,desc:"Join HubSpot's frontend team building the next generation of our CRM platform. You'll work on React components used by hundreds of thousands of customers worldwide.",cLogo:'🧡',cName:'HubSpot',cMeta:'Marketing software · 7,000+ employees · Remote-first',rating:'4.7 ⭐',reviews:'31 reviews',canApply:true},3:{logo:'📊',title:'Data Engineer',company:'Workday · Dublin',salary:'💶 €60,000 – €75,000',score:'82%',label:'Strong match — you are a great candidate',s:85,e:80,edu:82,l:82,desc:"Workday is looking for a Data Engineer to build and maintain our data pipeline infrastructure. You'll work with Python, SQL and cloud technologies.",cLogo:'📊',cName:'Workday',cMeta:'Enterprise software · 17,000+ employees · Dublin office',rating:'4.5 ⭐',reviews:'18 reviews',canApply:true},4:{logo:'🎯',title:'Product Manager',company:'Intercom · Dublin · Hybrid',salary:'💶 €70,000 – €90,000',score:'74%',label:'Good match — consider strengthening your profile',s:70,e:75,edu:78,l:73,desc:"Intercom is hiring a Product Manager to own the roadmap for our core messaging product. You'll work closely with engineering, design and data teams.",cLogo:'🎯',cName:'Intercom',cMeta:'Customer messaging · 800 employees · Dublin HQ',rating:'4.6 ⭐',reviews:'12 reviews',canApply:true},5:{logo:'🏥',title:'Registered Nurse',company:"St Vincent's Hospital · Dublin",salary:'💶 €38,000 – €50,000',score:'86%',label:'Strong match — you are a great candidate',s:88,e:85,edu:87,l:84,desc:"St Vincent's University Hospital is recruiting Registered Nurses across multiple wards. Full relocation support and visa sponsorship available.",cLogo:'🏥',cName:"St Vincent's Hospital",cMeta:'Healthcare · 4,000+ employees · Dublin 4',rating:'4.4 ⭐',reviews:'9 reviews',canApply:true},6:{logo:'🌍',title:'Customer Success Manager',company:'Salesforce · Dublin · Hybrid',salary:'💶 €50,000 – €65,000',score:'68%',label:'Moderate match — you meet basic requirements',s:65,e:70,edu:68,l:68,desc:"Salesforce Dublin is looking for a Customer Success Manager to support our Spanish-speaking enterprise customers across EMEA.",cLogo:'🌍',cName:'Salesforce',cMeta:'CRM software · 70,000+ employees · Dublin EMEA hub',rating:'4.3 ⭐',reviews:'28 reviews',canApply:true},7:{logo:'🏦',title:'Finance Manager',company:'AIB · Dublin · On-site',salary:'💶 €55,000 – €70,000',score:'18%',label:'Low match — below minimum threshold',s:15,e:20,edu:18,l:18,desc:'AIB is looking for a qualified Finance Manager with ACA/ACCA certification and 5+ years in financial services.',cLogo:'🏦',cName:'AIB',cMeta:'Banking · 9,000+ employees · Dublin',rating:'3.9 ⭐',reviews:'41 reviews',canApply:false}};
+
+function showJob(id,el){
+  document.querySelectorAll('.job-list-item').forEach(i=>i.classList.remove('active'));
+  el.classList.add('active');
+  const j=jobs[id];
+  document.getElementById('jd-logo').textContent=j.logo;
+  document.getElementById('jd-title').textContent=j.title;
+  document.getElementById('jd-company').textContent=j.company;
+  document.getElementById('jd-salary').textContent=j.salary;
+  document.getElementById('jd-score-val').textContent=j.score;
+  document.getElementById('jd-score-label').textContent=j.label;
+  document.getElementById('sb-skills').style.width=j.s+'%';document.getElementById('sp-skills').textContent=j.s+'%';
+  document.getElementById('sb-exp').style.width=j.e+'%';document.getElementById('sp-exp').textContent=j.e+'%';
+  document.getElementById('sb-edu').style.width=j.edu+'%';document.getElementById('sp-edu').textContent=j.edu+'%';
+  document.getElementById('sb-lang').style.width=j.l+'%';document.getElementById('sp-lang').textContent=j.l+'%';
+  document.getElementById('jd-desc').textContent=j.desc;
+  document.getElementById('jd-comp-logo').textContent=j.cLogo;
+  document.getElementById('jd-comp-name').textContent=j.cName;
+  document.getElementById('jd-comp-meta').textContent=j.cMeta;
+  document.getElementById('jd-rating').textContent=j.rating;
+  document.getElementById('jd-reviews').textContent=j.reviews;
+  const btn=document.getElementById('jd-apply-btn');
+  btn.disabled=!j.canApply;
+  btn.textContent=j.canApply?'Apply now →':'Below match threshold';
+  document.getElementById('jd-score-bar').style.background=parseInt(j.score)>=70?'var(--pp)':parseInt(j.score)>=30?'var(--amberl)':'var(--gl)';
+  document.getElementById('apply-modal-title').textContent='Apply — '+j.title+' at '+j.cName;
+  document.getElementById('modal-score').textContent=j.score;
+  document.getElementById('modal-score-label').textContent=parseInt(j.score)>=90?'Excellent match':parseInt(j.score)>=70?'Strong match':'Good match';
+}
+function openApplyModal(){document.getElementById('apply-modal').classList.add('open');document.body.style.overflow='hidden';document.getElementById('apply-success').style.display='none';document.getElementById('apply-btn-row').style.display='flex';}
+function closeApplyModal(){document.getElementById('apply-modal').classList.remove('open');document.body.style.overflow='';}
+function submitApplication(){
+  const form = document.getElementById('apply-form');
+  const btn = document.querySelector('#apply-btn-row button:last-child');
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+  fetch('/', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    body: new URLSearchParams(new FormData(form)).toString()
+  }).then(() => {
+    document.getElementById('apply-success').style.display='block';
+    document.getElementById('apply-btn-row').style.display='none';
+    setTimeout(closeApplyModal, 3000);
+  }).catch(() => {
+    btn.textContent = 'Send application →';
+    btn.disabled = false;
+    alert('Something went wrong. Please try again.');
+  });
+}
+function selectOption(btn){btn.closest('.question-options').querySelectorAll('.q-option').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');}
+document.getElementById('apply-modal').addEventListener('click',function(e){if(e.target===this)closeApplyModal();});
+
+const LANG_META = {
+  en:{flag:"🇬🇧",name:"English"},es:{flag:"🇪🇸",name:"Español"},
+  pt:{flag:"🇧🇷",name:"Português"},pl:{flag:"🇵🇱",name:"Polski"},
+  de:{flag:"🇩🇪",name:"Deutsch"},fr:{flag:"🇫🇷",name:"Français"},
+  it:{flag:"🇮🇹",name:"Italiano"},zh:{flag:"🇨🇳",name:"中文"},ja:{flag:"🇯🇵",name:"日本語"}
+};
+
+const PAGE_TRANSLATIONS = {"en": {"h1": "Find your next job.<br>Know your match before you apply.", "p": "Every listing shows your real compatibility score. Apply only where it counts.", "badge": "🇮🇪 Verified jobs in Ireland", "search_kw": "Job title, skill or keyword", "search_loc": "Location", "search_sec": "Sector", "btn": "🔍 Search jobs"}, "es": {"h1": "Encuentra tu próximo trabajo.<br>Conoce tu compatibilidad antes de aplicar.", "p": "Cada oferta muestra tu puntuación de compatibilidad real. Aplica solo donde realmente encajes.", "badge": "🇮🇪 Empleos verificados en Irlanda", "search_kw": "Cargo, habilidad o palabra clave", "search_loc": "Ubicación", "search_sec": "Sector", "btn": "🔍 Buscar empleos"}, "pt": {"h1": "Encontra o teu próximo emprego.<br>Conhece a tua compatibilidade antes de aplicar.", "p": "Cada anúncio mostra a tua pontuação real de compatibilidade. Aplica apenas onde realmente encaixas.", "badge": "🇮🇪 Empregos verificados na Irlanda", "search_kw": "Cargo, competência ou palavra-chave", "search_loc": "Localização", "search_sec": "Setor", "btn": "🔍 Pesquisar empregos"}, "pl": {"h1": "Znajdź swoją następną pracę.<br>Poznaj swój wynik przed aplikowaniem.", "p": "Każde ogłoszenie pokazuje Twój prawdziwy wynik zgodności. Aplikuj tylko tam, gdzie naprawdę pasujesz.", "badge": "🇮🇪 Zweryfikowane oferty pracy w Irlandii", "search_kw": "Stanowisko, umiejętność lub słowo kluczowe", "search_loc": "Lokalizacja", "search_sec": "Branża", "btn": "🔍 Szukaj pracy"}, "de": {"h1": "Finde deinen nächsten Job.<br>Kenne deine Übereinstimmung bevor du dich bewirbst.", "p": "Jede Stelle zeigt deinen echten Kompatibilitätswert. Bewirb dich nur dort, wo es wirklich passt.", "badge": "🇮🇪 Verifizierte Jobs in Irland", "search_kw": "Berufsbezeichnung, Fähigkeit oder Stichwort", "search_loc": "Standort", "search_sec": "Branche", "btn": "🔍 Jobs suchen"}, "fr": {"h1": "Trouvez votre prochain emploi.<br>Connaissez votre compatibilité avant de postuler.", "p": "Chaque offre affiche votre vrai score de compatibilité. Postulez uniquement là où vous correspondez vraiment.", "badge": "🇮🇪 Emplois vérifiés en Irlande", "search_kw": "Poste, compétence ou mot-clé", "search_loc": "Lieu", "search_sec": "Secteur", "btn": "🔍 Rechercher des emplois"}, "it": {"h1": "Trova il tuo prossimo lavoro.<br>Conosci la tua compatibilità prima di candidarti.", "p": "Ogni offerta mostra il tuo punteggio di compatibilità reale. Candidati solo dove corrisponde davvero.", "badge": "🇮🇪 Lavori verificati in Irlanda", "search_kw": "Titolo, competenza o parola chiave", "search_loc": "Posizione", "search_sec": "Settore", "btn": "🔍 Cerca lavori"}, "zh": {"h1": "找到您的下一份工作。<br>申请前了解您的匹配度。", "p": "每个职位都显示您的真实兼容性分数。只在真正匹配的地方申请。", "badge": "🇮🇪 爱尔兰认证职位", "search_kw": "职位名称、技能或关键词", "search_loc": "地点", "search_sec": "行业", "btn": "🔍 搜索职位"}, "ja": {"h1": "次の仕事を見つけよう。<br>応募前にマッチ度を確認。", "p": "すべての求人にあなたの本当の適合スコアが表示されます。本当に合う求人にだけ応募しましょう。", "badge": "🇮🇪 アイルランドの認証済み求人", "search_kw": "職種、スキルまたはキーワード", "search_loc": "場所", "search_sec": "業種", "btn": "🔍 求人を検索"}};
+
+let currentLang = localStorage.getItem("hubro_lang") || "en";
+
+function applyTranslation(lang) {
+  currentLang = lang;
+  localStorage.setItem("hubro_lang", lang);
+  const t = PAGE_TRANSLATIONS[lang];
+  if (!t) return;
+
+  // Hero h1
+  const h1 = document.querySelector(".hero h1");
+  if (h1 && t.h1) h1.innerHTML = t.h1;
+
+  // Hero p
+  const hp = document.querySelector(".hero p, .hero-inner p");
+  if (hp && t.p) hp.textContent = t.p;
+
+  // Hero badge
+  const badge = document.querySelector(".hero-badge");
+  if (badge && t.badge) badge.textContent = t.badge;
+
+  // Search button
+  const searchBtn = document.querySelector(".search-btn");
+  if (searchBtn && t.btn) searchBtn.innerHTML = t.btn;
+
+  // Update selector
+  const meta = LANG_META[lang];
+  const btnText = document.getElementById("lang-btn-text");
+  if (btnText && meta) btnText.textContent = meta.flag + " " + meta.name;
+
+  document.querySelectorAll(".lang-option").forEach(opt => {
+    opt.classList.toggle("active", opt.dataset.lang === lang);
+  });
+}
+
+function toggleLangDropdown() {
+  document.getElementById("lang-dropdown").classList.toggle("open");
+}
+
+function selectLang(lang) {
+  applyTranslation(lang);
+  document.getElementById("lang-dropdown").classList.remove("open");
+}
+
+document.addEventListener("click", function(e) {
+  if (!e.target.closest(".lang-selector")) {
+    const dd = document.getElementById("lang-dropdown");
+    if (dd) dd.classList.remove("open");
+  }
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+  applyTranslation(currentLang);
+});
+
+</script>
+
+<!-- Floating CTA -->
+<div id="float-cta" style="position:fixed;bottom:24px;right:24px;z-index:150;animation:slideUp 0.5s ease both;">
+  <a href="auth.html" style="display:flex;align-items:center;gap:8px;background:#534AB7;color:white;padding:14px 22px;border-radius:50px;font-size:0.9rem;font-weight:700;text-decoration:none;box-shadow:0 8px 24px rgba(83,74,183,0.4);transition:all 0.2s;">
+    <span>👤</span> Create free account
+  </a>
+</div>
+<style>
+@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+#float-cta a:hover{background:#3C3489;transform:translateY(-2px);box-shadow:0 12px 32px rgba(83,74,183,0.5);}
+@media(max-width:480px){#float-cta{bottom:16px;right:16px;}#float-cta a{padding:12px 18px;font-size:0.82rem;}}
+</style>
+<script>
+// Hide floating CTA after 30 seconds or if user scrolls to bottom
+setTimeout(function(){
+  var el=document.getElementById('float-cta');
+  if(el)el.style.display='none';
+},30000);
+
+// ── SUPABASE CV UPLOAD ──
+const SUPABASE_URL = 'https://ulinfbgqotjszdvuciaf.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_wSSksZq_K3RhOZLJNQAo8w_vGMPJgaQ';
+const { createClient } = supabase;
+const sbClient = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+let uploadedCVUrl = null;
+let uploadedCVName = null;
+
+async function handleCVUpload(input) {
+  const file = input.files[0];
+  if (!file) return;
+  
+  // Check file type
+  if (file.type !== 'application/pdf') {
+    alert('Please upload a PDF file only.');
+    return;
+  }
+  
+  // Check file size (max 10MB)
+  if (file.size > 10 * 1024 * 1024) {
+    alert('File too large. Maximum size is 10MB.');
+    return;
+  }
+  
+  // Check if user is logged in
+  const { data: { session } } = await sbClient.auth.getSession();
+  if (!session) {
+    document.getElementById('cv-login-warning').style.display = 'block';
+    return;
+  }
+  
+  // Show progress
+  document.getElementById('cv-upload-progress').style.display = 'block';
+  document.getElementById('cv-upload-success').style.display = 'none';
+  document.getElementById('cv-login-warning').style.display = 'none';
+  
+  const progressBar = document.getElementById('cv-progress-bar');
+  const progressText = document.getElementById('cv-progress-text');
+  
+  // Animate progress
+  let progress = 0;
+  const interval = setInterval(() => {
+    progress += 10;
+    progressBar.style.width = Math.min(progress, 90) + '%';
+    progressText.textContent = 'Uploading... ' + Math.min(progress, 90) + '%';
+    if (progress >= 90) clearInterval(interval);
+  }, 200);
+  
+  try {
+    // Create unique filename
+    const fileName = session.user.id + '/' + Date.now() + '_' + file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+    
+    // Upload to Supabase Storage
+    const { data, error } = await sbClient.storage
+      .from('cvs')
+      .upload(fileName, file, {
+        cacheControl: '3600',
+        upsert: true
+      });
+    
+    clearInterval(interval);
+    
+    if (error) throw error;
+    
+    // Get public URL
+    const { data: urlData } = sbClient.storage.from('cvs').getPublicUrl(fileName);
+    uploadedCVUrl = urlData.publicUrl;
+    uploadedCVName = file.name;
+    
+    // Update profile with CV URL
+    await sbClient.from('candidates').upsert({
+      profile_id: session.user.id,
+      cv_url: uploadedCVUrl
+    });
+    
+    // Update UI
+    progressBar.style.width = '100%';
+    progressText.textContent = 'Upload complete!';
+    
+    setTimeout(() => {
+      document.getElementById('cv-upload-progress').style.display = 'none';
+      document.getElementById('cv-upload-success').style.display = 'block';
+      document.getElementById('cv-name').textContent = file.name;
+      document.getElementById('cv-status').textContent = 'Ready to send · ' + (file.size / 1024).toFixed(0) + ' KB';
+      document.querySelector('#cv-box button').textContent = '✏️ Change CV';
+    }, 500);
+    
+  } catch (err) {
+    clearInterval(interval);
+    document.getElementById('cv-upload-progress').style.display = 'none';
+    alert('Upload failed: ' + err.message + '. Please try again.');
+  }
+}
+
+// Check if user already has a CV on modal open
+async function checkExistingCV() {
+  const { data: { session } } = await sbClient.auth.getSession();
+  if (!session) {
+    document.getElementById('cv-login-warning').style.display = 'block';
+    return;
+  }
+  
+  const { data } = await sbClient
+    .from('candidates')
+    .select('cv_url')
+    .eq('profile_id', session.user.id)
+    .single();
+  
+  if (data && data.cv_url) {
+    uploadedCVUrl = data.cv_url;
+    const parts = data.cv_url.split('/');
+    uploadedCVName = decodeURIComponent(parts[parts.length - 1]).replace(/^\d+_/, '');
+    document.getElementById('cv-name').textContent = uploadedCVName;
+    document.getElementById('cv-status').textContent = 'CV on file · Ready to send';
+    document.getElementById('cv-upload-success').style.display = 'block';
+    document.querySelector('#cv-box button').textContent = '✏️ Change CV';
+  }
+}
+
+// Call checkExistingCV when apply modal opens
+const originalOpenApply = window.openApplyModal;
+window.openApplyModal = function(jobId) {
+  if (originalOpenApply) originalOpenApply(jobId);
+  setTimeout(checkExistingCV, 300);
+};
+
+</script>
+
+</body>
+</html>
