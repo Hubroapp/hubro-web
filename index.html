@@ -766,10 +766,11 @@
   }
 
   .fade-in {
-    opacity: 0; transform: translateY(20px);
+    opacity: 1; transform: translateY(0);
     transition: opacity 0.6s ease, transform 0.6s ease;
   }
-  .fade-in.visible { opacity: 1; transform: translateY(0); }
+  .js-ready .fade-in { opacity: 0; transform: translateY(20px); }
+  .js-ready .fade-in.visible { opacity: 1; transform: translateY(0); }
 
   /* ── RESPONSIVE ── */
   @media (max-width: 1024px) {
@@ -784,17 +785,24 @@
   @media (max-width: 768px) {
     nav { padding: 0 4%; }
     .nav-links { display: none; }
-    .hero { padding: 100px 4% 60px; }
-    section { padding: 60px 4%; }
+    .hero { padding: 80px 4% 50px; min-height: auto; }
+    section { padding: 48px 4%; }
     .solution-grid, .steps, .employer-grid, .community-grid,
     .testimonials, .pricing-grid, .metrics { grid-template-columns: 1fr; }
     .steps::before { display: none; }
     .ai-inner { grid-template-columns: 1fr; }
-    .landlord-grid { grid-template-columns: 1fr 1fr; }
+    .landlord-grid { grid-template-columns: 1fr; }
     .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
     .footer-bottom { flex-direction: column; text-align: center; }
     .hero-btns { flex-direction: column; }
     .btn-primary, .btn-outline { text-align: center; justify-content: center; }
+    .phone-screen { min-height: auto; }
+    .hero-visual { display: none; }
+    .matching-inner, .ai-inner, .landlords-inner { gap: 2rem; }
+    .section-title { font-size: clamp(1.6rem, 5vw, 2.2rem); }
+    .hero h1 { font-size: clamp(2rem, 7vw, 3rem); }
+    .proof-grid { grid-template-columns: 1fr 1fr; }
+    .final-cta { padding: 60px 4%; }
   }
 
 /* ── LANGUAGE SELECTOR ── */
@@ -2180,6 +2188,7 @@ function joinWaitlist() {
 
 <script>
   // Scroll animations
+  document.body.classList.add('js-ready');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -2595,18 +2604,6 @@ document.addEventListener("DOMContentLoaded", function() {
   applyTranslation(currentLang);
 });
 
-</script>
-<!-- Crisp Chat -->
-<script type="text/javascript">
-  window.$crisp=[];
-  window.CRISP_WEBSITE_ID="ec917dbc-d2d8-40a2-8727-709fb046ae02";
-  (function(){
-    var d=document;
-    var s=d.createElement("script");
-    s.src="https://client.crisp.chat/l.js";
-    s.async=1;
-    d.getElementsByTagName("head")[0].appendChild(s);
-  })();
 </script>
 </body>
 </html>
