@@ -1,10 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WS9T8CKKY2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  gtag("config", "G-WS9T8CKKY2");
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hubro — For Employers | gethubro.app</title>
-<meta name="description" content="Post jobs on Hubro and find pre-verified international candidates. AI-powered matching, custom screening questions and faster hiring.">
+<title>Hire International Talent in Ireland — Hubro | gethubro.app</title>
+<meta name="description" content="Post jobs and find pre-verified international candidates in Ireland.">
+<link rel="canonical" href="https://gethubro.app/employers.html">
+<meta property="og:title" content="Hire International Talent in Ireland — Hubro | gethubro.app">
+<meta property="og:description" content="Post jobs and find pre-verified international candidates in Ireland.">
+<meta property="og:url" content="https://gethubro.app/employers.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://gethubro.app/og-image.png">
+<meta property="og:site_name" content="Hubro">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Hire International Talent in Ireland — Hubro | gethubro.app">
+<meta name="twitter:description" content="Post jobs and find pre-verified international candidates in Ireland.">
+<meta name="twitter:image" content="https://gethubro.app/og-image.png">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23534AB7'/><text y='.9em' font-size='70' x='10'>H</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
@@ -224,74 +244,26 @@ footer .logo .hub{color:var(--pl);}footer .logo .ro{color:rgba(255,255,255,0.4);
 .lang-flag{font-size:1.1rem;}
 
 
+/* ── COOKIE BANNER ── */
+#cookie-banner{position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#26215C;color:white;padding:16px 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:'DM Sans',sans-serif;font-size:0.85rem;box-shadow:0 -4px 20px rgba(0,0,0,0.2);}
+#cookie-banner p{margin:0;color:rgba(255,255,255,0.85);max-width:600px;line-height:1.5;}
+#cookie-banner a{color:#AFA9EC;text-decoration:underline;}
+#cookie-banner .cookie-btns{display:flex;gap:10px;flex-shrink:0;}
+#cookie-banner .btn-accept{background:#534AB7;color:white;border:none;padding:9px 20px;border-radius:8px;font-weight:700;cursor:pointer;font-size:0.85rem;font-family:'DM Sans',sans-serif;}
+#cookie-banner .btn-decline{background:transparent;color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.2);padding:9px 16px;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.85rem;font-family:'DM Sans',sans-serif;}
+
+
 /* ── HAMBURGER MENU ── */
-.hamburger {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  gap: 5px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 8px;
-  z-index: 201;
-}
-.hamburger span {
-  display: block;
-  width: 24px;
-  height: 2px;
-  background: var(--purple);
-  border-radius: 2px;
-  transition: all 0.3s;
-}
-.mobile-menu {
-  display: none;
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: white;
-  z-index: 200;
-  flex-direction: column;
-  padding: 80px 5% 40px;
-  gap: 0;
-  overflow-y: auto;
-}
-.mobile-menu.open { display: flex; }
-.mobile-menu a {
-  font-family: 'Syne', sans-serif;
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: var(--purple, #534AB7);
-  text-decoration: none;
-  padding: 16px 0;
-  border-bottom: 1px solid #E4E2F8;
-  transition: color 0.2s;
-}
-.mobile-menu a:hover { color: #3C3489; }
-.mobile-menu .mobile-cta {
-  margin-top: 24px;
-  background: var(--purple, #534AB7);
-  color: white !important;
-  border-radius: 12px;
-  padding: 16px !important;
-  text-align: center;
-  border-bottom: none !important;
-}
-.mobile-close {
-  position: absolute;
-  top: 20px; right: 20px;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #534AB7;
-  width: 40px; height: 40px;
-  display: flex; align-items: center; justify-content: center;
-  border-radius: 50%;
-}
-.mobile-close:hover { background: #EEEDFE; }
-@media (max-width: 768px) {
-  .hamburger { display: flex; }
-}
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:8px;z-index:201;}
+.hamburger span{display:block;width:24px;height:2px;background:#534AB7;border-radius:2px;transition:all 0.3s;}
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:white;z-index:200;flex-direction:column;padding:80px 5% 40px;gap:0;overflow-y:auto;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:700;color:#534AB7;text-decoration:none;padding:16px 0;border-bottom:1px solid #E4E2F8;transition:color 0.2s;}
+.mobile-menu a:hover{color:#3C3489;}
+.mobile-menu .mobile-cta{margin-top:24px;background:#534AB7;color:white !important;border-radius:12px;padding:16px !important;text-align:center;border-bottom:none !important;}
+.mobile-close{position:absolute;top:20px;right:20px;background:none;border:none;font-size:1.5rem;cursor:pointer;color:#534AB7;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;}
+.mobile-close:hover{background:#EEEDFE;}
+@media(max-width:768px){.hamburger{display:flex;}}
 
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -306,7 +278,6 @@ html,body{overflow-x:hidden !important;}
 [style*="calc(100vh"]{height:auto !important;}
 .modal-overlay,.hubro-success-overlay{position:fixed !important;}
 .float-cta,#float-cta{position:fixed !important;}
-section + section{padding-top:0 !important;}
 @media(max-width:768px){
   .job-detail,.jobs-list{position:relative !important;height:auto !important;max-height:none !important;overflow-y:visible !important;}
   .main-layout{flex-direction:column !important;}
@@ -314,6 +285,19 @@ section + section{padding-top:0 !important;}
 </style>
 </head>
 <body>
+<!-- COOKIE BANNER -->
+<div id="cookie-banner" style="display:none;">
+  <p>🍪 We use essential cookies to keep you logged in and remember your language preference. <a href="cookies.html">Learn more</a></p>
+  <div class="cookie-btns">
+    <button class="btn-decline" onclick="declineCookies()">Essential only</button>
+    <button class="btn-accept" onclick="acceptCookies()">Accept</button>
+  </div>
+</div>
+<script>
+(function(){if(!localStorage.getItem('hubro_cookie_consent')){document.getElementById('cookie-banner').style.display='flex';}})();
+function acceptCookies(){localStorage.setItem('hubro_cookie_consent','accepted');document.getElementById('cookie-banner').style.display='none';}
+function declineCookies(){localStorage.setItem('hubro_cookie_consent','essential');document.getElementById('cookie-banner').style.display='none';}
+</script>
 
 <nav>
   <a href="index.html" class="logo"><span class="hub">hub</span><span class="ro">ro</span></a>
@@ -1163,5 +1147,11 @@ async function submitJobHubro() {
 
 </script>
 
+<!-- Crisp Chat -->
+<script type="text/javascript">
+  window.$crisp=[];
+  window.CRISP_WEBSITE_ID="ec917dbc-d2d8-40a2-8727-709fb046ae02";
+  (function(){var d=document;var s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();
+</script>
 </body>
 </html>
