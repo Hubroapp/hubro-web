@@ -3,16 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="canonical" href="https://gethubro.app">
-<meta property="og:title" content="Hubro — Find Jobs, Housing & Community in Your New Country">
-<meta property="og:description" content="Hubro connects international workers, students and families with verified jobs, housing and a trusted community.">
-<meta property="og:url" content="https://gethubro.app">
+<title>Hubro — Find Jobs, Housing & Community in Ireland</title>
+<meta name="description" content="Hubro connects international workers, students and families with verified jobs, housing and a trusted community in Ireland.">
+<link rel="canonical" href="https://gethubro.app/">
+<meta property="og:title" content="Hubro — Find Jobs, Housing & Community in Ireland">
+<meta property="og:description" content="Hubro connects international workers, students and families with verified jobs, housing and a trusted community in Ireland.">
+<meta property="og:url" content="https://gethubro.app/">
 <meta property="og:type" content="website">
+<meta property="og:image" content="https://gethubro.app/og-image.png">
+<meta property="og:site_name" content="Hubro">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Hubro — Find Jobs, Housing & Community">
-<meta name="twitter:description" content="Find verified jobs, housing and community in your new country.">
-<title>Hubro — Find Jobs, Housing & Community in Your New Country</title>
-<meta name="description" content="Hubro connects international workers, students and families with verified jobs, housing and a trusted community. Visit gethubro.app — Available on iOS and Android.">
+<meta name="twitter:title" content="Hubro — Find Jobs, Housing & Community in Ireland">
+<meta name="twitter:description" content="Hubro connects international workers, students and families with verified jobs, housing and a trusted community in Ireland.">
+<meta name="twitter:image" content="https://gethubro.app/og-image.png">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23534AB7'/><text y='.9em' font-size='70' x='10'>🦉</text></svg>">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23534AB7'/><text y='.9em' font-size='70' x='10'>🦉</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -837,6 +842,17 @@
 .lang-option.active { background: var(--purple-pale); color: var(--purple); font-weight: 700; }
 .lang-flag { font-size: 1.1rem; }
 
+
+/* ── COOKIE BANNER ── */
+#cookie-banner{position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#26215C;color:white;padding:16px 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:'DM Sans',sans-serif;font-size:0.85rem;box-shadow:0 -4px 20px rgba(0,0,0,0.2);}
+#cookie-banner p{margin:0;color:rgba(255,255,255,0.85);max-width:600px;line-height:1.5;}
+#cookie-banner a{color:#AFA9EC;text-decoration:underline;}
+#cookie-banner .cookie-btns{display:flex;gap:10px;flex-shrink:0;}
+#cookie-banner .btn-accept{background:#534AB7;color:white;border:none;padding:9px 20px;border-radius:8px;font-weight:700;cursor:pointer;font-size:0.85rem;font-family:'DM Sans',sans-serif;}
+#cookie-banner .btn-accept:hover{background:#3C3489;}
+#cookie-banner .btn-decline{background:transparent;color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.2);padding:9px 16px;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.85rem;font-family:'DM Sans',sans-serif;}
+#cookie-banner .btn-decline:hover{color:white;border-color:rgba(255,255,255,0.5);}
+
 </style>
 
 
@@ -849,7 +865,6 @@ html,body{overflow-x:hidden !important;}
 [style*="calc(100vh"]{height:auto !important;}
 .modal-overlay,.hubro-success-overlay{position:fixed !important;}
 .float-cta,#float-cta{position:fixed !important;}
-section + section{padding-top:0 !important;}
 @media(max-width:768px){
   .job-detail,.jobs-list{position:relative !important;height:auto !important;max-height:none !important;overflow-y:visible !important;}
   .main-layout{flex-direction:column !important;}
@@ -857,6 +872,31 @@ section + section{padding-top:0 !important;}
 </style>
 </head>
 <body>
+
+<!-- COOKIE BANNER -->
+<div id="cookie-banner" style="display:none;">
+  <p>🍪 We use essential cookies to keep you logged in and remember your language preference. <a href="cookies.html">Learn more</a></p>
+  <div class="cookie-btns">
+    <button class="btn-decline" onclick="declineCookies()">Essential only</button>
+    <button class="btn-accept" onclick="acceptCookies()">Accept</button>
+  </div>
+</div>
+<script>
+(function(){
+  if(!localStorage.getItem('hubro_cookie_consent')){
+    document.getElementById('cookie-banner').style.display='flex';
+  }
+})();
+function acceptCookies(){
+  localStorage.setItem('hubro_cookie_consent','accepted');
+  document.getElementById('cookie-banner').style.display='none';
+}
+function declineCookies(){
+  localStorage.setItem('hubro_cookie_consent','essential');
+  document.getElementById('cookie-banner').style.display='none';
+}
+</script>
+
 
 <!-- NAV -->
 <nav>
@@ -2128,18 +2168,16 @@ function resetFilters() {
 <script>
 function joinWaitlist() {
   const email = document.getElementById('wl-email').value;
-  const type = document.getElementById('wl-type').value;
+  const type = document.getElementById('wl-type') ? document.getElementById('wl-type').value : '';
   if (!email || !email.includes('@')) {
     document.getElementById('wl-email').style.borderColor = '#E24B4A';
     return;
   }
-  document.getElementById('wl-email').style.borderColor = 'var(--border)';
-  document.getElementById('wl-success').style.display = 'block';
-  document.getElementById('wl-email').value = '';
-  document.getElementById('wl-type').value = '';
-  setTimeout(() => {
-    document.getElementById('wl-success').style.display = 'none';
-  }, 5000);
+  // Save to localStorage for thankyou page
+  localStorage.setItem('hubro_wl_email', email);
+  localStorage.setItem('hubro_wl_type', type);
+  // Redirect to thankyou page
+  window.location.href = 'thankyou.html';
 }
 </script>
 
